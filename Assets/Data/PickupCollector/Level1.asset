@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95aa0ef74e05a7a48817a3b680126b95, type: 3}
+  m_Name: Level1
+  m_EditorClassIdentifier: 
+  pickupSpawnInfos:
+  - PickupType: 0
+    PickupsCount: 3
+    PickupLifeTimeS: 3
+    NextPickupSpawnDelayS: 2.5
+  - PickupType: 1
+    PickupsCount: 1
+    PickupLifeTimeS: 4
+    NextPickupSpawnDelayS: 3
+  - PickupType: 0
+    PickupsCount: 4
+    PickupLifeTimeS: 2.7
+    NextPickupSpawnDelayS: 2
+  - PickupType: 1
+    PickupsCount: 1
+    PickupLifeTimeS: 3
+    NextPickupSpawnDelayS: 0
