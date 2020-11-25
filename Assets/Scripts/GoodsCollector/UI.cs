@@ -32,24 +32,24 @@ public class UI : MonoBehaviour
         _startLevelPanel_ObjectiveText.text = $"Зберіть {coinsCount} монет.";
     }
 
-    private void ShowStartLevelPanel()
+    public void ShowStartLevelPanel()
     {
         _screenFader.SetActive(true);
         _startLevelPanel.SetActive(true);
     }
 
-    private void HideStartLevelPanel()
+    public void HideStartLevelPanel()
     {
         _startLevelPanel.SetActive(false);
         _screenFader.SetActive(false);
     }
 
-    private void ShowMainHud()
+    public void ShowMainHud()
     {
         _mainHud.SetActive(true);
     }
 
-    private void HideMainHud()
+    public void HideMainHud()
     {
         _mainHud.SetActive(false);
     }
@@ -58,12 +58,12 @@ public class UI : MonoBehaviour
     {
         _levelCompletePanel_CaptionText.text = $"Рівень {levelIndex} пройдено!";
     }
-    private void ShowLevelCompletePanel()
+    public void ShowLevelCompletePanel()
     {
         _screenFader.SetActive(true);
         _levelCompletePanel.SetActive(true);
     }
-    private void HideLevelCompletePanel()
+    public void HideLevelCompletePanel()
     {
         _levelCompletePanel.SetActive(false);
         _screenFader.SetActive(false);
@@ -102,7 +102,7 @@ public class UI : MonoBehaviour
     {
         Utils.Gameplay.LevelLoaded += OnLevelLoaded;
         Utils.Gameplay.LevelStarted += OnLevelStarted;
-        Utils.Gameplay.LevelPassed += OnLevelPassed;
+        Utils.Gameplay.LevelPassed += OnLevelPassed; 
     }
 
 
