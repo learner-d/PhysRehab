@@ -6,10 +6,13 @@ using UnityEngine.UI;
 public class MainMenu : MonoBehaviour
 {
     [SerializeField] private GameObject mainMenuContent;
+    [SerializeField] private GameObject aboutAppMenuContent;
     [SerializeField] private GameObject levelsMenuContent;
     [SerializeField] private int levelsCount;
     [SerializeField] private GameObject levelsListHolder;
     [SerializeField] private GameObject startLevelButton;
+
+
 
     private void Awake()
     {
@@ -46,10 +49,19 @@ public class MainMenu : MonoBehaviour
     {
         levelsMenuContent.SetActive(false);
         mainMenuContent.SetActive(true);
+        aboutAppMenuContent.SetActive(false);
     }
     public void ShowLevelsMenu()
     {
         mainMenuContent.SetActive(false);
         levelsMenuContent.SetActive(true);
+        aboutAppMenuContent.SetActive(false);
+    }
+
+    public void ShowAboutAppMenu()
+    {
+        mainMenuContent.SetActive(false);
+        levelsMenuContent.SetActive(false);
+        aboutAppMenuContent.SetActive(true);
     }
 }
