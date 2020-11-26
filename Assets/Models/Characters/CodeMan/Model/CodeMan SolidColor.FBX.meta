@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ef11f15682ae41344ba781010ba3294f
+guid: db48b64b1520beb46b7da1b649894516
 ModelImporter:
   serializedVersion: 20101
   internalIDToNameTable:
@@ -389,7 +389,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: CodeMan_Body
-    second: {fileID: 2100000, guid: 2d74d832cb942cb4c9c6c9735c19d346, type: 2}
+    second: {fileID: 2100000, guid: 314e0812778c8474cac046db970c41bd, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -399,22 +399,22 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: CodeMan_Hair
-    second: {fileID: 2100000, guid: fffe6a3ae713d2744bec53d55fee32fe, type: 2}
+    second: {fileID: 2100000, guid: 314e0812778c8474cac046db970c41bd, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: CodeMan_Head
-    second: {fileID: 2100000, guid: 375c56cc1a22b014ca41d29cf4ed4a68, type: 2}
+    second: {fileID: 2100000, guid: 314e0812778c8474cac046db970c41bd, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: CodeMan_HeadGear
-    second: {fileID: 2100000, guid: 065fa218490e0b64cbfb02e41606cc78, type: 2}
+    second: {fileID: 2100000, guid: 314e0812778c8474cac046db970c41bd, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: CodeMan_Pads
-    second: {fileID: 2100000, guid: e3dcde20be6b6b14493c14331012899e, type: 2}
+    second: {fileID: 2100000, guid: 314e0812778c8474cac046db970c41bd, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -458,7 +458,7 @@ ModelImporter:
     globalScale: 1
     meshCompression: 0
     addColliders: 0
-    useSRGBMaterialColor: 1
+    useSRGBMaterialColor: 0
     sortHierarchyByName: 1
     importVisibility: 1
     importBlendShapes: 1
