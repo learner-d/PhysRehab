@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class MainMenu : MonoBehaviour
 {
     [SerializeField] private GameObject mainMenuContent;
+    [SerializeField] private GameObject gameChooseMenuContent;
     [SerializeField] private GameObject aboutAppMenuContent;
     [SerializeField] private GameObject levelsMenuContent;
     [SerializeField] private int levelsCount;
@@ -47,12 +48,14 @@ public class MainMenu : MonoBehaviour
 
     public void ShowMainMenu()
     {
+        gameChooseMenuContent.SetActive(false);
         levelsMenuContent.SetActive(false);
         mainMenuContent.SetActive(true);
         aboutAppMenuContent.SetActive(false);
     }
     public void ShowLevelsMenu()
     {
+        gameChooseMenuContent.SetActive(false);
         mainMenuContent.SetActive(false);
         levelsMenuContent.SetActive(true);
         aboutAppMenuContent.SetActive(false);
@@ -60,8 +63,17 @@ public class MainMenu : MonoBehaviour
 
     public void ShowAboutAppMenu()
     {
+        gameChooseMenuContent.SetActive(false);
         mainMenuContent.SetActive(false);
         levelsMenuContent.SetActive(false);
         aboutAppMenuContent.SetActive(true);
+    }
+
+    public void ShowGameChooseMenu()
+    {
+        gameChooseMenuContent.SetActive(true);
+        mainMenuContent.SetActive(false);
+        levelsMenuContent.SetActive(false);
+        aboutAppMenuContent.SetActive(false);
     }
 }
