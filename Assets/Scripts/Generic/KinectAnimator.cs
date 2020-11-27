@@ -1,43 +1,61 @@
 ﻿using LightBuzz.Vitruvius;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class KinectAnimator : MonoBehaviour
 {
-
-    //Kinect-контролер
-    private SensorAdapter adapter = null;
     [SerializeField]
-    private Model characterModel = null;
+    private Model _characterModel;
+
+    private CharacterScriptedModel _characterScriptedModel;
+    private SensorAdapter _adapter; //Kinect-сенсор
+    private HumanRig _defaultRig;
+
+    private void Awake()
+    {
+        if (_characterModel.AvatarRoot != null)
+        {
+            _defaultRig = new HumanRig(_characterModel.AvatarRoot);
+            _characterScriptedModel = _characterModel.AvatarRoot.GetComponent<CharacterScriptedModel>();
+            _characterScriptedModel.OnDestroying += ResetCharacterRig; 
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (_characterScriptedModel!=null)
+        {
+            _characterScriptedModel.OnDestroying -= ResetCharacterRig; 
+        }
+    }
+
+    public void ResetCharacterRig()
+    {
+        _characterScriptedModel?.ApplyRig(_defaultRig);
+    }
 
     private void OnEnable()
     {
-        adapter = new SensorAdapter(SensorType.Kinect2)
-        {
-            OnChangedAvailabilityEventHandler = (sender, args) =>
-            {
-                Debug.Log(args.SensorType + " is connected: " + args.IsConnected);
-            }
-        };
-
-        characterModel.Initialize();
+        _adapter = new SensorAdapter(SensorType.Kinect2);
+        _characterModel?.Initialize();
     }
 
     void OnDisable()
     {
-        if (adapter != null)
+        if (_adapter != null)
         {
-            adapter.Close();
-            adapter = null;
+            _adapter.Close();
+            _adapter = null;
         }
     }
 
     void Update()
     {
-        if (adapter == null) return;
+        if (_adapter == null) return;
 
-        Frame frame = adapter.UpdateFrame();
+        Frame frame = _adapter.UpdateFrame();
 
         if (frame != null)
         {
@@ -45,16 +63,8 @@ public class KinectAnimator : MonoBehaviour
 
             if (body != null)
             {
-                characterModel.DoAvateering(body);
-                //CorrectZCoordinate();
+                _characterModel.DoAvateering(body);
             }
         }
-    }
-
-    void CorrectZCoordinate()
-    {
-        Vector3 modelPos = characterModel.AvatarRoot.transform.position;
-        modelPos.z = 0;
-        characterModel.AvatarRoot.transform.position = modelPos;
     }
 }
