@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [ExecuteAlways]
-public class PoseIndicator : MonoBehaviour
+public class _PoseIndicator : MonoBehaviour
 {
     [SerializeField] private Line2 _leftArmLine;
     [SerializeField] private float _leftArmLineLength = 1.5f;
