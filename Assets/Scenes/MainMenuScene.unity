@@ -2750,7 +2750,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainMenuContent: {fileID: 1581288881}
-  gameChooseMenuContent: {fileID: 890209525}
+  gameChooseMenuContent: {fileID: 0}
   aboutAppMenuContent: {fileID: 2103073663}
   levelsMenuContent: {fileID: 862971447}
   levelsCount: 7
@@ -2776,7 +2776,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &890209526
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4936,7 +4936,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1581288882
 MonoBehaviour:
   m_ObjectHideFlags: 0
