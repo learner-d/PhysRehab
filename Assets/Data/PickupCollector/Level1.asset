@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pickupSpawnInfos:
   - PickupType: 0
-    PickupsCount: 2
-    PickupLifeTimeS: 3
-    NextPickupSpawnDelayS: 2.5
+    PickupsCount: 3
+    PickupLifeTimeS: 10
+    NextPickupSpawnDelayS: 1.5
   - PickupType: 1
     PickupsCount: 1
     PickupLifeTimeS: 4
