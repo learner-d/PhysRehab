@@ -4642,8 +4642,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 543690552}
     - target: {fileID: 5174989137140925525, guid: 26eba901465e06c43a4db1ba70b348e0, type: 3}
-      propertyPath: _characterModel.updateProperties.smoothness
+      propertyPath: _characterModel.updateProperties.hipRight
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5174989137140925525, guid: 26eba901465e06c43a4db1ba70b348e0, type: 3}
+      propertyPath: _characterModel.updateProperties.smoothness
+      value: 0.6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 26eba901465e06c43a4db1ba70b348e0, type: 3}
