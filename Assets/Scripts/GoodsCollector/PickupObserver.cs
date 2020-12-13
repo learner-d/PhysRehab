@@ -13,7 +13,6 @@ public class PickupObserver : MonoBehaviour
         pickup.Collected += OnPickupCollected;
     }
 
-
     private void OnPickupCollected(Pickup pickup)
     {
         int score;
@@ -31,10 +30,9 @@ public class PickupObserver : MonoBehaviour
         }
         
         _audioSource.PlayOneShot(collectSound);
-        Utils.ScoreCounter.AddScore(score);
-        
-        Destroy(pickup.gameObject);
-        Utils.Gameplay.CheckLevelProress();
+        GoodsCollectorScene.ScoreCounter.AddScore(score);
+
+        GoodsCollectorScene.PickupSpawner.RemovePickup(pickup, true);
     }
 
     private void Awake()

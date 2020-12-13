@@ -17,12 +17,12 @@ public class Gameplay : MonoBehaviour
     public void StartLevel()
     {
         LevelStarted?.Invoke();
-        Utils.PickupSpawner.StartSpawning();
+        GoodsCollectorScene.PickupSpawner.StartSpawning();
     }
 
     public void CheckLevelProress()
     {
-        if (Utils.PickupSpawner.AllPickupsSpawned)
+        if (GoodsCollectorScene.PickupSpawner.AllPickupsCollected)
         {
             LevelPassed?.Invoke();
         }
@@ -30,8 +30,8 @@ public class Gameplay : MonoBehaviour
 
     public void ResetLevel()
     {
-        Utils.ScoreCounter.ResetScore();
-        Utils.PickupSpawner.ResetState();
+        GoodsCollectorScene.ScoreCounter.ResetScore();
+        GoodsCollectorScene.PickupSpawner.ResetState();
         LevelLoaded?.Invoke();
     }
 
@@ -43,5 +43,10 @@ public class Gameplay : MonoBehaviour
     public void Resume()
     {
 
+    }
+
+    public void GoToMainMenu()
+    {
+        Program.GoToMainMenu();
     }
 }

@@ -21,7 +21,7 @@ public class PickupDebugging : MonoBehaviour
                 Vector2 clickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
                 //Створюємо пікап
-                Utils.PickupSpawner.SpawnPickup(clickPos);
+                GoodsCollectorScene.PickupSpawner.SpawnPickup(clickPos);
             }
         }
     }

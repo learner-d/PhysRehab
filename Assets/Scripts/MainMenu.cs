@@ -76,4 +76,19 @@ public class MainMenu : MonoBehaviour
         levelsMenuContent.SetActive(false);
         aboutAppMenuContent.SetActive(false);
     }
+
+    public void LaunchCollectorGame()
+    {
+        Program.LaunchCollectorGame();
+    }
+
+    public void LaunchCopycatGame()
+    {
+        Program.LaunchCopycatGame();
+    }
+
+    public void LaunchFlappyBirdGame()
+    {
+        Program.LaunchFlappyBirdGame();
+    }
 }

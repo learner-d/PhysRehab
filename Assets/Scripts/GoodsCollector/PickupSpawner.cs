@@ -18,15 +18,22 @@ public class PickupSpawner : MonoBehaviour
     private GameObject _bigScorePickupPrefab;
     [SerializeField]
     private LevelInfo _levelInfo/* = new MockLevelInfo()*/;
+    [SerializeField]
+    private int _maxPickups = 0;
+
+    private List<Pickup> _spawnedPickups = new List<Pickup>();
 
     private bool _spawnIsRunning = false;
 
     public int SpawnedPickupsCount { get; private set; }
+    public int CollectedPickupsCount { get; private set; }
+    public int DestroyedPickupsCount { get; private set; }
     public int TotalPickupsCount { get; private set; }
-    public bool AllPickupsSpawned => SpawnedPickupsCount == TotalPickupsCount;
+    public bool AllPickupsSpawned => SpawnedPickupsCount >= TotalPickupsCount;
+    public bool AllPickupsCollected => AllPickupsSpawned && SpawnedPickupsCount == DestroyedPickupsCount;
 
-    public event UnityAction SpawnStarted;
-    public event UnityAction SpawnFinished;
+    //public event UnityAction SpawnStarted;
+    //public event UnityAction SpawnFinished;
 
     private void Awake()
     {
@@ -37,11 +44,18 @@ public class PickupSpawner : MonoBehaviour
 
     private void Initialize()
     {
-        SpawnedPickupsCount = 0;
+        _spawnedPickups.Clear();
         TotalPickupsCount = 0;
+        SpawnedPickupsCount = 0;
+        CollectedPickupsCount = 0;
+        DestroyedPickupsCount = 0;
         for (int i = 0; i < _levelInfo.pickupSpawnInfos.Length; i++)
         {
             TotalPickupsCount += (int)_levelInfo.pickupSpawnInfos[i].PickupsCount;
+        }
+        if (TotalPickupsCount > _maxPickups)
+        {
+            TotalPickupsCount = _maxPickups; 
         }
     }
 
@@ -65,7 +79,7 @@ public class PickupSpawner : MonoBehaviour
 
     private IEnumerator SpawningCoroutine()
     {
-        SpawnStarted?.Invoke();
+        //SpawnStarted?.Invoke();
         _spawnIsRunning = true;
 
         for (int i = 0; i < _levelInfo.SpawnInfoRecordsCount; i++)
@@ -77,21 +91,25 @@ public class PickupSpawner : MonoBehaviour
                     break;
 
                 StartCoroutine(NextSpawn(spawnInfo.PickupType, spawnInfo.PickupLifeTimeS));
-                SpawnedPickupsCount++;
+                
+                if (SpawnedPickupsCount == _maxPickups) yield break;
+                
                 yield return new WaitForSeconds(spawnInfo.NextPickupSpawnDelayS);
             }
         }
 
         _spawnIsRunning = false;
-        SpawnFinished?.Invoke();
+        //SpawnFinished?.Invoke();
         yield break;
     }
 
     private IEnumerator NextSpawn(PickupType pickupType, float lifetimeS)
     {
-        GameObject pickup = SpawnPickup(NextRandomPosition(pickupType), pickupType);
+        Pickup pickup = SpawnPickup(NextRandomPosition(pickupType), pickupType);
+        
         yield return new WaitForSeconds(lifetimeS);
-        Destroy(pickup);
+
+        RemovePickup(pickup);
         yield break;
     }
 
@@ -104,16 +122,36 @@ public class PickupSpawner : MonoBehaviour
         return new Vector3(x, y, -1);
     }
 
-    public GameObject SpawnPickup(Vector2 pos, PickupType pickupType = PickupType.Normal)
+    public Pickup SpawnPickup(Vector2 pos, PickupType pickupType = PickupType.Normal)
     {
         return SpawnPickup(new Vector3(pos.x, pos.y, -1), pickupType);
     }
 
-    public GameObject SpawnPickup(Vector3 pos, PickupType pickupType = PickupType.Normal)
+    public Pickup SpawnPickup(Vector3 pos, PickupType pickupType = PickupType.Normal)
     {
         GameObject pickupPrefab = pickupType == PickupType.Normal ? _normalPickupPrefab : _bigScorePickupPrefab;
-        GameObject pickup = Instantiate(pickupPrefab, pos, Quaternion.identity);
-        Utils.PickupObserver.Subscribe(pickup.GetComponent<Pickup>());
+        Pickup pickup = Instantiate(pickupPrefab, pos, Quaternion.identity).GetComponent<Pickup>();
+        GoodsCollectorScene.PickupObserver.Subscribe(pickup);
+
+        _spawnedPickups.Add(pickup);
+        SpawnedPickupsCount++;
         return pickup;
+    }
+
+    public void RemovePickup(Pickup pickup, bool collected = false)
+    {
+        int index = _spawnedPickups.FindIndex(p => p == pickup);
+        if (index != -1)
+        {
+            Destroy(pickup.gameObject);
+            _spawnedPickups.RemoveAt(index);
+
+            if (collected)
+            {
+                CollectedPickupsCount++; 
+            }
+            DestroyedPickupsCount++;
+        }
+        GoodsCollectorScene.Gameplay.CheckLevelProress();
     }
 }

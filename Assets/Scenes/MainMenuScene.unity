@@ -814,7 +814,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 937545960597749127, guid: 0015805795ee4ac4aa9a398fd273ac7c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ShowLevelsMenu
+      value: LaunchCopycatGame
       objectReference: {fileID: 0}
     - target: {fileID: 937545960597749127, guid: 0015805795ee4ac4aa9a398fd273ac7c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -2550,7 +2550,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4560856628179469047, guid: 0015805795ee4ac4aa9a398fd273ac7c, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -69.62774
+      value: -69.62775
       objectReference: {fileID: 0}
     - target: {fileID: 4560856628179469047, guid: 0015805795ee4ac4aa9a398fd273ac7c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2751,7 +2751,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainMenuContent: {fileID: 1581288881}
-  gameChooseMenuContent: {fileID: 0}
+  gameChooseMenuContent: {fileID: 890209525}
   aboutAppMenuContent: {fileID: 2103073663}
   levelsMenuContent: {fileID: 862971447}
   levelsCount: 7
@@ -3347,7 +3347,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 937545960597749127, guid: 0015805795ee4ac4aa9a398fd273ac7c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ShowLevelsMenu
+      value: LaunchCopycatGame
       objectReference: {fileID: 0}
     - target: {fileID: 937545960597749127, guid: 0015805795ee4ac4aa9a398fd273ac7c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -4140,7 +4140,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 937545960597749127, guid: 0015805795ee4ac4aa9a398fd273ac7c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ShowLevelsMenu
+      value: LaunchCollectorGame
       objectReference: {fileID: 0}
     - target: {fileID: 937545960597749127, guid: 0015805795ee4ac4aa9a398fd273ac7c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName

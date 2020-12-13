@@ -6,14 +6,10 @@ using UnityEngine;
 [Serializable]
 public class TransformData
 {
-    public Vector3 position;
-    public Quaternion rotation;
     public Vector3 localPosition;
     public Quaternion localRotation;
     public TransformData(Transform transform)
     {
-        position = transform.position;
-        rotation = transform.rotation;
         localPosition = transform.localPosition;
         localRotation = transform.localRotation;
     }
@@ -98,10 +94,5 @@ public static class TransformExt
     {
         transform.localPosition = transformData.localPosition;
         transform.localRotation = transformData.localRotation;
-    }
-    public static void SetGlobalTransform(this Transform transform, TransformData transformData)
-    {
-        transform.position = transformData.position;
-        transform.rotation = transformData.rotation;
     }
 }

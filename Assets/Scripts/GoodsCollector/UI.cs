@@ -20,6 +20,7 @@ public class UI : MonoBehaviour
     private Text _startLevelPanel_ObjectiveText;
     private Text _uiScoreCounter_text;
     private Text _levelCompletePanel_CaptionText;
+    private Text _levelCompletePanel_InfoText;
 
     public void SetScoreCounterValue(int value)
     {
@@ -54,9 +55,10 @@ public class UI : MonoBehaviour
         _mainHud.SetActive(false);
     }
 
-    private void SetupLeveCompletePanel(int levelIndex)
+    private void SetupLeveCompletePanel(int levelIndex, int pickupCount, int collectedCount, int score)
     {
         _levelCompletePanel_CaptionText.text = $"Рівень {levelIndex} пройдено!";
+        _levelCompletePanel_InfoText.text = $"Рахунок: {score}\nЗібрано {collectedCount}/{pickupCount}";
     }
     public void ShowLevelCompletePanel()
     {
@@ -86,7 +88,10 @@ public class UI : MonoBehaviour
     private void OnLevelPassed()
     {
         HideMainHud();
-        SetupLeveCompletePanel(1);
+        SetupLeveCompletePanel(1,
+            GoodsCollectorScene.PickupSpawner.TotalPickupsCount, 
+            GoodsCollectorScene.PickupSpawner.CollectedPickupsCount,
+            GoodsCollectorScene.ScoreCounter.Score);
         ShowLevelCompletePanel();
     }
 
@@ -96,26 +101,29 @@ public class UI : MonoBehaviour
         _startLevelPanel_ObjectiveText = _startLevelPanel.transform.Find("LevelObjectiveText").GetComponent<Text>();
         _uiScoreCounter_text = _mainHud.transform.Find("ScoreCounterText").GetComponent<Text>();
         _levelCompletePanel_CaptionText = _levelCompletePanel.transform.Find("LevelCaptionText").GetComponent<Text>();
+        _levelCompletePanel_InfoText = _levelCompletePanel.transform.Find("InfoText").GetComponent<Text>();
     }
 
     private void SetupUiEvents()
     {
-        Utils.Gameplay.LevelLoaded += OnLevelLoaded;
-        Utils.Gameplay.LevelStarted += OnLevelStarted;
-        Utils.Gameplay.LevelPassed += OnLevelPassed; 
+        GoodsCollectorScene.Gameplay.LevelLoaded += OnLevelLoaded;
+        GoodsCollectorScene.Gameplay.LevelStarted += OnLevelStarted;
+        GoodsCollectorScene.Gameplay.LevelPassed += OnLevelPassed; 
     }
 
+    private void Start()
+    {
+        SetupUiEvents();
+    }
 
     private void Awake()
     {
         SetupUiObjects();
-        SetupUiEvents();
     }
-
     private void OnDestroy()
     {
-        Utils.Gameplay.LevelLoaded -= OnLevelLoaded;
-        Utils.Gameplay.LevelStarted -= OnLevelStarted;
-        Utils.Gameplay.LevelPassed -= OnLevelPassed;
+        GoodsCollectorScene.Gameplay.LevelLoaded -= OnLevelLoaded;
+        GoodsCollectorScene.Gameplay.LevelStarted -= OnLevelStarted;
+        GoodsCollectorScene.Gameplay.LevelPassed -= OnLevelPassed;
     }
 }

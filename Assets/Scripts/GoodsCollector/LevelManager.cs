@@ -8,6 +8,6 @@ public class LevelManager : MonoBehaviour
 
     public void StartLevel()
     {
-        Utils.PickupSpawner.StartSpawning();
+        GoodsCollectorScene.PickupSpawner.StartSpawning();
     }
 }

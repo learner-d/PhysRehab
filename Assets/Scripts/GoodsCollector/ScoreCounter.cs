@@ -11,7 +11,7 @@ public class ScoreCounter : MonoBehaviour
         private set
         {
             Score_fld = value;
-            Utils.HudController.SetScoreCounterValue(Score_fld);
+            GoodsCollectorScene.HudController.SetScoreCounterValue(Score_fld);
         }
     }
 

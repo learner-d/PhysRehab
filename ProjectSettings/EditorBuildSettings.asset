@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GoodsCollectorGame.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/CopycatGame.unity
+    guid: 0d60ec56ee48d884ab2386cdca284556
   m_configObjects: {}
