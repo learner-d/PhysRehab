@@ -2,6 +2,8 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+using PhysRehab;
+
 public class GoodsCollectorScene
 {
     public static Gameplay Gameplay { get; private set; }

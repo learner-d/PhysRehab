@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+using PhysRehab;
+
 public class MainMenu : MonoBehaviour
 {
     [SerializeField] private GameObject mainMenuContent;
