@@ -16,31 +16,26 @@ namespace PhysRehab
     public class Program
     {
         #region Properties
-        public static UIScript Ui { get; /*private*/ set; }
+        public static UIScript Ui { get; private set; }
         #endregion
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterAssembliesLoaded)]
         public static void Init()
         {
-            LoadUiScene();
-            SceneManager.activeSceneChanged += (oldScene, newScene) =>
-            {
-                System.Console.WriteLine();
-            };
+
             SceneManager.sceneLoaded += (scene, loadMode) =>
             {
                 switch (scene.name)
                 {
-                    case "UIScene":
-                        Ui.Hide();
-                        break;
                     case "GoodsCollectorGame":
                     case "CopycatGame":
                     case "BirdGame":
-                        Ui?.Show();
+                        LoadUiScene();
+                        Ui.Show();
                         break;
                     case "MainMenuScene":
-                        Ui?.Hide();
+                        LoadUiScene();
+                        Ui.Hide();
                         break;
                     default:
                         break;
@@ -48,15 +43,15 @@ namespace PhysRehab
             };
             SceneManager.sceneUnloaded += scene =>
             {
-                System.Console.WriteLine("");
             };
         }
 
         private static void LoadUiScene()
         {
             Scene uiScene = SceneManager.GetSceneByName("UIScene");
-            if (uiScene.buildIndex == -1)
-                SceneManager.LoadScene("UIScene", LoadSceneMode.Additive);
+            if (!uiScene.isLoaded)
+                SceneManager.LoadScene(uiScene.buildIndex, LoadSceneMode.Additive);
+            Ui = Object.FindObjectOfType<UIScript>();
         }
 
         public static void ResolveStaticProperties<T>()
@@ -103,11 +98,11 @@ namespace PhysRehab
         {
             if (game == EGame.Collector)
             {
-                LoadScene("GoodsCollectorGame");
+                SceneManager.LoadScene("GoodsCollectorGame");
             }
             else if (game == EGame.Copycat)
             {
-                LoadScene("CopycatGame");
+                SceneManager.LoadScene("CopycatGame");
             }
             else if (game == EGame.FlappyBird)
             {
@@ -116,18 +111,7 @@ namespace PhysRehab
         }
         public static void GoToMainMenu()
         {
-            LoadScene("MainMenuScene");
-        }
-        public static void LoadScene(string sceneName)
-        {
-            foreach (var scene in SceneManager.GetAllScenes())
-            {
-                if (scene.name != "UIScene")
-                {
-                    SceneManager.UnloadScene(scene);
-                }
-            }
-            SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
+            SceneManager.LoadScene("MainMenuScene");
         }
     } 
 }
