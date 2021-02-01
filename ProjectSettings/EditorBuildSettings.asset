@@ -14,7 +14,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/CopycatGame.unity
     guid: 0d60ec56ee48d884ab2386cdca284556
-  - enabled: 1
-    path: Assets/Scenes/UIScene.unity
-    guid: 4c608d6d116ed094585bb07233733820
   m_configObjects: {}

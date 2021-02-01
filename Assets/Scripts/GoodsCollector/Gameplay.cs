@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-using PhysRehab;
-
 public class Gameplay : MonoBehaviour
 {
     public event UnityAction LevelLoaded;
