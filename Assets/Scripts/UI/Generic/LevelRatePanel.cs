@@ -6,7 +6,6 @@ using UnityEngine.UI;
 [ExecuteAlways]
 public class LevelRatePanel : MonoBehaviour
 {
-    #region Fields
     [SerializeField]
     private Sprite _inactiveStarSprite;
     [SerializeField]
@@ -17,9 +16,12 @@ public class LevelRatePanel : MonoBehaviour
     [SerializeField]
     [Range(0, 3)]
     private int _levelRate;
-    #endregion
 
-    #region Methods
+    [SerializeField]
+    [Range(0, 100)]
+    private int _percent;
+
+
     private void Awake()
     {
         _stars = new Image[3];
@@ -30,16 +32,31 @@ public class LevelRatePanel : MonoBehaviour
 
     private void Update()
     {
-        if (!Application.isPlaying)
+        _levelRate = FromPercent(_percent);
+
+        for (int i = 0; i < 3; i++)
         {
-            for (int i = 0; i < 3; i++)
-            {
-                if (i < _levelRate)
-                    _stars[i].sprite = _activeStarSprite;
-                else
-                    _stars[i].sprite = _inactiveStarSprite;
-            } 
+            if (i < _levelRate)
+                _stars[i].sprite = _activeStarSprite;
+            else
+                _stars[i].sprite = _inactiveStarSprite;
         }
+    }
+
+    private int FromPercent(int percent)
+    {
+        Debug.Assert(percent >= 0 && percent <= 100);
+
+        if (percent >= 0 && percent < 33)
+            return 0;
+        else if (percent >= 33 && percent < 66)
+            return 1;
+        else if (percent >= 66 && percent < 90)
+            return 2;
+        else if (percent >= 90)
+            return 3;
+
+        return 0;
     } 
-    #endregion
+    
 }
