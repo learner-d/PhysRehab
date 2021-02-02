@@ -1,25 +1,27 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class PickupSpawner : MonoBehaviour
 {
+    private const int _zCoord = -1;
     [SerializeField]
     private float _pickupMargin = 1f;
-    [SerializeField]
-    private PickupSpawnZone _normalPickupSpawnZone;
-    [SerializeField]
-    private PickupSpawnZone _biggerScorePickupSpawnZone;
+
     [SerializeField]
     private GameObject _normalPickupPrefab;
     [SerializeField]
     private GameObject _bigScorePickupPrefab;
     [SerializeField]
-    private LevelInfo _levelInfo/* = new MockLevelInfo()*/;
+    private LevelInfo _levelInfo;
     [SerializeField]
     private int _maxPickups = 0;
+
+    [SerializeField]
+    private SpawnZoneCollection _spawnZonesCollection;
 
     private List<Pickup> _spawnedPickups = new List<Pickup>();
 
@@ -32,36 +34,38 @@ public class PickupSpawner : MonoBehaviour
     public bool AllPickupsSpawned => SpawnedPickupsCount >= TotalPickupsCount;
     public bool AllPickupsCollected => AllPickupsSpawned && SpawnedPickupsCount == DestroyedPickupsCount;
 
-    //public event UnityAction SpawnStarted;
-    //public event UnityAction SpawnFinished;
-
     private void Awake()
     {
-        string levelConfigPath = Path.Combine(Application.dataPath, @"Data\PickupCollector\testLevel.cfg");
-        //File.WriteAllText(levelConfigPath, JsonUtility.ToJson(_levelInfo, true));
         Initialize();
     }
 
     private void Initialize()
     {
-        _spawnedPickups.Clear();
+        Clear();
+
+        _spawnZonesCollection.Initialize();
+
+        for (int i = 0; i < _levelInfo.pickupSpawnInfos.Length; i++)
+            TotalPickupsCount += (int)_levelInfo.pickupSpawnInfos[i].PickupsCount;
+
+        if (_maxPickups <= 0)
+            _maxPickups = int.MaxValue;
+
+        if (TotalPickupsCount > _maxPickups)
+            TotalPickupsCount = _maxPickups; 
+        
+    }
+
+    public void Clear()
+    {
         TotalPickupsCount = 0;
         SpawnedPickupsCount = 0;
         CollectedPickupsCount = 0;
         DestroyedPickupsCount = 0;
-        for (int i = 0; i < _levelInfo.pickupSpawnInfos.Length; i++)
-        {
-            TotalPickupsCount += (int)_levelInfo.pickupSpawnInfos[i].PickupsCount;
-        }
-        if (TotalPickupsCount > _maxPickups)
-        {
-            TotalPickupsCount = _maxPickups; 
-        }
-    }
+        _spawnedPickups.Clear();
 
-    public void ResetState()
-    {
-        Initialize();
+        ///Clear spawn zones
+        _spawnZonesCollection.Clear();
     }
 
     public void StartSpawning()
@@ -79,7 +83,6 @@ public class PickupSpawner : MonoBehaviour
 
     private IEnumerator SpawningCoroutine()
     {
-        //SpawnStarted?.Invoke();
         _spawnIsRunning = true;
 
         for (int i = 0; i < _levelInfo.SpawnInfoRecordsCount; i++)
@@ -99,13 +102,12 @@ public class PickupSpawner : MonoBehaviour
         }
 
         _spawnIsRunning = false;
-        //SpawnFinished?.Invoke();
         yield break;
     }
 
     private IEnumerator NextSpawn(PickupType pickupType, float lifetimeS)
     {
-        Pickup pickup = SpawnPickup(NextRandomPosition(pickupType), pickupType);
+        Pickup pickup = SpawnPickup(NextSpawnPosition(), pickupType);
         
         yield return new WaitForSeconds(lifetimeS);
 
@@ -113,18 +115,16 @@ public class PickupSpawner : MonoBehaviour
         yield break;
     }
 
-    private Vector3 NextRandomPosition(PickupType pickupType)
+    private Vector3 NextSpawnPosition()
     {
-        PickupSpawnZone spawnZone = pickupType == PickupType.Normal ? _normalPickupSpawnZone : _biggerScorePickupSpawnZone;
-        float x = Random.Range(spawnZone.Zone.xMin, spawnZone.Zone.xMax);
-        float y = Random.Range(spawnZone.Zone.yMin, spawnZone.Zone.yMax);
-
-        return new Vector3(x, y, -1);
+        ///get random spawn zone
+        PickupSpawnZone spawnZone = _spawnZonesCollection.GetRandomZone();
+        return spawnZone.NextCoord(_pickupMargin);
     }
-
+    
     public Pickup SpawnPickup(Vector2 pos, PickupType pickupType = PickupType.Normal)
     {
-        return SpawnPickup(new Vector3(pos.x, pos.y, -1), pickupType);
+        return SpawnPickup(new Vector3(pos.x, pos.y, _zCoord), pickupType);
     }
 
     public Pickup SpawnPickup(Vector3 pos, PickupType pickupType = PickupType.Normal)

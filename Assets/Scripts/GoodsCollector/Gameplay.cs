@@ -7,6 +7,7 @@ public class Gameplay : MonoBehaviour
 {
     public event UnityAction LevelLoaded;
     public event UnityAction LevelStarted;
+    public event UnityAction GameStarted;
     public event UnityAction LevelPassed;
 
     private void Start()
@@ -17,6 +18,11 @@ public class Gameplay : MonoBehaviour
     public void StartLevel()
     {
         LevelStarted?.Invoke();
+    }
+
+    public void StartGame()
+    {
+        GameStarted?.Invoke();
         GoodsCollectorScene.PickupSpawner.StartSpawning();
     }
 
@@ -31,7 +37,7 @@ public class Gameplay : MonoBehaviour
     public void ResetLevel()
     {
         GoodsCollectorScene.ScoreCounter.ResetScore();
-        GoodsCollectorScene.PickupSpawner.ResetState();
+        GoodsCollectorScene.PickupSpawner.Clear();
         LevelLoaded?.Invoke();
     }
 

@@ -18,7 +18,7 @@ public class PickupDebugging : MonoBehaviour
             else if (Input.GetMouseButtonDown(1)) //коли відбувся клік ПКМ
             {
                 //Координати миші
-                Vector2 clickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                Vector3 clickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
                 //Створюємо пікап
                 GoodsCollectorScene.PickupSpawner.SpawnPickup(clickPos);

@@ -70,4 +70,9 @@ public class Program
     {
         SceneManager.LoadScene("MainMenuScene");
     }
+
+    public static void Quit()
+    {
+        Application.Quit();
+    }
 }

@@ -91,4 +91,9 @@ public class MainMenu : MonoBehaviour
     {
         Program.LaunchFlappyBirdGame();
     }
+
+    public void ExitApp()
+    {
+        Program.Quit();
+    }
 }

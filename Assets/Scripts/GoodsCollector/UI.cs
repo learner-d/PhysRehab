@@ -73,13 +73,18 @@ public class UI : MonoBehaviour
 
     private void OnLevelLoaded()
     {
-        HideMainHud();
+        //HideMainHud();
+        HideStartLevelPanel();
         HideLevelCompletePanel();
+    }
+
+    private void OnLevelStarted()
+    {
         SetupStartLevelPanel(1, 10);
         ShowStartLevelPanel();
     }
 
-    private void OnLevelStarted()
+    private void OnGameStarted()
     {
         HideStartLevelPanel();
         ShowMainHud();
@@ -108,6 +113,7 @@ public class UI : MonoBehaviour
     {
         GoodsCollectorScene.Gameplay.LevelLoaded += OnLevelLoaded;
         GoodsCollectorScene.Gameplay.LevelStarted += OnLevelStarted;
+        GoodsCollectorScene.Gameplay.GameStarted += OnGameStarted;
         GoodsCollectorScene.Gameplay.LevelPassed += OnLevelPassed; 
     }
 
@@ -124,6 +130,7 @@ public class UI : MonoBehaviour
     {
         GoodsCollectorScene.Gameplay.LevelLoaded -= OnLevelLoaded;
         GoodsCollectorScene.Gameplay.LevelStarted -= OnLevelStarted;
+        GoodsCollectorScene.Gameplay.GameStarted -= OnGameStarted;
         GoodsCollectorScene.Gameplay.LevelPassed -= OnLevelPassed;
     }
 }
