@@ -43,8 +43,9 @@ public class SpawnZoneCollection : MonoBehaviour
         ///TODO: Optimize
         int[] activeZonesInd
             = _spawnZones
-            .Where(zone => zone.IsActive)
-            .Select((zone, index) => index).ToArray();
+            .Select((zone, index) => index)
+            .Where(index => _spawnZones[index].IsActive)
+            .ToArray();
 
         if(activeZonesInd.Length > 0)
             return _spawnZones[activeZonesInd[Random.Range(0, activeZonesInd.Length)]];

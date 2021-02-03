@@ -68,7 +68,7 @@ public class PickupSpawnZone : MonoBehaviour
 
     public void Clear()
     {
-        IsActive = true;
+        IsActive = false;
         _generatedCoords.Clear();
     }
 
