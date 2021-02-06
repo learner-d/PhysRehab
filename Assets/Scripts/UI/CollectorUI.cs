@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class UI : MonoBehaviour
+public class CollectorUI : MonoBehaviour
 {
     [SerializeField]
     private GameObject _screenFader;
@@ -124,6 +124,8 @@ public class UI : MonoBehaviour
 
     private void Awake()
     {
+        //Delete mockup image
+        Destroy(GetComponent<Image>());
         SetupUiObjects();
     }
     private void OnDestroy()

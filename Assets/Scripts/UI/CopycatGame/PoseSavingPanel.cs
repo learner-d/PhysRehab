@@ -7,6 +7,8 @@ namespace PhysRehab.Copycat.UI
 {
     public class PoseSavingPanel : MonoBehaviour
     {
+        public static PoseSavingPanel Instance { get; private set; }
+
         [SerializeField]
         private InputField _poseName_infld;
         [SerializeField]
@@ -19,6 +21,11 @@ namespace PhysRehab.Copycat.UI
         public float PoseDuration { get; private set; } = float.NaN;
         public bool DataAcquired { get; private set; } = false;
         public bool Visible { get; private set; } = false;
+
+        private void Awake()
+        {
+            Instance = this;
+        }
 
         public void SaveBtn_OnClick()
         {
@@ -38,7 +45,7 @@ namespace PhysRehab.Copycat.UI
 
         public void Show()
         {
-            UI.Instance.Fading(_fading);
+            CopycatDevUi.Instance.Fading(_fading);
             DataAcquired = false;
             gameObject.SetActive(true);
             Visible = true;
@@ -48,7 +55,7 @@ namespace PhysRehab.Copycat.UI
         {
             gameObject.SetActive(false);
             Visible = false;
-            UI.Instance.Fading(0);
+            CopycatDevUi.Instance.Fading(0);
         }
     }
 

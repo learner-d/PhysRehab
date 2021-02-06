@@ -25,4 +25,11 @@ public class PoseInfo
         _poseRig = humanRig;
         _lifetimeS = lifetimeS;
     }
+
+    public bool CheckRigMatch(HumanRig rig, float tolerance = 0.1F)
+    {
+        if (_poseRig == null || rig == null)
+            return false;
+        return _poseRig.CheckRigMatch(rig, tolerance);
+    }
 }
