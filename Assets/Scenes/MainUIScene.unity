@@ -2540,7 +2540,7 @@ GameObject:
   - component: {fileID: 959488567}
   - component: {fileID: 959488566}
   m_Layer: 5
-  m_Name: '#Dropdown_ExercisesList'
+  m_Name: Dropdown_ExercisesList
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2561,7 +2561,7 @@ RectTransform:
   - {fileID: 1216876133}
   - {fileID: 853608145}
   m_Father: {fileID: 1167688480}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -3466,10 +3466,10 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 1031491777}
-  - {fileID: 1936462824}
-  - {fileID: 2139058045}
   - {fileID: 959488565}
   - {fileID: 1438479578}
+  - {fileID: 1936462824}
+  - {fileID: 2139058045}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4546,7 +4546,7 @@ RectTransform:
   m_Children:
   - {fileID: 1665290092}
   m_Father: {fileID: 1167688480}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -6750,7 +6750,7 @@ GameObject:
   - component: {fileID: 1936462826}
   - component: {fileID: 1936462825}
   m_Layer: 5
-  m_Name: PoseListScrollRect
+  m_Name: ScrollRect_PoseList
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6771,7 +6771,7 @@ RectTransform:
   - {fileID: 290208083}
   - {fileID: 1710499003}
   m_Father: {fileID: 1167688480}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -7270,7 +7270,7 @@ GameObject:
   - component: {fileID: 2139058047}
   - component: {fileID: 2139058046}
   m_Layer: 5
-  m_Name: ClearPoseListBtn
+  m_Name: Btn_ClearPoseList
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7289,7 +7289,7 @@ RectTransform:
   m_Children:
   - {fileID: 1770078594}
   m_Father: {fileID: 1167688480}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -7342,7 +7342,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1167688476}
         m_TargetAssemblyTypeName: PhysRehab.Copycat.CopycatDevUi, Assembly-CSharp
-        m_MethodName: BtnClearPoseList_Click
+        m_MethodName: Btn_ClearPoseList_Click
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
