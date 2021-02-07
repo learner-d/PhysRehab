@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class UI : MonoBehaviour
+public class CollectorUI : MonoBehaviour
 {
     [SerializeField]
     private GameObject _screenFader;

@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using PhysRehab.Copycat;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PoseIndicator : MonoBehaviour
 {
@@ -16,16 +19,15 @@ public class PoseIndicator : MonoBehaviour
     private Transform spineBaseJoint;
 
     public bool IsActive { get; private set; } = false;
-    public HumanRig CurrentPoseRig { get; private set; } = null;
+    //TODO: Remove
     public float CurrentTimeoutS { get; private set; } = 0;
     public float CurrentTimeS { get; private set; } = 0;   
-    public void SetPose(HumanRig poseRig, float timeoutS = float.PositiveInfinity)
+    public void SetPose(PoseInfo pose)
     {
-        if (poseRig != null)
+        if (pose != null)
         {
-            _indicatorModel.ApplyRig(poseRig);
-            CurrentPoseRig = poseRig;
-            CurrentTimeoutS = timeoutS;
+            _indicatorModel.ApplyRig(pose.PoseRig);
+            CurrentTimeoutS = pose.LifetimeS;
             CurrentTimeS = 0;
             IsActive = true; 
         }
@@ -35,8 +37,7 @@ public class PoseIndicator : MonoBehaviour
     {
         if (IsActive)
         {
-            bool match = CurrentPoseRig.CheckRigMatch(poseRig);
-            if (match)
+            if (PoseSelector.Instance.ActivePose.CheckRigMatch(poseRig))
             {
                 OnPoseMatch();
                 return true; 
@@ -101,11 +102,17 @@ public class PoseIndicator : MonoBehaviour
         spineBaseJoint.parent = preBaseJoint;
     }
 
+
     private void Awake()
     {
         InitializePoseIndicator();
         _modelRenderers = _indicatorModel.GetComponentsInChildren<Renderer>();
         ApplyColor(_matchNotSuccededColor);
+    }
+
+    private void Start()
+    {
+        PoseSelector.Instance.ActivePoseChanged += SetPose;
     }
 
     private void FixedUpdate()
