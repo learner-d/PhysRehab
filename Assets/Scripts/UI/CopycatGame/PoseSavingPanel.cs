@@ -20,6 +20,8 @@ namespace PhysRehab.Copycat.UI
         [SerializeField]
         private Fader _fader;
 
+        private CanvasRenderer _canvasRenderer;
+
         public string PoseName { get; private set; } = "";
         public float PoseDuration { get; private set; } = float.NaN;
         public bool DataAcquired { get; private set; } = false;
@@ -27,6 +29,7 @@ namespace PhysRehab.Copycat.UI
 
         private void Awake()
         {
+            _canvasRenderer = GetComponent <CanvasRenderer>();
             Instance = this;
         }
 
@@ -50,13 +53,13 @@ namespace PhysRehab.Copycat.UI
         {
             _fader.Fading(_fading);
             DataAcquired = false;
-            gameObject.SetActive(true);
+            _canvasRenderer.cull = false;
             Visible = true;
         }
 
         public void Hide()
         {
-            gameObject.SetActive(false);
+            _canvasRenderer.cull = true;
             Visible = false;
             _fader.Fading(0);
         }
