@@ -1,8 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using PhysRehab.Core;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace PhysRehab.Copycat
@@ -22,13 +24,12 @@ namespace PhysRehab.Copycat
         private void Awake()
         {
             _canvas = GetComponent<Canvas>();
-            InitializePosesPackSelector();
-
             Instance = this;
         }
 
         private void Start()
         {
+            InitializePosesPackSelector();
             PoseSelector.Instance.PoseAdded += AddPoseActivator;
             PoseSelector.Instance.PoseRemoved += RemovePoseActivator;
         }
@@ -42,6 +43,9 @@ namespace PhysRehab.Copycat
         /// </summary>
         private void InitializePosesPackSelector()
         {
+            if (_posesPackSelector == null)
+                return;
+
             _posesPackSelector.ClearOptions();
             List<string> posesPacksNames = PoseStorage.GetPosesPacksNames();
             List<Dropdown.OptionData> optionDatas
@@ -60,29 +64,43 @@ namespace PhysRehab.Copycat
         #region Pose Selector
         private void AddPoseActivator(PoseInfo pose)
         {
-            //TODO: remove poseIndex
-            int poseIndex = PoseSelector.Instance.PosesCount;
-            Button poseActivator = new GameObject($"Pose{poseIndex}Btn").AddComponent<Button>();
-            poseActivator.transform.parent = _poseList_ScrollRect.content;
-            poseActivator.transform.SetSiblingIndex(poseActivator.transform.parent.childCount - 2);
-
-            poseActivator.gameObject
-                .AddComponent<DataBinder<PoseInfo>>()
-                .DataSource = pose;
-
-            poseActivator.onClick.AddListener(() => PoseSelector.Instance.SelectPose(pose));
-
-            var poseNameTxt = poseActivator.GetComponentInChildren<Text>();
-            if (string.IsNullOrEmpty(pose.Name))
+            try
             {
-                poseNameTxt.text = $"Поза {poseIndex + 1}";
-            }
-            else
-            {
-                if (float.IsNaN(pose.LifetimeS) || float.IsInfinity(pose.LifetimeS))
-                    poseNameTxt.text = pose.Name;
+                //TODO: remove poseIndex
+                int poseIndex = PoseSelector.Instance.PosesCount;
+                Button poseActivator = new GameObject($"Pose{poseIndex}Btn").AddComponent<Button>();
+                poseActivator.transform.parent = _poseList_ScrollRect.content;
+                poseActivator.transform.SetSiblingIndex(poseActivator.transform.parent.childCount - 2);
+
+                try
+                {
+                    poseActivator.gameObject
+                                .AddComponent<DataBinder<PoseInfo>>()
+                                .DataSource = pose;
+                }
+                catch (NullReferenceException e)
+                {
+                    throw e;
+                }
+
+                poseActivator.onClick.AddListener(() => PoseSelector.Instance.SelectPose(pose));
+
+                var poseNameTxt = poseActivator.GetComponentInChildren<Text>();
+                if (string.IsNullOrEmpty(pose.Name))
+                {
+                    poseNameTxt.text = $"Поза {poseIndex + 1}";
+                }
                 else
-                    poseNameTxt.text = $"{pose.Name} ({pose.LifetimeS: 0.0} сек.)";
+                {
+                    if (float.IsNaN(pose.LifetimeS) || float.IsInfinity(pose.LifetimeS))
+                        poseNameTxt.text = pose.Name;
+                    else
+                        poseNameTxt.text = $"{pose.Name} ({pose.LifetimeS: 0.0} сек.)";
+                }
+            }
+            catch (NullReferenceException e)
+            {
+                throw e;
             }
         }
 

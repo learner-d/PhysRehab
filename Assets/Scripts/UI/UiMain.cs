@@ -29,6 +29,12 @@ namespace PhysRehab.UI
             Debug.Assert(_dialogs != null);
             if (_isLoaded == false)
             {
+                //Ensure canvases activation
+                _collectorUi.gameObject.SetActive(true);
+                _copycatUi.gameObject.SetActive(true);
+                _genericUi.gameObject.SetActive(true);
+                _dialogs.gameObject.SetActive(true);
+
                 //Delete mockup image
                 Destroy(_collectorUi.GetComponent<Image>());
 
@@ -43,16 +49,13 @@ namespace PhysRehab.UI
                 HideGameUi();
                 Instance = this;
                 _isLoaded = true;
-#if DEBUG
-                SceneManager.LoadScene("CopycatGame");
-#endif
             }
         }
 
         public void HideGameUi()
         {
-            _collectorUi.gameObject.SetActive(false);
-            _copycatUi.gameObject.SetActive(false);
+            _collectorUi.enabled = false;
+            _copycatUi.enabled = false;
         }
 
         public void ShowGameUi(EGame game)
@@ -61,11 +64,11 @@ namespace PhysRehab.UI
             {
                 case EGame.Collector:
                     HideGameUi();
-                    _collectorUi.gameObject.SetActive(true);
+                    _collectorUi.enabled = true;
                     break;
                 case EGame.Copycat:
                     HideGameUi();
-                    _copycatUi.gameObject.SetActive(true);
+                    _copycatUi.enabled = true;
                     break;
                 case EGame.FlappyBird:
                     break;
