@@ -124,8 +124,6 @@ public class CollectorUI : MonoBehaviour
 
     private void Awake()
     {
-        //Delete mockup image
-        Destroy(GetComponent<Image>());
         SetupUiObjects();
     }
     private void OnDestroy()

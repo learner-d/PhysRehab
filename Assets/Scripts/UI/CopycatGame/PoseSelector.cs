@@ -114,8 +114,8 @@ namespace PhysRehab.Copycat
         {
             //TODO: rewrite
             _currentPosesPack = PoseStorage.GetPosesPack("Default");
-            foreach (PoseInfo pose in _currentPosesPack.Poses)
-                AddPose(pose);
+            for (int i = 0; i < _currentPosesPack.Poses.Count; i++)
+                AddPose(_currentPosesPack.Poses[i]);
         }
 
         private void Awake()

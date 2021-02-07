@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using PhysRehab.UI;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,6 +17,8 @@ namespace PhysRehab.Copycat.UI
         [SerializeField]
         [Range(0, 1)]
         private float _fading;
+        [SerializeField]
+        private Fader _fader;
 
         public string PoseName { get; private set; } = "";
         public float PoseDuration { get; private set; } = float.NaN;
@@ -45,7 +48,7 @@ namespace PhysRehab.Copycat.UI
 
         public void Show()
         {
-            CopycatDevUi.Instance.Fading(_fading);
+            _fader.Fading(_fading);
             DataAcquired = false;
             gameObject.SetActive(true);
             Visible = true;
@@ -55,7 +58,7 @@ namespace PhysRehab.Copycat.UI
         {
             gameObject.SetActive(false);
             Visible = false;
-            CopycatDevUi.Instance.Fading(0);
+            _fader.Fading(0);
         }
     }
 

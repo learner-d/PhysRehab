@@ -9,25 +9,21 @@ namespace PhysRehab.Copycat
 {
     public class CopycatDevUi : MonoBehaviour
     {
+        public static CopycatDevUi Instance { get; private set; }
         [SerializeField]
         private bool _renderInGame = true;
-
-        private Canvas _canvas;
+        [SerializeField]
         private ScrollRect _poseList_ScrollRect;
+        [SerializeField]
         private Dropdown _posesPackSelector;
+        
+        private Canvas _canvas;
 
-        private Image _faderImg;
-        public static CopycatDevUi Instance { get; private set; }
         private void Awake()
         {
-            //Delete mockup image
-            Destroy(GetComponent<Image>());
-
             _canvas = GetComponent<Canvas>();
-            _poseList_ScrollRect = _canvas.transform.Find("#CapturingModeUi").GetComponent<ScrollRect>();
             InitializePosesPackSelector();
 
-            _faderImg = new GameObject().AddComponent<Image>();
             Instance = this;
         }
 
@@ -43,7 +39,6 @@ namespace PhysRehab.Copycat
 
         private void InitializePosesPackSelector()
         {
-            _posesPackSelector = _canvas.transform.Find("#Dropdown_ExercisesList").GetComponent<Dropdown>();
             _posesPackSelector.ClearOptions();
             List<string> posesPacksNames = PoseStorage.GetPosesPacksNames();
             List<Dropdown.OptionData> optionDatas
@@ -52,16 +47,6 @@ namespace PhysRehab.Copycat
                     .ToList();
             optionDatas.Add(new Dropdown.OptionData("<Додати>"));
             _posesPackSelector.AddOptions(optionDatas);
-        }
-
-        public void Fading(float amount)
-        {
-            if (amount < 0 || amount > 1)
-                throw new System.ArgumentOutOfRangeException(nameof(amount));
-
-            _faderImg.gameObject.SetActive(amount != 0);
-            Color oldColor = _faderImg.color;
-            _faderImg.color = new Color(oldColor.r, oldColor.g, oldColor.b, amount);
         }
 
         public void Btn_Menu_Click()
