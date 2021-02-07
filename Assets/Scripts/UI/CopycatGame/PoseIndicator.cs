@@ -21,17 +21,7 @@ public class PoseIndicator : MonoBehaviour
     public bool IsActive { get; private set; } = false;
     //TODO: Remove
     public float CurrentTimeoutS { get; private set; } = 0;
-    public float CurrentTimeS { get; private set; } = 0;   
-    public void SetPose(PoseInfo pose)
-    {
-        if (pose != null)
-        {
-            _indicatorModel.ApplyRig(pose.PoseRig);
-            CurrentTimeoutS = pose.LifetimeS;
-            CurrentTimeS = 0;
-            IsActive = true; 
-        }
-    }
+    public float CurrentTimeS { get; private set; } = 0;
 
     public bool CheckPoseMatch(HumanRig poseRig)
     {
@@ -112,18 +102,28 @@ public class PoseIndicator : MonoBehaviour
 
     private void Start()
     {
-        PoseSelector.Instance.ActivePoseChanged += SetPose;
+        PoseSelector.Instance.ActivePoseChanged += OnActivePoseChanged;
+    }
+
+    private void OnActivePoseChanged(PoseInfo prevPose, PoseInfo newPose)
+    {
+        if (newPose != null)
+        {
+            _indicatorModel.ApplyRig(newPose.PoseRig);
+            CurrentTimeoutS = newPose.LifetimeS;
+            CurrentTimeS = 0;
+            IsActive = true;
+        }
     }
 
     private void FixedUpdate()
     {
-        if (IsActive)
+        if (!IsActive) return;
+        
+        CurrentTimeS += Time.fixedDeltaTime;
+        if (CurrentTimeS > CurrentTimeoutS)
         {
-            CurrentTimeS += Time.fixedDeltaTime;
-            if (CurrentTimeS > CurrentTimeoutS)
-            {
-                OnTimeoutExceeded();
-            }
+            OnTimeoutExceeded();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -10,11 +11,15 @@ public class PosePack
     [SerializeField]
     private List<PoseInfo> _poses;
 
+    public event Action<PoseInfo> PoseAdded;
+    public event Action<PoseInfo> PoseRemoved;
+
     public IReadOnlyList<PoseInfo> Poses => _poses;
     public string Name { get => _name; set => _name = value; }
     public void AddPose(PoseInfo poseInfo)
     {
         _poses.Add(poseInfo);
+        PoseAdded?.Invoke(poseInfo);
     }
     public PoseInfo AddPose(HumanRig humanRig, string name, float lifetimeS)
     {
@@ -28,6 +33,7 @@ public class PosePack
         Debug.Assert(poseIndex>=0 && poseIndex < _poses.Count);
         PoseInfo result = _poses[poseIndex];
         _poses.RemoveAt(poseIndex);
+        PoseRemoved?.Invoke(result);
         return result;
     }
     public void RemovePose(PoseInfo poseInfo)

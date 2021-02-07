@@ -37,6 +37,9 @@ namespace PhysRehab.Copycat
             _canvas.enabled = _renderInGame;
         }
 
+        /// <summary>
+        /// TODO: Do One time initialization
+        /// </summary>
         private void InitializePosesPackSelector()
         {
             _posesPackSelector.ClearOptions();

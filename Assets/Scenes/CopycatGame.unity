@@ -873,7 +873,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 283120d3eceb9e543af668a4070c6a19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _indicatorModel: {fileID: 0}
+  _indicatorModel: {fileID: 1586411077}
   _matchNotSuccededColor: {r: 0.5176471, g: 0.07450981, b: 0.25490198, a: 1}
   _matchSuccededColor: {r: 0.15686275, g: 0.5176471, b: 0.07450981, a: 1}
 --- !u!1001 &1586411075
@@ -1064,6 +1064,11 @@ PrefabInstance:
 --- !u!4 &1586411076 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: db48b64b1520beb46b7da1b649894516, type: 3}
+  m_PrefabInstance: {fileID: 1586411075}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1586411077 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: db48b64b1520beb46b7da1b649894516, type: 3}
   m_PrefabInstance: {fileID: 1586411075}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1929180235
