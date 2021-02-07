@@ -7,7 +7,9 @@ public class MainMenu : MonoBehaviour
 {
     [SerializeField] private GameObject mainMenuContent;
     [SerializeField] private GameObject gameChooseMenuContent;
-    [SerializeField] private GameObject aboutAppMenuContent;
+    [SerializeField] private GameObject aboutAppMenuContent1;
+    [SerializeField] private GameObject aboutAppMenuContent2;
+    [SerializeField] private GameObject aboutAppMenuContent3;
     [SerializeField] private GameObject levelsMenuContent;
     [SerializeField] private int levelsCount;
     [SerializeField] private GameObject levelsListHolder;
@@ -51,30 +53,60 @@ public class MainMenu : MonoBehaviour
         gameChooseMenuContent.SetActive(false);
         levelsMenuContent.SetActive(false);
         mainMenuContent.SetActive(true);
-        aboutAppMenuContent.SetActive(false);
+        aboutAppMenuContent1.SetActive(false);
+        aboutAppMenuContent2.SetActive(false);
+        aboutAppMenuContent3.SetActive(false);
     }
     public void ShowLevelsMenu()
     {
         gameChooseMenuContent.SetActive(false);
         mainMenuContent.SetActive(false);
         levelsMenuContent.SetActive(true);
-        aboutAppMenuContent.SetActive(false);
+        aboutAppMenuContent1.SetActive(false);
+        aboutAppMenuContent2.SetActive(false);
+        aboutAppMenuContent3.SetActive(false);
     }
 
-    public void ShowAboutAppMenu()
+    public void ShowAboutAppMenu1()
     {
         gameChooseMenuContent.SetActive(false);
         mainMenuContent.SetActive(false);
         levelsMenuContent.SetActive(false);
-        aboutAppMenuContent.SetActive(true);
+        aboutAppMenuContent1.SetActive(true);
+        aboutAppMenuContent2.SetActive(false);
+        aboutAppMenuContent3.SetActive(false);
     }
+
+    public void ShowAboutAppMenu2()
+    {
+        gameChooseMenuContent.SetActive(false);
+        mainMenuContent.SetActive(false);
+        levelsMenuContent.SetActive(false);
+        aboutAppMenuContent1.SetActive(false);
+        aboutAppMenuContent2.SetActive(true);
+        aboutAppMenuContent3.SetActive(false);
+    }
+
+    public void ShowAboutAppMenu3()
+    {
+        gameChooseMenuContent.SetActive(false);
+        mainMenuContent.SetActive(false);
+        levelsMenuContent.SetActive(false);
+        aboutAppMenuContent3.SetActive(true);
+        aboutAppMenuContent1.SetActive(false);
+        aboutAppMenuContent2.SetActive(false);
+
+    }
+
 
     public void ShowGameChooseMenu()
     {
         gameChooseMenuContent.SetActive(true);
         mainMenuContent.SetActive(false);
         levelsMenuContent.SetActive(false);
-        aboutAppMenuContent.SetActive(false);
+        aboutAppMenuContent1.SetActive(false);
+        aboutAppMenuContent2.SetActive(false);
+        aboutAppMenuContent3.SetActive(false);
     }
 
     public void LaunchCollectorGame()
