@@ -4,15 +4,10 @@ using UnityEngine;
 
 public class Dialogs : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private Canvas _canvas;
 
-    // Update is called once per frame
-    void Update()
+    private void Awake()
     {
-        
+        _canvas = GetComponent<Canvas>();
     }
 }

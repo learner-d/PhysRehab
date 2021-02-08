@@ -30,6 +30,9 @@ namespace PhysRehab.Copycat
         private void Start()
         {
             InitializePosesPackSelector();
+            //TODO: handle it
+            if(PoseSelector.Instance == null)
+                return;
             PoseSelector.Instance.PoseAdded += AddPoseActivator;
             PoseSelector.Instance.PoseRemoved += RemovePoseActivator;
         }

@@ -112,10 +112,11 @@ public class CollectorUI : MonoBehaviour
 
     private void SetupUiEvents()
     {
+        return;
         GoodsCollectorScene.Gameplay.LevelLoaded += OnLevelLoaded;
         GoodsCollectorScene.Gameplay.LevelStarted += OnLevelStarted;
         GoodsCollectorScene.Gameplay.GameStarted += OnGameStarted;
-        GoodsCollectorScene.Gameplay.LevelPassed += OnLevelPassed; 
+        GoodsCollectorScene.Gameplay.LevelPassed += OnLevelPassed;
     }
 
     private void Start()
@@ -129,6 +130,7 @@ public class CollectorUI : MonoBehaviour
     }
     private void OnDestroy()
     {
+        return;
         GoodsCollectorScene.Gameplay.LevelLoaded -= OnLevelLoaded;
         GoodsCollectorScene.Gameplay.LevelStarted -= OnLevelStarted;
         GoodsCollectorScene.Gameplay.GameStarted -= OnGameStarted;

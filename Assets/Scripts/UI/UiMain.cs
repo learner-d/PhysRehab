@@ -27,14 +27,16 @@ namespace PhysRehab.UI
             Debug.Assert(_copycatUi != null);
             Debug.Assert(_genericUi != null);
             Debug.Assert(_dialogs != null);
+            
+            //Ensure canvases activation
+            
+            //_collectorUi.gameObject.SetActive(true);
+            
+            _dialogs.gameObject.SetActive(true);
+            _copycatUi.gameObject.SetActive(true);
+            _genericUi.gameObject.SetActive(true);
             if (_isLoaded == false)
             {
-                //Ensure canvases activation
-                _collectorUi.gameObject.SetActive(true);
-                _copycatUi.gameObject.SetActive(true);
-                _genericUi.gameObject.SetActive(true);
-                _dialogs.gameObject.SetActive(true);
-
                 //Delete mockup image
                 Destroy(_collectorUi.GetComponent<Image>());
 
