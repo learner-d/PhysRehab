@@ -2000,9 +2000,9 @@ MonoBehaviour:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 14
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 10
-    m_MaxSize: 40
+    m_MaxSize: 25
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -3101,8 +3101,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -103, y: -37}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: -150, y: -50}
+  m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1031491778
 MonoBehaviour:
@@ -3497,8 +3497,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _renderInGame: 1
-  _poseList_ScrollRect: {fileID: 0}
-  _posesPackSelector: {fileID: 0}
+  _poseList_ScrollRect: {fileID: 1936462825}
+  _posesPackSelector: {fileID: 959488566}
 --- !u!114 &1167688477
 MonoBehaviour:
   m_ObjectHideFlags: 0
