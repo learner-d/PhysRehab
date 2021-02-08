@@ -7,6 +7,7 @@ namespace PhysRehab.Scenes
 {
     public class CopycatGameScene : GameScene
     {
+        public static CopycatGameScene Instance { get; protected set; }
         public CopycatGameScene()
         {
             _name = "CopycatGame";

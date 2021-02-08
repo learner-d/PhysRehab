@@ -124,7 +124,7 @@ namespace PhysRehab.Copycat
             foreach (GameObject child in _poseList_ScrollRect.content)
             {
                 DataBinder childDataBind = child.GetComponent<DataBinder>();
-                if ((childDataBind?.DataSource) == poseInfo)
+                if ((childDataBind?.DataSource as PoseInfo) == poseInfo)
                 {
                     Destroy(childDataBind.gameObject);
                     return;

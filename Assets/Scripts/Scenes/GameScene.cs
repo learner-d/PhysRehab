@@ -10,7 +10,6 @@ namespace PhysRehab.Scenes
 {
     public class GameScene
     {
-        public static GameScene Instance { get; protected set; }
         protected string _name;
         public string Name => _name;
         public bool IsLoaded { get; protected set; }
