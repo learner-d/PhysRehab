@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using PhysRehab.Copycat;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PoseIndicator : MonoBehaviour
 {
@@ -16,27 +19,15 @@ public class PoseIndicator : MonoBehaviour
     private Transform spineBaseJoint;
 
     public bool IsActive { get; private set; } = false;
-    public HumanRig CurrentPoseRig { get; private set; } = null;
+    //TODO: Remove
     public float CurrentTimeoutS { get; private set; } = 0;
-    public float CurrentTimeS { get; private set; } = 0;   
-    public void SetPose(HumanRig poseRig, float timeoutS = float.PositiveInfinity)
-    {
-        if (poseRig != null)
-        {
-            _indicatorModel.ApplyRig(poseRig);
-            CurrentPoseRig = poseRig;
-            CurrentTimeoutS = timeoutS;
-            CurrentTimeS = 0;
-            IsActive = true; 
-        }
-    }
+    public float CurrentTimeS { get; private set; } = 0;
 
     public bool CheckPoseMatch(HumanRig poseRig)
     {
         if (IsActive)
         {
-            bool match = CurrentPoseRig.CheckRigMatch(poseRig);
-            if (match)
+            if (PoseSelector.Instance.ActivePose.CheckRigMatch(poseRig))
             {
                 OnPoseMatch();
                 return true; 
@@ -101,6 +92,7 @@ public class PoseIndicator : MonoBehaviour
         spineBaseJoint.parent = preBaseJoint;
     }
 
+
     private void Awake()
     {
         InitializePoseIndicator();
@@ -108,15 +100,30 @@ public class PoseIndicator : MonoBehaviour
         ApplyColor(_matchNotSuccededColor);
     }
 
+    private void Start()
+    {
+        PoseSelector.Instance.ActivePoseChanged += OnActivePoseChanged;
+    }
+
+    private void OnActivePoseChanged(PoseInfo prevPose, PoseInfo newPose)
+    {
+        if (newPose != null)
+        {
+            _indicatorModel.ApplyRig(newPose.PoseRig);
+            CurrentTimeoutS = newPose.LifetimeS;
+            CurrentTimeS = 0;
+            IsActive = true;
+        }
+    }
+
     private void FixedUpdate()
     {
-        if (IsActive)
+        if (!IsActive) return;
+        
+        CurrentTimeS += Time.fixedDeltaTime;
+        if (CurrentTimeS > CurrentTimeoutS)
         {
-            CurrentTimeS += Time.fixedDeltaTime;
-            if (CurrentTimeS > CurrentTimeoutS)
-            {
-                OnTimeoutExceeded();
-            }
+            OnTimeoutExceeded();
         }
     }
 }

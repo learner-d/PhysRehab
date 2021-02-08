@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using PhysRehab.UI;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,6 +8,8 @@ namespace PhysRehab.Copycat.UI
 {
     public class PoseSavingPanel : MonoBehaviour
     {
+        public static PoseSavingPanel Instance { get; private set; }
+
         [SerializeField]
         private InputField _poseName_infld;
         [SerializeField]
@@ -14,11 +17,21 @@ namespace PhysRehab.Copycat.UI
         [SerializeField]
         [Range(0, 1)]
         private float _fading;
+        [SerializeField]
+        private Fader _fader;
+
+        private CanvasRenderer _canvasRenderer;
 
         public string PoseName { get; private set; } = "";
         public float PoseDuration { get; private set; } = float.NaN;
         public bool DataAcquired { get; private set; } = false;
         public bool Visible { get; private set; } = false;
+
+        private void Awake()
+        {
+            _canvasRenderer = GetComponent <CanvasRenderer>();
+            Instance = this;
+        }
 
         public void SaveBtn_OnClick()
         {
@@ -38,17 +51,17 @@ namespace PhysRehab.Copycat.UI
 
         public void Show()
         {
-            UI.Instance.Fading(_fading);
+            _fader.Fading(_fading);
             DataAcquired = false;
-            gameObject.SetActive(true);
+            _canvasRenderer.cull = false;
             Visible = true;
         }
 
         public void Hide()
         {
-            gameObject.SetActive(false);
+            _canvasRenderer.cull = true;
             Visible = false;
-            UI.Instance.Fading(0);
+            _fader.Fading(0);
         }
     }
 

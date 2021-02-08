@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class UI : MonoBehaviour
+public class CollectorUI : MonoBehaviour
 {
     [SerializeField]
     private GameObject _screenFader;
@@ -16,10 +16,15 @@ public class UI : MonoBehaviour
     [SerializeField]
     private GameObject _levelCompletePanel;
 
+    [SerializeField]
     private Text _startLevelPanel_CaptionText;
+    [SerializeField]
     private Text _startLevelPanel_ObjectiveText;
+    [SerializeField]
     private Text _uiScoreCounter_text;
+    [SerializeField]
     private Text _levelCompletePanel_CaptionText;
+    [SerializeField]
     private Text _levelCompletePanel_InfoText;
 
     public void SetScoreCounterValue(int value)
@@ -102,11 +107,7 @@ public class UI : MonoBehaviour
 
     private void SetupUiObjects()
     {
-        _startLevelPanel_CaptionText = _startLevelPanel.transform.Find("LevelCaptionText").GetComponent<Text>();
-        _startLevelPanel_ObjectiveText = _startLevelPanel.transform.Find("LevelObjectiveText").GetComponent<Text>();
-        _uiScoreCounter_text = _mainHud.transform.Find("ScoreCounterText").GetComponent<Text>();
-        _levelCompletePanel_CaptionText = _levelCompletePanel.transform.Find("LevelCaptionText").GetComponent<Text>();
-        _levelCompletePanel_InfoText = _levelCompletePanel.transform.Find("InfoText").GetComponent<Text>();
+        
     }
 
     private void SetupUiEvents()

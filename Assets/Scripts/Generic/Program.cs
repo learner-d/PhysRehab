@@ -1,13 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
+using PhysRehab.Core;
+using PhysRehab.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
-public enum EGame
-{
-    None, Collector, Copycat, FlappyBird
-}
 
 public class Program
 {
@@ -55,10 +52,12 @@ public class Program
     {
         if (game == EGame.Collector)
         {
+            UiMain.Instance.ShowGameUi(game);
             SceneManager.LoadScene("GoodsCollectorGame");
         }
         else if(game == EGame.Copycat)
         {
+            UiMain.Instance.ShowGameUi(game);
             SceneManager.LoadScene("CopycatGame");
         }
         else if(game == EGame.FlappyBird)
@@ -68,11 +67,27 @@ public class Program
     }
     public static void GoToMainMenu()
     {
+        UiMain.Instance.HideGameUi();
         SceneManager.LoadScene("MainMenuScene");
     }
 
     public static void Quit()
     {
         Application.Quit();
+    }
+
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterAssembliesLoaded)]
+    public static void OnAppStartup()
+    {
+        
+    }
+
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    private static void LoadUi()
+    {
+        if (UiMain.IsLoaded == false)
+        {
+            SceneManager.LoadScene("MainUIScene");
+        }
     }
 }
