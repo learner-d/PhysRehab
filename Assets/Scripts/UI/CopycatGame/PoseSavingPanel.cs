@@ -20,7 +20,7 @@ namespace PhysRehab.Copycat.UI
         [SerializeField]
         private Fader _fader;
 
-        private CanvasRenderer _canvasRenderer;
+        private Canvas _canvas;
 
         public string PoseName { get; private set; } = "";
         public float PoseDuration { get; private set; } = float.NaN;
@@ -29,8 +29,9 @@ namespace PhysRehab.Copycat.UI
 
         private void Awake()
         {
-            _canvasRenderer = GetComponent <CanvasRenderer>();
+            _canvas = GetComponent<Canvas>();
             Instance = this;
+            Hide();
         }
 
         public void SaveBtn_OnClick()
@@ -53,13 +54,13 @@ namespace PhysRehab.Copycat.UI
         {
             _fader.Fading(_fading);
             DataAcquired = false;
-            _canvasRenderer.cull = false;
+            _canvas.enabled = true;
             Visible = true;
         }
 
         public void Hide()
         {
-            _canvasRenderer.cull = true;
+            _canvas.enabled = false;
             Visible = false;
             _fader.Fading(0);
         }

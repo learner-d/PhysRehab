@@ -7,9 +7,15 @@ namespace PhysRehab.Scenes
 {
     public class CopycatGameScene : GameScene
     {
-        static CopycatGameScene()
+        public CopycatGameScene()
         {
             _name = "CopycatGame";
+        }
+
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterAssembliesLoaded)]
+        public static void Initialize()
+        {
+            Instance = new CopycatGameScene();
         }
     }
 }
