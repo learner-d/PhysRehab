@@ -4903,12 +4903,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainMenuContent: {fileID: 1581288881}
   gameChooseMenuContent: {fileID: 890209525}
-  InfoCanvas: {fileID: 0}
-  InfoCanvas2: {fileID: 0}
-  InfoCanvas3: {fileID: 0}
-  Game1: {fileID: 0}
-  Game2: {fileID: 0}
-  Game3: {fileID: 0}
+  InfoCanvas: {fileID: 2103073663}
+  InfoCanvas2: {fileID: 1778783406}
+  InfoCanvas3: {fileID: 784841711}
+  Game1: {fileID: 608720012}
+  Game2: {fileID: 609280684}
+  Game3: {fileID: 1047168201}
   levelsMenuContent: {fileID: 862971447}
   levelsCount: 7
   levelsListHolder: {fileID: 86428699}
