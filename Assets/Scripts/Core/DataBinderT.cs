@@ -2,7 +2,7 @@
 
 namespace PhysRehab.Core
 {
-    public class DataBinder<T> : MonoBehaviour
+    public class DataBinderT<T> : MonoBehaviour
     {
         [SerializeField]
         private T _dataSource;

@@ -135,6 +135,7 @@ namespace PhysRehab.Copycat
                 }
                 if (newPosePack != null)
                 {
+                    ClearPoses();
                     foreach (PoseInfo poseInfo in newPosePack.Poses)
                         PoseAdded?.Invoke(poseInfo);
 
