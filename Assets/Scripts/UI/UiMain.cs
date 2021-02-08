@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using PhysRehab.Core;
+using PhysRehab.Scenes;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -14,6 +15,7 @@ namespace PhysRehab.UI
         private static bool _isLoaded = false;
         public static bool IsLoaded => _isLoaded;
 
+        [SerializeField]
         private EGame _activeGame = EGame.None;
         public EGame ActiveGame {
             get => _activeGame;
@@ -41,7 +43,7 @@ namespace PhysRehab.UI
                     SceneManager.LoadScene("GoodsCollectorGame");
                     break;
                 case EGame.Copycat:
-                    SceneManager.LoadScene("CopycatGame");
+                    CopycatGameScene.Instance.EnsureLoaded();
                     break;
                 case EGame.FlappyBird:
                     SceneManager.LoadScene("BirdGame");
@@ -79,6 +81,7 @@ namespace PhysRehab.UI
                 HideGameUi();
                 Instance = this;
                 _isLoaded = true;
+                OnActiveGameChanged(_activeGame);
             }
         }
 

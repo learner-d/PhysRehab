@@ -10,18 +10,12 @@ namespace PhysRehab.Scenes
 {
     public class GameScene
     {
-        private GameScene _instance = null;
+        public static GameScene Instance { get; protected set; }
+        protected string _name;
+        public string Name => _name;
+        public bool IsLoaded { get; protected set; }
 
-        public static string Name { get; }
-        public static bool IsLoaded { get; private set; }
-
-        static GameScene()
-        {
-
-        }
-        
-        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
-        public static void Initialize()
+        public GameScene()
         {
             SceneManager.sceneLoaded += (scene, loadType) =>
             {
@@ -33,6 +27,12 @@ namespace PhysRehab.Scenes
                 if (scene.name == Name)
                     IsLoaded = false;
             };
+        }
+
+        public void EnsureLoaded()
+        {
+            if (IsLoaded == false)
+                SceneManager.LoadScene(_name);
         }
     }
 }

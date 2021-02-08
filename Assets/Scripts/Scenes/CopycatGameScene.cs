@@ -7,22 +7,15 @@ namespace PhysRehab.Scenes
 {
     public class CopycatGameScene : GameScene
     {
-        public const string Name = "CopycatGame";
-        public static bool IsLoaded { get; private set; }
+        public CopycatGameScene()
+        {
+            _name = "CopycatGame";
+        }
 
-        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterAssembliesLoaded)]
         public static void Initialize()
         {
-            SceneManager.sceneLoaded += (scene, loadType) =>
-            {
-                if (scene.name == Name)
-                    IsLoaded = true;
-            };
-            SceneManager.sceneUnloaded += (scene) =>
-            {
-                if (scene.name == Name)
-                    IsLoaded = false;
-            };
+            Instance = new CopycatGameScene();
         }
     }
 }
