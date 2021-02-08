@@ -2106,7 +2106,7 @@ GameObject:
   - component: {fileID: 746276295}
   - component: {fileID: 746276294}
   m_Layer: 5
-  m_Name: CapturePoseBtn
+  m_Name: Btn_CapturePose
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2176,9 +2176,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PoseSelector, Assembly-CSharp
-        m_MethodName: CapturePoseBtn_OnClick
+      - m_Target: {fileID: 1167688476}
+        m_TargetAssemblyTypeName: PhysRehab.Copycat.CopycatDevUi, Assembly-CSharp
+        m_MethodName: Btn_CapturePose_Click
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3078,7 +3078,7 @@ GameObject:
   - component: {fileID: 1031491779}
   - component: {fileID: 1031491778}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Btn_Menu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4804,7 +4804,7 @@ GameObject:
   - component: {fileID: 1438479580}
   - component: {fileID: 1438479579}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Btn_SaveExercise
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4874,9 +4874,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PoseSelector, Assembly-CSharp
-        m_MethodName: SavePoses
+      - m_Target: {fileID: 1167688476}
+        m_TargetAssemblyTypeName: PhysRehab.Copycat.CopycatDevUi, Assembly-CSharp
+        m_MethodName: Btn_Save_Click
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7421,7 +7421,7 @@ GameObject:
   - component: {fileID: 2139058047}
   - component: {fileID: 2139058046}
   m_Layer: 5
-  m_Name: ClearPoseListBtn
+  m_Name: Btn_ClearPoseList
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7491,9 +7491,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PoseSelector, Assembly-CSharp
-        m_MethodName: ClearPoses
+      - m_Target: {fileID: 1167688476}
+        m_TargetAssemblyTypeName: PhysRehab.Copycat.CopycatDevUi, Assembly-CSharp
+        m_MethodName: Btn_ClearPoseList_Click
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
