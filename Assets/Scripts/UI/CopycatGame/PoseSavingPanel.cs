@@ -14,13 +14,9 @@ namespace PhysRehab.Copycat.UI
         private InputField _poseName_infld;
         [SerializeField]
         private InputField _poseDuration_infld;
-        [SerializeField]
-        [Range(0, 1)]
-        private float _fading;
-        [SerializeField]
-        private Fader _fader;
 
         private Canvas _canvas;
+        private Fader _fader;
 
         public string PoseName { get; private set; } = "";
         public float PoseDuration { get; private set; } = float.NaN;
@@ -30,6 +26,7 @@ namespace PhysRehab.Copycat.UI
         private void Awake()
         {
             _canvas = GetComponent<Canvas>();
+            _fader = GetComponentInParent<Fader>();
             Instance = this;
         }
 
@@ -56,17 +53,17 @@ namespace PhysRehab.Copycat.UI
 
         public void Show()
         {
-            _fader?.Fading(_fading);
             DataAcquired = false;
             _canvas.enabled = true;
+            _fader.IsVisible = true;
             Visible = true;
         }
 
         public void Hide()
         {
             _canvas.enabled = false;
+            _fader.IsVisible = false;
             Visible = false;
-            _fader?.Fading(0);
         }
     }
 

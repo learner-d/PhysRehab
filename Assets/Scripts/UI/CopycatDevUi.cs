@@ -6,6 +6,7 @@ using PhysRehab.Core;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Object = UnityEngine.Object;
 
 namespace PhysRehab.Copycat
 {
@@ -121,7 +122,7 @@ namespace PhysRehab.Copycat
 
         private void RemovePoseActivator(PoseInfo poseInfo)
         {
-            foreach (GameObject child in _poseList_ScrollRect.content)
+            foreach (Transform child in _poseList_ScrollRect.content)
             {
                 DataBinder childDataBind = child.GetComponent<DataBinder>();
                 if ((childDataBind?.DataSource as PoseInfo) == poseInfo)
