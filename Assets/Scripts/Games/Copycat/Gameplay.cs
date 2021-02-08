@@ -10,7 +10,7 @@ namespace PhysRehab.Copycat
     {
         private void Start()
         {
-            UiMain.Instance.ShowGameUi(EGame.Copycat);
+            //UiMain.Instance.ShowGameUi(EGame.Copycat);
         }
     }
 }

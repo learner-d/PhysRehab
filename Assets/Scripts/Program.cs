@@ -82,7 +82,6 @@ public class Program
         
     }
 
-    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     private static void LoadUi()
     {
         if (UiMain.IsLoaded == false)
