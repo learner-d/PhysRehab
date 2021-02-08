@@ -491,7 +491,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1709144854}
   m_Direction: 0
   m_Value: 1
-  m_Size: 0.99999964
+  m_Size: 0.9999995
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2130,7 +2130,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 30}
+  m_SizeDelta: {x: 0, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &746276294
 MonoBehaviour:
@@ -2655,7 +2655,7 @@ GameObject:
   - component: {fileID: 959488567}
   - component: {fileID: 959488566}
   m_Layer: 5
-  m_Name: Dropdown
+  m_Name: Dropdown_SelectExercise
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2676,12 +2676,12 @@ RectTransform:
   - {fileID: 1216876133}
   - {fileID: 853608145}
   m_Father: {fileID: 1167688480}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -167.10999, y: 297.5}
-  m_SizeDelta: {x: 122.28003, y: 30}
+  m_AnchoredPosition: {x: -266.68, y: 500}
+  m_SizeDelta: {x: 190, y: 55}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &959488566
 MonoBehaviour:
@@ -3047,9 +3047,9 @@ MonoBehaviour:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 14
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 10
-    m_MaxSize: 40
+    m_MaxSize: 35
     m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -3531,7 +3531,7 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
@@ -3572,10 +3572,10 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 1031491777}
-  - {fileID: 1936462824}
-  - {fileID: 2139058045}
   - {fileID: 959488565}
   - {fileID: 1438479578}
+  - {fileID: 1936462824}
+  - {fileID: 2139058045}
   - {fileID: 1006585889}
   m_Father: {fileID: 0}
   m_RootOrder: 4
@@ -4823,12 +4823,12 @@ RectTransform:
   m_Children:
   - {fileID: 1665290092}
   m_Father: {fileID: 1167688480}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -67.91016, y: 297.5}
-  m_SizeDelta: {x: 50, y: 30}
+  m_AnchoredPosition: {x: -85.138, y: 500}
+  m_SizeDelta: {x: 124.455, y: 55}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1438479579
 MonoBehaviour:
@@ -5571,7 +5571,7 @@ MonoBehaviour:
     m_FontStyle: 0
     m_BestFit: 1
     m_MinSize: 10
-    m_MaxSize: 40
+    m_MaxSize: 30
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -6081,7 +6081,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 637377315}
   m_HandleRect: {fileID: 637377314}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -6406,9 +6406,9 @@ MonoBehaviour:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 14
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 10
-    m_MaxSize: 40
+    m_MaxSize: 25
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -6922,12 +6922,12 @@ RectTransform:
   - {fileID: 290208083}
   - {fileID: 1710499003}
   m_Father: {fileID: 1167688480}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -128.25, y: 165}
-  m_SizeDelta: {x: 200, y: 200}
+  m_AnchoredPosition: {x: -195.81, y: 266.465}
+  m_SizeDelta: {x: 335.119, y: 402.931}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1936462825
 MonoBehaviour:
@@ -7241,9 +7241,9 @@ MonoBehaviour:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 14
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 10
-    m_MaxSize: 40
+    m_MaxSize: 25
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -7440,12 +7440,12 @@ RectTransform:
   m_Children:
   - {fileID: 1770078594}
   m_Father: {fileID: 1167688480}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -137, y: 41}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: -195.81, y: 35}
+  m_SizeDelta: {x: 240, y: 45}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2139058046
 MonoBehaviour:
