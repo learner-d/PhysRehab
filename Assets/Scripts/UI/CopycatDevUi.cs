@@ -27,13 +27,13 @@ namespace PhysRehab.Copycat
         private void Awake()
         {
             _canvas = GetComponent<Canvas>();
+            InitializePoseSelector();
             Instance = this;
         }
 
         private void Start()
         {
             InitializePosesPackSelector();
-            InitializePoseSelector();
             PoseSelector.Instance.PoseAdded += AddPoseActivator;
             PoseSelector.Instance.PoseRemoved += RemovePoseActivator;
         }
@@ -87,13 +87,15 @@ namespace PhysRehab.Copycat
                 int poseIndex = PoseSelector.Instance.PosesCount;
                 Button poseActivator = Instantiate(_btnPrefab_poseActivator, _poseList_ScrollRect.content);
                 poseActivator.transform.name = $"Pose{poseIndex}Btn";
-                poseActivator.transform.SetSiblingIndex(poseActivator.transform.parent.childCount - 2);
+                poseActivator.transform.SetSiblingIndex(poseActivator.transform.parent.childCount - 3);
 
                 poseActivator.gameObject
                                 .AddComponent<DataBinder>()
                                 .DataSource = pose;
                 
-                poseActivator.onClick.AddListener(() => PoseSelector.Instance.SelectPose(pose));
+                poseActivator.onClick.AddListener(() => {
+                    PoseSelector.Instance.SelectPose(pose);
+                });
 
                 var poseNameTxt = poseActivator.GetComponentInChildren<Text>();
                 if (string.IsNullOrEmpty(pose.Name))

@@ -109,7 +109,7 @@ namespace PhysRehab.Copycat
 
         public void ClearPoses()
         {
-            while (ActivePosesPack.Poses.Count > 0)
+            while (ActivePosesPack?.Poses.Count > 0)
              ActivePosesPack.RemovePose(0);   
         }
 

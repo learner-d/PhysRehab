@@ -31,6 +31,10 @@ namespace PhysRehab.Copycat.UI
         {
             _canvas = GetComponent<Canvas>();
             Instance = this;
+        }
+
+        private void Start()
+        {
             Hide();
         }
 
@@ -52,7 +56,7 @@ namespace PhysRehab.Copycat.UI
 
         public void Show()
         {
-            _fader.Fading(_fading);
+            _fader?.Fading(_fading);
             DataAcquired = false;
             _canvas.enabled = true;
             Visible = true;
@@ -62,7 +66,7 @@ namespace PhysRehab.Copycat.UI
         {
             _canvas.enabled = false;
             Visible = false;
-            _fader.Fading(0);
+            _fader?.Fading(0);
         }
     }
 
