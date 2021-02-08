@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using PhysRehab.Core;
+using PhysRehab.Scenes;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -14,6 +16,17 @@ namespace PhysRehab.UI
         public static bool IsLoaded => _isLoaded;
 
         [SerializeField]
+        private EGame _activeGame = EGame.None;
+        public EGame ActiveGame {
+            get => _activeGame;
+            set {
+                OnActiveGameChanged(value);
+                _activeGame = value;
+            }
+        }
+
+        
+        [SerializeField]
         private Canvas _collectorUi;
         [SerializeField]
         private Canvas _copycatUi;
@@ -21,6 +34,25 @@ namespace PhysRehab.UI
         private Canvas _genericUi;
         [SerializeField]
         private Dialogs _dialogs;
+
+        private static void OnActiveGameChanged(EGame value)
+        {
+            switch (value)
+            {
+                case EGame.Collector:
+                    SceneManager.LoadScene("GoodsCollectorGame");
+                    break;
+                case EGame.Copycat:
+                    CopycatGameScene.Instance.EnsureLoaded();
+                    break;
+                case EGame.FlappyBird:
+                    SceneManager.LoadScene("BirdGame");
+                    break;
+                default:
+                    break;
+            }
+        }
+
         private void Awake()
         {
             Debug.Assert(_collectorUi != null);
@@ -51,6 +83,7 @@ namespace PhysRehab.UI
                 HideGameUi();
                 Instance = this;
                 _isLoaded = true;
+                OnActiveGameChanged(_activeGame);
             }
         }
 

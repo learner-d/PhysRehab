@@ -18,12 +18,16 @@ namespace PhysRehab.Copycat
         private ScrollRect _poseList_ScrollRect;
         [SerializeField]
         private Dropdown _posesPackSelector;
+
+        [SerializeField]
+        private Button _btnPrefab_poseActivator;
         
         private Canvas _canvas;
 
         private void Awake()
         {
             _canvas = GetComponent<Canvas>();
+            InitializePoseSelector();
             Instance = this;
         }
 
@@ -59,6 +63,19 @@ namespace PhysRehab.Copycat
             _posesPackSelector.AddOptions(optionDatas);
         }
 
+        private void InitializePoseSelector()
+        {
+            ClearPoseSelector();
+        }
+
+        private void ClearPoseSelector()
+        {
+            while (_poseList_ScrollRect.content.childCount > 2)
+            {
+                DestroyImmediate(_poseList_ScrollRect.content.GetChild(0).gameObject);
+            }
+        }
+
         public void Btn_Menu_Click()
         {
             Program.GoToMainMenu();
@@ -71,22 +88,17 @@ namespace PhysRehab.Copycat
             {
                 //TODO: remove poseIndex
                 int poseIndex = PoseSelector.Instance.PosesCount;
-                Button poseActivator = new GameObject($"Pose{poseIndex}Btn").AddComponent<Button>();
-                poseActivator.transform.parent = _poseList_ScrollRect.content;
-                poseActivator.transform.SetSiblingIndex(poseActivator.transform.parent.childCount - 2);
+                Button poseActivator = Instantiate(_btnPrefab_poseActivator, _poseList_ScrollRect.content);
+                poseActivator.transform.name = $"Pose{poseIndex}Btn";
+                poseActivator.transform.SetSiblingIndex(poseActivator.transform.parent.childCount - 3);
 
-                try
-                {
-                    poseActivator.gameObject
-                                .AddComponent<DataBinder<PoseInfo>>()
+                poseActivator.gameObject
+                                .AddComponent<DataBinder>()
                                 .DataSource = pose;
-                }
-                catch (NullReferenceException e)
-                {
-                    throw e;
-                }
-
-                poseActivator.onClick.AddListener(() => PoseSelector.Instance.SelectPose(pose));
+                
+                poseActivator.onClick.AddListener(() => {
+                    PoseSelector.Instance.SelectPose(pose);
+                });
 
                 var poseNameTxt = poseActivator.GetComponentInChildren<Text>();
                 if (string.IsNullOrEmpty(pose.Name))
@@ -111,8 +123,8 @@ namespace PhysRehab.Copycat
         {
             foreach (GameObject child in _poseList_ScrollRect.content)
             {
-                DataBinder<PoseInfo> childDataBind = child.GetComponent<DataBinder<PoseInfo>>();
-                if (childDataBind?.DataSource == poseInfo)
+                DataBinder childDataBind = child.GetComponent<DataBinder>();
+                if ((childDataBind?.DataSource) == poseInfo)
                 {
                     Destroy(childDataBind.gameObject);
                     return;

@@ -27,7 +27,7 @@ namespace PhysRehab.UI
             if (amount < 0 || amount > 1)
                 throw new System.ArgumentOutOfRangeException(nameof(amount));
 
-            _faderImg.gameObject.SetActive(Math.Abs(amount) > float.Epsilon);
+            _faderImg.enabled = Math.Abs(amount) > float.Epsilon;
             Color oldColor = _faderImg.color;
             _faderImg.color = new Color(oldColor.r, oldColor.g, oldColor.b, amount);
         }
