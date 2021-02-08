@@ -136,4 +136,9 @@ public class CollectorUI : MonoBehaviour
         GoodsCollectorScene.Gameplay.GameStarted -= OnGameStarted;
         GoodsCollectorScene.Gameplay.LevelPassed -= OnLevelPassed;
     }
+
+    public void Btn_Menu_Click()
+    {
+        Program.GoToMainMenu();
+    }
 }

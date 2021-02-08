@@ -14,8 +14,6 @@ namespace PhysRehab.Copycat
     {
         public static CopycatDevUi Instance { get; private set; }
         [SerializeField]
-        private bool _renderInGame = true;
-        [SerializeField]
         private ScrollRect _poseList_ScrollRect;
         [SerializeField]
         private Dropdown _posesPackSelector;
@@ -40,10 +38,6 @@ namespace PhysRehab.Copycat
                 return;
             PoseSelector.Instance.PoseAdded += AddPoseActivator;
             PoseSelector.Instance.PoseRemoved += RemovePoseActivator;
-        }
-        private void Update()
-        {
-            _canvas.enabled = _renderInGame;
         }
 
         /// <summary>
@@ -125,7 +119,7 @@ namespace PhysRehab.Copycat
             foreach (Transform child in _poseList_ScrollRect.content)
             {
                 DataBinder childDataBind = child.GetComponent<DataBinder>();
-                if ((childDataBind?.DataSource as PoseInfo) == poseInfo)
+                if (childDataBind?.DataSource as PoseInfo == poseInfo)
                 {
                     Destroy(childDataBind.gameObject);
                     return;

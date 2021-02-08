@@ -7,24 +7,24 @@ using UnityEngine.SceneManagement;
 
 namespace PhysRehab.Scenes
 {
-    public class CopycatGameScene : GameScene
+    public class CollectorGameScene : GameScene
     {
-        public static CopycatGameScene Instance { get; protected set; }
-        public CopycatGameScene()
+        public static CollectorGameScene Instance { get; protected set; }
+        public CollectorGameScene()
         {
-            _name = "CopycatGame";
+            _name = "GoodsCollectorGame";
         }
 
         protected override void OnSceneLoaded()
         {
             base.OnSceneLoaded();
-            UiMain.Instance.ShowGameUi(EGame.Copycat);
+            UiMain.Instance.ShowGameUi(EGame.Collector);
         }
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterAssembliesLoaded)]
         protected static void Initialize()
         {
-            Instance = new CopycatGameScene();
+            Instance = new CollectorGameScene();
         }
     }
 }
