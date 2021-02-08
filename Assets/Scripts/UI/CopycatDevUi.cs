@@ -69,7 +69,7 @@ namespace PhysRehab.Copycat
         {
             while (_poseList_ScrollRect.content.childCount > 2)
             {
-                Destroy(_poseList_ScrollRect.content.GetChild(0).gameObject);
+                DestroyImmediate(_poseList_ScrollRect.content.GetChild(0).gameObject);
             }
         }
 
