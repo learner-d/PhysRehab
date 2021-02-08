@@ -8,28 +8,23 @@ using UnityEngine.SceneManagement;
 
 namespace PhysRehab.Scenes
 {
-    public abstract class GameScene
+    public class GameScene
     {
         protected string _name;
         public string Name => _name;
         public bool IsLoaded { get; protected set; }
 
-        protected GameScene()
+        public GameScene()
         {
-            SceneManager.activeSceneChanged += (prevScene, newScene) =>
-            {
-                if(newScene.name == _name)
-                    OnScenePreLoad();
-            };
             SceneManager.sceneLoaded += (scene, loadType) =>
             {
                 if (scene.name == Name)
-                    OnSceneLoaded();
+                    IsLoaded = true;
             };
             SceneManager.sceneUnloaded += (scene) =>
             {
                 if (scene.name == Name)
-                    OnSceneUnloaded();
+                    IsLoaded = false;
             };
         }
 
@@ -37,22 +32,6 @@ namespace PhysRehab.Scenes
         {
             if (IsLoaded == false)
                 SceneManager.LoadScene(_name);
-        }
-
-
-        protected virtual void OnSceneLoaded()
-        {
-            IsLoaded = true;
-        }
-
-        protected virtual void OnSceneUnloaded()
-        {
-            IsLoaded = false;
-        }
-
-        protected virtual void OnScenePreLoad()
-        {
-            Program.LoadUi();
         }
     }
 }
