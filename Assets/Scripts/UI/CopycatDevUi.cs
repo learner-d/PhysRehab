@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using PhysRehab.Core;
+using PhysRehab.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -10,11 +11,10 @@ using Object = UnityEngine.Object;
 
 namespace PhysRehab.Copycat
 {
-    public class CopycatDevUi : MonoBehaviour
+    public class CopycatDevUi : VisibleBase
     {
-        public static CopycatDevUi Instance { get; private set; }
-        [SerializeField]
-        private bool _renderInGame = true;
+        public static CopycatDevUi Instance => (CopycatDevUi) _instance;
+
         [SerializeField]
         private ScrollRect _poseList_ScrollRect;
         [SerializeField]
@@ -22,14 +22,12 @@ namespace PhysRehab.Copycat
 
         [SerializeField]
         private Button _btnPrefab_poseActivator;
-        
-        private Canvas _canvas;
 
-        private void Awake()
+
+        protected override void Awake()
         {
-            _canvas = GetComponent<Canvas>();
             InitializePoseSelector();
-            Instance = this;
+            base.Awake();
         }
 
         private void Start()
@@ -40,10 +38,6 @@ namespace PhysRehab.Copycat
                 return;
             PoseSelector.Instance.PoseAdded += AddPoseActivator;
             PoseSelector.Instance.PoseRemoved += RemovePoseActivator;
-        }
-        private void Update()
-        {
-            _canvas.enabled = _renderInGame;
         }
 
         /// <summary>

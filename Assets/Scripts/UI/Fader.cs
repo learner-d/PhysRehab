@@ -18,7 +18,7 @@ namespace PhysRehab.UI
         private Canvas _canvas;
         private Image _faderImg;
 
-        public bool IsVisible { get; set; } = true;
+        public bool Visible { get; set; } = true;
 
         private void Awake()
         {
@@ -27,7 +27,7 @@ namespace PhysRehab.UI
             _faderImg = GetComponent<Image>();
             if (_faderImg == null)
                 _faderImg = gameObject.AddComponent<Image>(); 
-            IsVisible = false;
+            Visible = false;
             Instance = this;
         }
 
@@ -36,7 +36,7 @@ namespace PhysRehab.UI
             if (amount < 0 || amount > 1)
                 throw new System.ArgumentOutOfRangeException(nameof(amount));
 
-            _faderImg.enabled = IsVisible && Math.Abs(amount) > float.Epsilon;
+            _faderImg.enabled = Visible && Math.Abs(amount) > float.Epsilon;
             Color oldColor = _faderImg.color;
             _faderImg.color = new Color(oldColor.r, oldColor.g, oldColor.b, amount);
         }

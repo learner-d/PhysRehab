@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using PhysRehab.Copycat;
 using PhysRehab.Core;
 using PhysRehab.Scenes;
 using UnityEngine;
@@ -9,9 +10,9 @@ using UnityEngine.UI;
 
 namespace PhysRehab.UI
 {
-    public class UiMain : MonoBehaviour
+    public class UI_MAIN : MonoBehaviour
     {
-        public static UiMain Instance { get; private set; }
+        public static UI_MAIN Instance { get; private set; }
         private static bool _isLoaded = false;
         public static bool IsLoaded => _isLoaded;
 
@@ -27,9 +28,9 @@ namespace PhysRehab.UI
 
         
         [SerializeField]
-        private Canvas _collectorUi;
+        private CollectorUI _collectorUi;
         [SerializeField]
-        private Canvas _copycatUi;
+        private CopycatDevUi _copycatUi;
         [SerializeField]
         private Canvas _genericUi;
         [SerializeField]
@@ -80,17 +81,21 @@ namespace PhysRehab.UI
                 DontDestroyOnLoad(_genericUi.gameObject);
                 DontDestroyOnLoad(_dialogs.gameObject);
                 DontDestroyOnLoad(gameObject);
-                HideGameUi();
                 Instance = this;
                 _isLoaded = true;
                 OnActiveGameChanged(_activeGame);
             }
         }
 
+        private void Start()
+        {
+            HideGameUi();
+        }
+
         public void HideGameUi()
         {
-            _collectorUi.enabled = false;
-            _copycatUi.enabled = false;
+            _collectorUi.Hide();
+            _copycatUi.Hide();
         }
 
         public void ShowGameUi(EGame game)
@@ -99,24 +104,16 @@ namespace PhysRehab.UI
             {
                 case EGame.Collector:
                     HideGameUi();
-                    _collectorUi.enabled = true;
+                    _collectorUi.Show();
                     break;
                 case EGame.Copycat:
                     HideGameUi();
-                    _copycatUi.enabled = true;
+                    _copycatUi.Show();
                     break;
                 case EGame.FlappyBird:
                     break;
                 default:
                     break;
-            }
-        }
-
-        public void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.B))
-            {
-                Debug.Log("Break!");
             }
         }
     } 

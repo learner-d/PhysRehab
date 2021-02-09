@@ -8,14 +8,19 @@ using UnityEngine.SceneManagement;
 
 namespace PhysRehab.Scenes
 {
-    public class GameScene
+    public abstract class GameScene
     {
         protected string _name;
         public string Name => _name;
         public bool IsLoaded { get; protected set; }
 
-        public GameScene()
+        protected GameScene()
         {
+            SceneManager.activeSceneChanged += (prevScene, newScene) =>
+            {
+                if(newScene.name == Name)
+                    Program.LoadUi();
+            };
             SceneManager.sceneLoaded += (scene, loadType) =>
             {
                 if (scene.name == Name)
