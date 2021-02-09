@@ -40,13 +40,13 @@ namespace PhysRehab.UI
             switch (value)
             {
                 case EGame.Collector:
-                    CollectorGameScene.Instance.EnsureLoaded();
+                    SceneManager.LoadScene("GoodsCollectorGame");
                     break;
                 case EGame.Copycat:
                     CopycatGameScene.Instance.EnsureLoaded();
                     break;
                 case EGame.FlappyBird:
-                    FlappyBirdGameScene.Instance.EnsureLoaded();
+                    SceneManager.LoadScene("BirdGame");
                     break;
                 default:
                     break;
@@ -61,7 +61,9 @@ namespace PhysRehab.UI
             Debug.Assert(_dialogs != null);
             
             //Ensure canvases activation
-            _collectorUi.gameObject.SetActive(true);
+            
+            //_collectorUi.gameObject.SetActive(true);
+            
             _dialogs.gameObject.SetActive(true);
             _copycatUi.gameObject.SetActive(true);
             _genericUi.gameObject.SetActive(true);
@@ -89,30 +91,21 @@ namespace PhysRehab.UI
         {
             _collectorUi.enabled = false;
             _copycatUi.enabled = false;
-            _genericUi.enabled = false;
-            _dialogs.enabled = false;
         }
 
         public void ShowGameUi(EGame game)
         {
-            //TODO: remove generic ui and dialogs enabled changing
             switch (game)
             {
                 case EGame.Collector:
                     HideGameUi();
                     _collectorUi.enabled = true;
-                    _genericUi.enabled = true;
-                    _dialogs.enabled = true;
                     break;
                 case EGame.Copycat:
                     HideGameUi();
                     _copycatUi.enabled = true;
-                    _genericUi.enabled = true;
-                    _dialogs.enabled = true;
                     break;
                 case EGame.FlappyBird:
-                    _genericUi.enabled = true;
-                    _dialogs.enabled = true;
                     break;
                 default:
                     break;

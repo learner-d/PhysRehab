@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Reflection;
 using PhysRehab.Core;
-using PhysRehab.Scenes;
 using PhysRehab.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -54,16 +53,16 @@ public class Program
         if (game == EGame.Collector)
         {
             UiMain.Instance.ShowGameUi(game);
-            CollectorGameScene.Instance.EnsureLoaded();
+            SceneManager.LoadScene("GoodsCollectorGame");
         }
         else if(game == EGame.Copycat)
         {
             UiMain.Instance.ShowGameUi(game);
-            CopycatGameScene.Instance.EnsureLoaded();
+            SceneManager.LoadScene("CopycatGame");
         }
         else if(game == EGame.FlappyBird)
         {
-            CollectorGameScene.Instance.EnsureLoaded();
+
         }
     }
     public static void GoToMainMenu()
@@ -83,8 +82,7 @@ public class Program
         
     }
 
-    //Must be called before any game scene loading
-    public static void LoadUi()
+    private static void LoadUi()
     {
         if (UiMain.IsLoaded == false)
         {

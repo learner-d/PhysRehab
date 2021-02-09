@@ -1,7 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using PhysRehab.Core;
-using PhysRehab.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -15,14 +13,8 @@ namespace PhysRehab.Scenes
             _name = "CopycatGame";
         }
 
-        protected override void OnSceneLoaded()
-        {
-            base.OnSceneLoaded();
-            UiMain.Instance.ShowGameUi(EGame.Copycat);
-        }
-
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterAssembliesLoaded)]
-        protected static void Initialize()
+        public static void Initialize()
         {
             Instance = new CopycatGameScene();
         }
