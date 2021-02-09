@@ -50,9 +50,4 @@ public class Gameplay : MonoBehaviour
     {
 
     }
-
-    public void GoToMainMenu()
-    {
-        Program.GoToMainMenu();
-    }
 }

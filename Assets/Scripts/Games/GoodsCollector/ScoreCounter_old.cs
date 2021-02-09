@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using PhysRehab.UI;
 using UnityEngine;
 
-public class ScoreCounter : MonoBehaviour
+//TODO: remove this script
+public class ScoreCounter_old : MonoBehaviour
 {
     private int Score_fld;
     public int Score
@@ -11,7 +13,7 @@ public class ScoreCounter : MonoBehaviour
         private set
         {
             Score_fld = value;
-            GoodsCollectorScene.HudController.SetScoreCounterValue(Score_fld);
+            CollectorUIHud.Instance.ScoreCounter.Score = value;
         }
     }
 

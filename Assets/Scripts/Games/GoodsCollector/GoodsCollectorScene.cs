@@ -1,15 +1,15 @@
 ﻿using System.Reflection;
+using PhysRehab.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GoodsCollectorScene
 {
     public static Gameplay Gameplay { get; private set; }
-    public static CollectorUI HudController { get; private set; }
     public static LevelManager LevelManager { get; private set; }
     public static PickupObserver PickupObserver { get; private set; }
     public static PickupSpawner PickupSpawner { get; private set; }
-    public static ScoreCounter ScoreCounter { get; private set; }
+    public static ScoreCounter_old ScoreCounter { get; private set; }
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterAssembliesLoaded)]
     public static void Initialize()
