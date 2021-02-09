@@ -8,8 +8,10 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject mainMenuContent;
     [SerializeField] private GameObject gameChooseMenuContent;
     [SerializeField] private GameObject InfoCanvas;
-    [SerializeField] private GameObject InfoCanvas2;
-    [SerializeField] private GameObject InfoCanvas3;
+    [SerializeField] private GameObject Info1st;
+    [SerializeField] private GameObject Info2st;
+    [SerializeField] private GameObject Info3st;
+    [SerializeField] private GameObject GamePanel;
     [SerializeField] private GameObject Game1;
     [SerializeField] private GameObject Game2;
     [SerializeField] private GameObject Game3;
@@ -57,8 +59,10 @@ public class MainMenu : MonoBehaviour
         levelsMenuContent.SetActive(false);
         mainMenuContent.SetActive(true);
         InfoCanvas.SetActive(false);
-        InfoCanvas2.SetActive(false);
-        InfoCanvas3.SetActive(false);
+        Info1st.SetActive(false);
+        Info2st.SetActive(false);
+        Info3st.SetActive(false);
+        GamePanel.SetActive(false);
         Game1.SetActive(false);
         Game2.SetActive(false);
         Game3.SetActive(false);
@@ -69,8 +73,10 @@ public class MainMenu : MonoBehaviour
         mainMenuContent.SetActive(false);
         levelsMenuContent.SetActive(true);
         InfoCanvas.SetActive(false);
-        InfoCanvas2.SetActive(false);
-        InfoCanvas3.SetActive(false);
+        Info1st.SetActive(false);
+        Info2st.SetActive(false);
+        Info3st.SetActive(false);
+        GamePanel.SetActive(false);
         Game1.SetActive(false);
         Game2.SetActive(false);
         Game3.SetActive(false);
@@ -82,8 +88,13 @@ public class MainMenu : MonoBehaviour
         mainMenuContent.SetActive(false);
         levelsMenuContent.SetActive(false);
         InfoCanvas.SetActive(true);
-        InfoCanvas2.SetActive(false);
-        InfoCanvas3.SetActive(false);
+        Info1st.SetActive(true);
+        Info2st.SetActive(false);
+        Info3st.SetActive(false);
+        GamePanel.SetActive(false);
+        Game1.SetActive(false);
+        Game2.SetActive(false);
+        Game3.SetActive(false);
     }
 
     public void ShowAboutAppMenu2()
@@ -91,9 +102,11 @@ public class MainMenu : MonoBehaviour
         gameChooseMenuContent.SetActive(false);
         mainMenuContent.SetActive(false);
         levelsMenuContent.SetActive(false);
-        InfoCanvas.SetActive(false);
-        InfoCanvas2.SetActive(true);
-        InfoCanvas3.SetActive(false);
+        InfoCanvas.SetActive(true);
+        Info1st.SetActive(false);
+        Info2st.SetActive(true);
+        Info3st.SetActive(false);
+        GamePanel.SetActive(false);
         Game1.SetActive(false);
         Game2.SetActive(false);
         Game3.SetActive(false);
@@ -104,9 +117,11 @@ public class MainMenu : MonoBehaviour
         gameChooseMenuContent.SetActive(false);
         mainMenuContent.SetActive(false);
         levelsMenuContent.SetActive(false);
-        InfoCanvas.SetActive(false);
-        InfoCanvas2.SetActive(false);
-        InfoCanvas3.SetActive(true);
+        InfoCanvas.SetActive(true);
+        Info1st.SetActive(false);
+        Info2st.SetActive(false);
+        Info3st.SetActive(true);
+        GamePanel.SetActive(false);
         Game1.SetActive(false);
         Game2.SetActive(false);
         Game3.SetActive(false);
@@ -120,8 +135,10 @@ public class MainMenu : MonoBehaviour
         mainMenuContent.SetActive(false);
         levelsMenuContent.SetActive(false);
         InfoCanvas.SetActive(false);
-        InfoCanvas2.SetActive(false);
-        InfoCanvas3.SetActive(false);
+        Info1st.SetActive(false);
+        Info2st.SetActive(false);
+        Info3st.SetActive(false);
+        GamePanel.SetActive(true);
         Game1.SetActive(false);
         Game2.SetActive(false);
         Game3.SetActive(false);
@@ -129,12 +146,14 @@ public class MainMenu : MonoBehaviour
 
     public void ShowGame1()
     {
-        gameChooseMenuContent.SetActive(false);
+        gameChooseMenuContent.SetActive(true);
         mainMenuContent.SetActive(false);
         levelsMenuContent.SetActive(false);
         InfoCanvas.SetActive(false);
-        InfoCanvas2.SetActive(false);
-        InfoCanvas3.SetActive(false);
+        Info1st.SetActive(false);
+        Info2st.SetActive(false);
+        Info3st.SetActive(false);
+        GamePanel.SetActive(false);
         Game1.SetActive(true);
         Game2.SetActive(false);
         Game3.SetActive(false);
@@ -142,12 +161,14 @@ public class MainMenu : MonoBehaviour
 
     public void ShowGame2()
     {
-        gameChooseMenuContent.SetActive(false);
+        gameChooseMenuContent.SetActive(true);
         mainMenuContent.SetActive(false);
         levelsMenuContent.SetActive(false);
         InfoCanvas.SetActive(false);
-        InfoCanvas2.SetActive(false);
-        InfoCanvas3.SetActive(false);
+        Info1st.SetActive(false);
+        Info2st.SetActive(false);
+        Info3st.SetActive(false);
+        GamePanel.SetActive(false);
         Game1.SetActive(false);
         Game2.SetActive(true);
         Game3.SetActive(false);
@@ -155,12 +176,14 @@ public class MainMenu : MonoBehaviour
 
     public void ShowGame3()
     {
-        gameChooseMenuContent.SetActive(false);
+        gameChooseMenuContent.SetActive(true);
         mainMenuContent.SetActive(false);
         levelsMenuContent.SetActive(false);
         InfoCanvas.SetActive(false);
-        InfoCanvas2.SetActive(false);
-        InfoCanvas3.SetActive(false);
+        Info1st.SetActive(false);
+        Info2st.SetActive(false);
+        Info3st.SetActive(false);
+        GamePanel.SetActive(false);
         Game1.SetActive(false);
         Game2.SetActive(false);
         Game3.SetActive(true);
