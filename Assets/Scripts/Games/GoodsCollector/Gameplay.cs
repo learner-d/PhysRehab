@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using PhysRehab.Scenes;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -23,12 +24,12 @@ public class Gameplay : MonoBehaviour
     public void StartGame()
     {
         GameStarted?.Invoke();
-        GoodsCollectorScene.PickupSpawner.StartSpawning();
+        CollectorGameScene.PickupSpawner.StartSpawning();
     }
 
     public void CheckLevelProress()
     {
-        if (GoodsCollectorScene.PickupSpawner.AllPickupsCollected)
+        if (CollectorGameScene.PickupSpawner.AllPickupsCollected)
         {
             LevelPassed?.Invoke();
         }
@@ -36,8 +37,8 @@ public class Gameplay : MonoBehaviour
 
     public void ResetLevel()
     {
-        GoodsCollectorScene.ScoreCounter.ResetScore();
-        GoodsCollectorScene.PickupSpawner.Clear();
+        CollectorGameScene.ScoreCounter.ResetScore();
+        CollectorGameScene.PickupSpawner.Clear();
         LevelLoaded?.Invoke();
     }
 

@@ -14,8 +14,6 @@ namespace PhysRehab.Copycat
 {
     public class CopycatDevUi : VisibleBase
     {
-        public static CopycatDevUi Instance { get; private set; }
-
         [SerializeField]
         private ScrollRect _poseList_ScrollRect;
         [SerializeField]
@@ -29,7 +27,6 @@ namespace PhysRehab.Copycat
         {
             InitializePoseSelector();
             base.Awake();
-            Instance = this;
         }
 
         private void Start()
@@ -78,7 +75,8 @@ namespace PhysRehab.Copycat
             base.UpdateVisibility();
             if (_visible == false)
             {
-                PoseSavingPanel.Instance.Hide();
+                UI_MAIN.Instance.Dialogs.PoseSavingPanel.Hide();
+                UI_MAIN.Instance.GenericUI.PausePanel.Hide();
             }
         }
 

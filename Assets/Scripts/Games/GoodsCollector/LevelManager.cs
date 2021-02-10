@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using PhysRehab.Scenes;
 using UnityEngine;
 
 public class LevelManager : MonoBehaviour
@@ -8,6 +9,6 @@ public class LevelManager : MonoBehaviour
 
     public void StartLevel()
     {
-        GoodsCollectorScene.PickupSpawner.StartSpawning();
+        CollectorGameScene.PickupSpawner.StartSpawning();
     }
 }

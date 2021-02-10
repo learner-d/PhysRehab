@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using PhysRehab.Scenes;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -131,7 +132,7 @@ public class PickupSpawner : MonoBehaviour
     {
         GameObject pickupPrefab = pickupType == PickupType.Normal ? _normalPickupPrefab : _bigScorePickupPrefab;
         Pickup pickup = Instantiate(pickupPrefab, pos, Quaternion.identity).GetComponent<Pickup>();
-        GoodsCollectorScene.PickupObserver.Subscribe(pickup);
+        CollectorGameScene.PickupObserver.Subscribe(pickup);
 
         _spawnedPickups.Add(pickup);
         SpawnedPickupsCount++;
@@ -152,6 +153,6 @@ public class PickupSpawner : MonoBehaviour
             }
             DestroyedPickupsCount++;
         }
-        GoodsCollectorScene.Gameplay.CheckLevelProress();
+        CollectorGameScene.Gameplay.CheckLevelProress();
     }
 }

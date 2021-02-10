@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using PhysRehab.Copycat.UI;
+using PhysRehab.UI;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -70,18 +71,18 @@ namespace PhysRehab.Copycat
         //TODO: rewrite immediately!
         public void CapturePoseBtn_OnClick()
         {
-            PoseSavingPanel.Instance.Show();
+            UI_MAIN.Instance.Dialogs.PoseSavingPanel.Show();
             StartCoroutine(retrievePoseData(_character.CaptureRig()));
         }
 
         private IEnumerator retrievePoseData(HumanRig poseRig)
         {
-            if (PoseSavingPanel.Instance.Visible)
+            if (UI_MAIN.Instance.Dialogs.PoseSavingPanel.Visible)
             {
-                yield return new WaitUntil(() => PoseSavingPanel.Instance.Visible == false);
-                if (PoseSavingPanel.Instance.DataAcquired)
+                yield return new WaitUntil(() => UI_MAIN.Instance.Dialogs.PoseSavingPanel.Visible == false);
+                if (UI_MAIN.Instance.Dialogs.PoseSavingPanel.DataAcquired)
                 {
-                    AddPose(poseRig, PoseSavingPanel.Instance.PoseName, PoseSavingPanel.Instance.PoseDuration);
+                    AddPose(poseRig, UI_MAIN.Instance.Dialogs.PoseSavingPanel.PoseName, UI_MAIN.Instance.Dialogs.PoseSavingPanel.PoseDuration);
                 }
             }
             yield break;

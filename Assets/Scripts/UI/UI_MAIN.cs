@@ -13,6 +13,10 @@ namespace PhysRehab.UI
     public class UI_MAIN : MonoBehaviour
     {
         public static UI_MAIN Instance { get; private set; }
+
+        [SerializeField]
+        private bool GO_TO_MENU = false;
+
         private static bool _isLoaded = false;
         public static bool IsLoaded => _isLoaded;
 
@@ -21,29 +25,49 @@ namespace PhysRehab.UI
         public EGame ActiveGame {
             get => _activeGame;
             set {
-                OnActiveGameChanged(value);
                 _activeGame = value;
+                ShowGameUi(value);
             }
         }
 
-        
         [SerializeField]
         private CollectorUI _collectorUi;
+        public CollectorUI CollectorUI => _collectorUi;
+
         [SerializeField]
         private CopycatDevUi _copycatUi;
+        public CopycatDevUi CopycatDevUi => _copycatUi;
+        
         [SerializeField]
-        private Canvas _genericUi;
+        private GenericUI _genericUi;
+        public GenericUI GenericUI => _genericUi;
+
         [SerializeField]
         private Dialogs _dialogs;
+        public Dialogs Dialogs => _dialogs;
 
-        public static void Load()
+        [SerializeField]
+        private UiGameLoader _gameLoader;
+
+        private static GameScene _sceneToLoad = null;
+
+        /// <summary>
+        /// Not supporting LoadSceneMode.Additive
+        /// </summary>
+        /// <returns>whether is scene wasn't previously loaded</returns>
+        public static bool EnsureLoaded(GameScene loadNext = null)
         {
             if (_isLoaded == false)
             {
                 SceneManager.LoadScene("MainUIScene");
-                System.Console.WriteLine("UI Loaded");
-                _isLoaded = true; 
+                Debug.Log("UI Loaded");
+
+                _sceneToLoad = loadNext;
+
+                return true;
             }
+
+            return false;
         }
 
         private void Awake()
@@ -52,11 +76,11 @@ namespace PhysRehab.UI
             Debug.Assert(_copycatUi != null);
             Debug.Assert(_genericUi != null);
             Debug.Assert(_dialogs != null);
+            Debug.Assert(_gameLoader != null);
             
             //Ensure canvases activation
             
-            //_collectorUi.gameObject.SetActive(true);
-            
+            _collectorUi.gameObject.SetActive(true);
             _dialogs.gameObject.SetActive(true);
             _copycatUi.gameObject.SetActive(true);
             _genericUi.gameObject.SetActive(true);
@@ -72,33 +96,25 @@ namespace PhysRehab.UI
                 DontDestroyOnLoad(_copycatUi.gameObject);
                 DontDestroyOnLoad(_genericUi.gameObject);
                 DontDestroyOnLoad(_dialogs.gameObject);
+                DontDestroyOnLoad(_gameLoader);
                 DontDestroyOnLoad(gameObject);
 
                 Instance = this;
+                _isLoaded = true;
+
                 //OnActiveGameChanged(_activeGame);
-            }
-        }
 
-        private void Start()
-        {
-            ShowGameUi(_activeGame);
-        }
+                if (GO_TO_MENU)
+                {
+                    MainMenuScene.Instance.EnsureLoaded();
+                    GO_TO_MENU = false;
+                }
 
-        private void OnActiveGameChanged(EGame value)
-        {
-            switch (value)
-            {
-                case EGame.Collector:
-                    CollectorGameScene.Instance.EnsureLoaded();
-                    break;
-                case EGame.Copycat:
-                    CopycatGameScene.Instance.EnsureLoaded();
-                    break;
-                case EGame.FlappyBird:
-                    //SceneManager.LoadScene("BirdGame");
-                    break;
-                default:
-                    break;
+                if (_sceneToLoad != null)
+                {
+                    _sceneToLoad.EnsureLoaded();
+                    _sceneToLoad = null;
+                }
             }
         }
 
@@ -106,20 +122,19 @@ namespace PhysRehab.UI
         {
             _collectorUi.Hide();
             _copycatUi.Hide();
-            _genericUi.enabled = false;
+            _genericUi.Hide();
             _dialogs.Hide();
         }
 
         public void ShowGameUi(EGame game)
         {
+            HideGameUi();
             switch (game)
             {
                 case EGame.Collector:
-                    HideGameUi();
                     _collectorUi.Show();
                     break;
                 case EGame.Copycat:
-                    HideGameUi();
                     _copycatUi.Show();
                     break;
                 case EGame.FlappyBird:
@@ -127,7 +142,7 @@ namespace PhysRehab.UI
                 default:
                     return;
             }
-            _genericUi.enabled = true;
+            _genericUi.Show();
             _dialogs.Show();
         }
     } 

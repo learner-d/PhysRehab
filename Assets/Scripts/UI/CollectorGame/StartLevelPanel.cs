@@ -1,4 +1,5 @@
 ﻿
+using PhysRehab.Scenes;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,8 +7,6 @@ namespace PhysRehab.UI.CollectorGame
 {
     public class StartLevelPanel : DialogPanelBase
     {
-        public static StartLevelPanel Instance { get; private set; }
-
         [SerializeField]
         private Text _captionText;
         [SerializeField]
@@ -21,7 +20,6 @@ namespace PhysRehab.UI.CollectorGame
         protected override void Awake()
         {
             base.Awake();
-            Instance = this;
             UpdateText();
         }
 
@@ -48,7 +46,7 @@ namespace PhysRehab.UI.CollectorGame
 
         public void Btn_StartGame_Click()
         {
-            GoodsCollectorScene.Gameplay.StartGame();
+            CollectorGameScene.Gameplay.StartGame();
         }
     }
 }

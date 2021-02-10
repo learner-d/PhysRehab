@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using PhysRehab.Core;
+using PhysRehab.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,6 +13,18 @@ namespace PhysRehab.Scenes
         public CopycatGameScene()
         {
             _name = "CopycatGame";
+        }
+
+        protected override void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        {
+            if (scene.name == Name)
+            {
+                IsLoaded = UI_MAIN.EnsureLoaded(this) == false;
+                if (IsLoaded)
+                {
+                    _Loaded?.Invoke(this);
+                }
+            }
         }
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterAssembliesLoaded)]

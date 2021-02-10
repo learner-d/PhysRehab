@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using PhysRehab.Scenes;
 using UnityEngine;
 
 public class PickupObserver : MonoBehaviour
@@ -30,9 +31,9 @@ public class PickupObserver : MonoBehaviour
         }
         
         _audioSource.PlayOneShot(collectSound);
-        GoodsCollectorScene.ScoreCounter.AddScore(score);
+        CollectorGameScene.ScoreCounter.AddScore(score);
 
-        GoodsCollectorScene.PickupSpawner.RemovePickup(pickup, true);
+        CollectorGameScene.PickupSpawner.RemovePickup(pickup, true);
     }
 
     private void Awake()

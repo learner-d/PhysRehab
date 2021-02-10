@@ -1,4 +1,5 @@
 ﻿using PhysRehab.Core;
+using PhysRehab.Scenes;
 using PhysRehab.UI.CollectorGame;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -8,64 +9,48 @@ namespace PhysRehab.UI
 {
     public class CollectorUI : VisibleBase
     {
-        public static CollectorUI Instance { get; private set; }
+        private CollectorPreConfingUI _preConfingUi;
+        public CollectorPreConfingUI PreConfingUi => _preConfingUi;
+        
+        private CollectorUIHud _collectorUiHud;
+        public CollectorUIHud HUD => _collectorUiHud;
 
         protected override void Awake()
         {
             base.Awake();
-            Instance = this;
-        }
-
-        private void Start()
-        {
-            if (Application.isPlaying && UI_MAIN.Instance?.ActiveGame == EGame.Collector && GoodsCollectorScene.Gameplay)
-            {
-                GoodsCollectorScene.Gameplay.LevelLoaded += OnLevelLoaded;
-                GoodsCollectorScene.Gameplay.LevelStarted += OnLevelStarted;
-                GoodsCollectorScene.Gameplay.GameStarted += OnGameStarted;
-                GoodsCollectorScene.Gameplay.LevelPassed += OnLevelPassed; 
-            }
+            _preConfingUi = GetComponentInChildren<CollectorPreConfingUI>();
+            _collectorUiHud = GetComponentInChildren<CollectorUIHud>();
         }
 
         private void OnLevelLoaded()
         {
-            StartLevelPanel.Instance.Hide();
-            LevelCompletePanel.Instance.Hide();
-            CollectorUIHud.Instance.Hide();
-            CollectorPreConfingUI.Instance.Show();
+            UI_MAIN.Instance.Dialogs.StartLevelPanel.Hide();
+            UI_MAIN.Instance.Dialogs.StartLevelPanel.Hide();
+            UI_MAIN.Instance.Dialogs.LevelCompletePanel.Hide();
+            _collectorUiHud.Hide();
+            _preConfingUi.Show();
         }
 
         private void OnLevelStarted()
         {
             //TODO: rewrite
-            CollectorPreConfingUI.Instance.Hide();
-            StartLevelPanel.Instance.Show(1, 10);
+            _preConfingUi.Hide();
+            UI_MAIN.Instance.Dialogs.StartLevelPanel.Show(1, 10);
         }
 
         private void OnGameStarted()
         {
-            StartLevelPanel.Instance.Hide();
-            CollectorUIHud.Instance.Show();
+            UI_MAIN.Instance.Dialogs.StartLevelPanel.Hide();
+            _collectorUiHud.Show();
         }
 
         private void OnLevelPassed()
         {
-            CollectorUIHud.Instance.Hide();
-            LevelCompletePanel.Instance.Show(1,
-                GoodsCollectorScene.PickupSpawner.TotalPickupsCount,
-                GoodsCollectorScene.PickupSpawner.CollectedPickupsCount,
-                GoodsCollectorScene.ScoreCounter.Score);
-        }
-
-        private void OnDestroy()
-        {
-            if (Application.isPlaying && GoodsCollectorScene.Gameplay)
-            {
-                GoodsCollectorScene.Gameplay.LevelLoaded -= OnLevelLoaded;
-                GoodsCollectorScene.Gameplay.LevelStarted -= OnLevelStarted;
-                GoodsCollectorScene.Gameplay.GameStarted -= OnGameStarted;
-                GoodsCollectorScene.Gameplay.LevelPassed -= OnLevelPassed; 
-            }
+            _collectorUiHud.Hide();
+            UI_MAIN.Instance.Dialogs.LevelCompletePanel.Show(1,
+                CollectorGameScene.PickupSpawner.TotalPickupsCount,
+                CollectorGameScene.PickupSpawner.CollectedPickupsCount,
+                CollectorGameScene.ScoreCounter.Score);
         }
 
         protected override void UpdateVisibility()
@@ -73,9 +58,31 @@ namespace PhysRehab.UI
             base.UpdateVisibility();
             if(_visible == false)
             {
-                StartLevelPanel.Instance.Hide();
-                PausePanel.Instance.Hide();
-                LevelCompletePanel.Instance.Hide();
+                UI_MAIN.Instance.Dialogs.StartLevelPanel.Hide();
+                UI_MAIN.Instance.GenericUI.PausePanel.Hide();
+                UI_MAIN.Instance.Dialogs.LevelCompletePanel.Hide();
+            }
+        }
+
+        public void WireupGameEvents()
+        {
+            if (CollectorGameScene.Gameplay)
+            {
+                CollectorGameScene.Gameplay.LevelLoaded += OnLevelLoaded;
+                CollectorGameScene.Gameplay.LevelStarted += OnLevelStarted;
+                CollectorGameScene.Gameplay.GameStarted += OnGameStarted;
+                CollectorGameScene.Gameplay.LevelPassed += OnLevelPassed;
+            }
+        }
+
+        public void UnwireupGameEvents()
+        {
+            if (CollectorGameScene.Gameplay)
+            {
+                CollectorGameScene.Gameplay.LevelLoaded -= OnLevelLoaded;
+                CollectorGameScene.Gameplay.LevelStarted -= OnLevelStarted;
+                CollectorGameScene.Gameplay.GameStarted -= OnGameStarted;
+                CollectorGameScene.Gameplay.LevelPassed -= OnLevelPassed;
             }
         }
     }

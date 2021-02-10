@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PhysRehab.Core;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 namespace PhysRehab.Scenes
@@ -14,6 +16,20 @@ namespace PhysRehab.Scenes
         protected string _name;
         public string Name => _name;
         public bool IsLoaded { get; protected set; }
+
+        protected UnityAction<GameScene> _Loaded;
+        public event UnityAction<GameScene> Loaded
+        {
+            add => _Loaded += value;
+            remove => _Loaded -= value;
+        }
+
+        protected UnityAction<GameScene> _UnLoaded;
+        public event UnityAction<GameScene> Unloaded
+        {
+            add => _UnLoaded += value;
+            remove => _UnLoaded -= value;
+        }
 
         protected GameScene()
         {
@@ -29,24 +45,19 @@ namespace PhysRehab.Scenes
                 Program.LoadUi();
         }
 
-        protected virtual void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-        {
-            if (scene.name == Name)
-                IsLoaded = true;
-        }
+        protected abstract void OnSceneLoaded(Scene scene, LoadSceneMode mode);
 
         protected virtual void OnSceneUnloaded(Scene scene) 
         {
             if (scene.name == Name)
             {
-                UI_MAIN.Instance?.HideGameUi();
                 IsLoaded = false;
+                _UnLoaded?.Invoke(this);
             }
         }
 
         public void EnsureLoaded()
         {
-            Program.LoadUi();
             if (IsLoaded == false)
                 SceneManager.LoadScene(_name);
         }
