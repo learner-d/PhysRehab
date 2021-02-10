@@ -38,6 +38,7 @@ public class CharacterScriptedModel : MonoBehaviour
 
     public void ApplyRig(HumanRig humanRig)
     {
+        if (humanRig == null) return;
         _modelAnimator.ApplyRig(humanRig);
     }
 }

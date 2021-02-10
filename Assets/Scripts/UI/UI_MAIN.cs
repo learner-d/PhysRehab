@@ -36,6 +36,16 @@ namespace PhysRehab.UI
         [SerializeField]
         private Dialogs _dialogs;
 
+        public static void Load()
+        {
+            if (_isLoaded == false)
+            {
+                SceneManager.LoadScene("MainUIScene");
+                System.Console.WriteLine("UI Loaded");
+                _isLoaded = true; 
+            }
+        }
+
         private void Awake()
         {
             Debug.Assert(_collectorUi != null);
@@ -65,7 +75,6 @@ namespace PhysRehab.UI
                 DontDestroyOnLoad(gameObject);
 
                 Instance = this;
-                _isLoaded = true;
                 //OnActiveGameChanged(_activeGame);
             }
         }

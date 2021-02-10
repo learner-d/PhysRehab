@@ -1,4 +1,5 @@
-﻿using PhysRehab.UI.CollectorGame;
+﻿using PhysRehab.Core;
+using PhysRehab.UI.CollectorGame;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -17,7 +18,7 @@ namespace PhysRehab.UI
 
         private void Start()
         {
-            if (Application.isPlaying)
+            if (Application.isPlaying && UI_MAIN.Instance?.ActiveGame == EGame.Collector && GoodsCollectorScene.Gameplay)
             {
                 GoodsCollectorScene.Gameplay.LevelLoaded += OnLevelLoaded;
                 GoodsCollectorScene.Gameplay.LevelStarted += OnLevelStarted;
@@ -58,12 +59,23 @@ namespace PhysRehab.UI
 
         private void OnDestroy()
         {
-            if (Application.isPlaying)
+            if (Application.isPlaying && GoodsCollectorScene.Gameplay)
             {
                 GoodsCollectorScene.Gameplay.LevelLoaded -= OnLevelLoaded;
                 GoodsCollectorScene.Gameplay.LevelStarted -= OnLevelStarted;
                 GoodsCollectorScene.Gameplay.GameStarted -= OnGameStarted;
                 GoodsCollectorScene.Gameplay.LevelPassed -= OnLevelPassed; 
+            }
+        }
+
+        protected override void UpdateVisibility()
+        {
+            base.UpdateVisibility();
+            if(_visible == false)
+            {
+                StartLevelPanel.Instance.Hide();
+                PausePanel.Instance.Hide();
+                LevelCompletePanel.Instance.Hide();
             }
         }
     }

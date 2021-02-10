@@ -56,13 +56,13 @@ public class Program
         {
             CollectorGameScene.Instance.EnsureLoaded();
             UI_MAIN.Instance.ActiveGame = game;
-            UI_MAIN.Instance.ShowGameUi(game);
+            //UI_MAIN.Instance.ShowGameUi(game);
         }
         else if(game == EGame.Copycat)
         {
             CopycatGameScene.Instance.EnsureLoaded();
             UI_MAIN.Instance.ActiveGame = game;
-            UI_MAIN.Instance.ShowGameUi(game);
+            //UI_MAIN.Instance.ShowGameUi(game);
         }
         else if(game == EGame.FlappyBird)
         {
@@ -72,7 +72,7 @@ public class Program
     public static void GoToMainMenu()
     {
         UI_MAIN.Instance.HideGameUi();
-        SceneManager.LoadScene("MainMenuScene");
+        MainMenuScene.Instance.EnsureLoaded();
     }
 
     public static void Quit()
@@ -88,9 +88,6 @@ public class Program
 
     public static void LoadUi()
     {
-        if (UI_MAIN.IsLoaded == false)
-        {
-            SceneManager.LoadScene("MainUIScene");
-        }
+        UI_MAIN.Load();
     }
 }
