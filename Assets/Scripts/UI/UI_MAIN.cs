@@ -93,11 +93,12 @@ namespace PhysRehab.UI
             }
         }
 
-
         public void HideGameUi()
         {
             _collectorUi.Hide();
             _copycatUi.Hide();
+            _genericUi.enabled = false;
+            _dialogs.Hide();
         }
 
         public void ShowGameUi(EGame game)
@@ -115,8 +116,10 @@ namespace PhysRehab.UI
                 case EGame.FlappyBird:
                     break;
                 default:
-                    break;
+                    return;
             }
+            _genericUi.enabled = true;
+            _dialogs.Show();
         }
     } 
 }
