@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using PhysRehab.Copycat.UI;
 using PhysRehab.Core;
 using PhysRehab.UI;
 using UnityEngine;
@@ -69,6 +70,15 @@ namespace PhysRehab.Copycat
             while (_poseList_ScrollRect.content.childCount > 2)
             {
                 DestroyImmediate(_poseList_ScrollRect.content.GetChild(0).gameObject);
+            }
+        }
+
+        protected override void UpdateVisibility()
+        {
+            base.UpdateVisibility();
+            if (_visible == false)
+            {
+                PoseSavingPanel.Instance.Hide();
             }
         }
 

@@ -1,3 +1,4 @@
+using PhysRehab.UI;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,6 +18,13 @@ namespace PhysRehab.Scenes
         public static void Initialize()
         {
             Instance = new CollectorGameScene();
+        }
+
+        protected override void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        {
+            base.OnSceneLoaded(scene, mode);
+            //if(UI_MAIN.Instance)
+            //    UI_MAIN.Instance.ActiveGame = 
         }
     }
 }

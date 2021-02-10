@@ -10,7 +10,14 @@ namespace PhysRehab.UI
 
         [SerializeField]
         protected bool _visible = true;
-        public bool Visible => _visible;
+        public bool Visible {
+            get => _visible;
+            set
+            {
+                _visible = value;
+                UpdateVisibility();
+            }
+        }
 
         protected virtual void Awake()
         {
