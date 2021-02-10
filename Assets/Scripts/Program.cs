@@ -53,15 +53,15 @@ public class Program
     {
         if (game == EGame.Collector)
         {
-            UI_MAIN.Instance.ShowGameUi(game);
             UI_MAIN.Instance.ActiveGame = game;
             CollectorGameScene.Instance.EnsureLoaded();
+            UI_MAIN.Instance.ShowGameUi(game);
         }
         else if(game == EGame.Copycat)
         {
-            UI_MAIN.Instance.ShowGameUi(game);
             UI_MAIN.Instance.ActiveGame = game;
             CollectorGameScene.Instance.EnsureLoaded();
+            UI_MAIN.Instance.ShowGameUi(game);
         }
         else if(game == EGame.FlappyBird)
         {
