@@ -38,8 +38,12 @@ namespace PhysRehab.UI
 
         public static void Load()
         {
-            SceneManager.LoadScene("MainUIScene");
-            System.Console.WriteLine("UI Loaded");
+            if (_isLoaded == false)
+            {
+                SceneManager.LoadScene("MainUIScene");
+                System.Console.WriteLine("UI Loaded");
+                _isLoaded = true; 
+            }
         }
 
         private void Awake()
@@ -71,7 +75,6 @@ namespace PhysRehab.UI
                 DontDestroyOnLoad(gameObject);
 
                 Instance = this;
-                _isLoaded = true;
                 //OnActiveGameChanged(_activeGame);
             }
         }
