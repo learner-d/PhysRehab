@@ -7,7 +7,13 @@ namespace PhysRehab.UI
 {
     public class CollectorUI : VisibleBase
     {
-        public static CollectorUI Instance => (CollectorUI)_instance;
+        public static CollectorUI Instance { get; private set; }
+
+        protected override void Awake()
+        {
+            base.Awake();
+            Instance = this;
+        }
 
         private void Start()
         {

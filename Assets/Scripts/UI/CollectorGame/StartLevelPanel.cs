@@ -6,7 +6,7 @@ namespace PhysRehab.UI.CollectorGame
 {
     public class StartLevelPanel : DialogPanelBase
     {
-        public static StartLevelPanel Instance => (StartLevelPanel)_instance;
+        public static StartLevelPanel Instance { get; private set; }
 
         [SerializeField]
         private Text _captionText;
@@ -21,6 +21,7 @@ namespace PhysRehab.UI.CollectorGame
         protected override void Awake()
         {
             base.Awake();
+            Instance = this;
             UpdateText();
         }
 
@@ -43,6 +44,11 @@ namespace PhysRehab.UI.CollectorGame
         {
             _captionText.text = $"Рівень {_levelIndex}";
             _objectiveText.text = $"Зберіть {_coinsCount} монет.";
+        }
+
+        public void Btn_StartGame_Click()
+        {
+            GoodsCollectorScene.Gameplay.StartGame();
         }
     }
 }

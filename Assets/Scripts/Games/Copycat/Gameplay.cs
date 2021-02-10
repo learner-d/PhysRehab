@@ -8,9 +8,6 @@ namespace PhysRehab.Copycat
 {
     public class Gameplay : MonoBehaviour
     {
-        private void Start()
-        {
-            //UiMain.Instance.ShowGameUi(EGame.Copycat);
-        }
+        
     }
 }

@@ -6,8 +6,6 @@ namespace PhysRehab.UI
     [ExecuteInEditMode]
     public abstract class VisibleBase : MonoBehaviour
     {
-        protected static VisibleBase _instance;
-
         protected Canvas _canvas;
 
         [SerializeField]
@@ -17,7 +15,6 @@ namespace PhysRehab.UI
         protected virtual void Awake()
         {
             _canvas = GetComponent<Canvas>();
-            _instance = this;
         }
 
         public virtual void Show()
