@@ -32,7 +32,7 @@ namespace PhysRehab.Scenes
             {
                 if (scene.name == Name)
                 {
-                    UI_MAIN.Instance.HideGameUi();
+                    UI_MAIN.Instance?.HideGameUi();
                     IsLoaded = false;
                 }
             };

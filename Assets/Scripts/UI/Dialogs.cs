@@ -4,15 +4,14 @@ using PhysRehab.Copycat.UI;
 using PhysRehab.UI;
 using UnityEngine;
 
-public class Dialogs : MonoBehaviour
+public class Dialogs : VisibleBase
 {
-    private Canvas _canvas;
     private Fader _fader;
     private PoseSavingPanel _poseSavingPanel;
 
-    private void Awake()
+    protected override void Awake()
     {
-        _canvas = GetComponent<Canvas>();
+        base.Awake();
         _fader = GetComponent<Fader>();
         _poseSavingPanel = GetComponentInChildren<PoseSavingPanel>();
     }
