@@ -90,7 +90,7 @@ public class Program
     {
         if (UI_MAIN.IsLoaded == false)
         {
-            SceneManager.LoadScene("MainUIScene");
+            UI_MAIN.Load();
         }
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace PhysRehab.Scenes
 {
@@ -13,6 +14,11 @@ namespace PhysRehab.Scenes
         public MainMenuScene()
         {
             _name = "MainMenuScene";
+        }
+
+        protected override void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        {
+            EnsureLoaded();
         }
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterAssembliesLoaded)]

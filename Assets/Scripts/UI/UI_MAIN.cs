@@ -36,6 +36,12 @@ namespace PhysRehab.UI
         [SerializeField]
         private Dialogs _dialogs;
 
+        public static void Load()
+        {
+            SceneManager.LoadScene("MainUIScene");
+            System.Console.WriteLine("UI Loaded");
+        }
+
         private void Awake()
         {
             Debug.Assert(_collectorUi != null);

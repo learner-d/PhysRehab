@@ -46,9 +46,9 @@ namespace PhysRehab.Scenes
 
         public void EnsureLoaded()
         {
+            Program.LoadUi();
             if (IsLoaded == false)
                 SceneManager.LoadScene(_name);
-            Program.LoadUi();
         }
     }
 }
