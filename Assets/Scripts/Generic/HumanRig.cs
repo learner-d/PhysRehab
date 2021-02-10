@@ -58,6 +58,8 @@ public static class AnimatorExt
 {
     public static void ApplyRig(this Animator animator, HumanRig rig)
     {
+        if (rig == null) return;
+
         for (int i = 0; i < HumanRig.BodyBoneTypes.Length - 1; i++)
         {
             Transform origBoneTransform = animator.GetBoneTransform(HumanRig.BodyBoneTypes[i]);
