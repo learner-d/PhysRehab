@@ -14,13 +14,9 @@ namespace PhysRehab.UI
     {
         public static UI_MAIN Instance { get; private set; }
 
-        [SerializeField]
-        private bool GO_TO_MENU = false;
-
         private static bool _isLoaded = false;
         public static bool IsLoaded => _isLoaded;
 
-        [SerializeField]
         private EGame _activeGame = EGame.None;
         public EGame ActiveGame {
             get => _activeGame;
@@ -103,12 +99,6 @@ namespace PhysRehab.UI
                 _isLoaded = true;
 
                 //OnActiveGameChanged(_activeGame);
-
-                if (GO_TO_MENU)
-                {
-                    MainMenuScene.Instance.EnsureLoaded();
-                    GO_TO_MENU = false;
-                }
 
                 if (_sceneToLoad != null)
                 {

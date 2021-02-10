@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using PhysRehab.Core;
@@ -9,6 +10,13 @@ namespace PhysRehab.UI
     public class UiGameLoader : MonoBehaviour
     {
         private static bool _isLoaded = false;
+        
+        [SerializeField]
+        private EGame _loadGame = EGame.None;
+
+        [SerializeField]
+        private bool _goToMenu = false;
+
         private void Awake()
         {
             if (_isLoaded == false)
@@ -21,7 +29,33 @@ namespace PhysRehab.UI
                 CopycatGameScene.Instance.Loaded += CopycatGameScene_Loaded;
                 CopycatGameScene.Instance.Unloaded += CopycatGameScene_Unloaded;
                 _isLoaded = true;
+
+                LoadSceneIfNeeded();
             }
+        }
+
+        private void LoadSceneIfNeeded()
+        {
+            if (_goToMenu)
+            {
+                MainMenuScene.Instance.EnsureLoaded();
+                _goToMenu = false;
+                return;
+            }
+
+            switch (_loadGame)
+            {
+                case EGame.Collector:
+                    break;
+                case EGame.Copycat:
+                    break;
+                case EGame.FlappyBird:
+                    break;
+                default:
+                    break;
+            }
+
+            _loadGame = EGame.None;
         }
 
         private void MainMenuScene_Loaded(GameScene arg0)
