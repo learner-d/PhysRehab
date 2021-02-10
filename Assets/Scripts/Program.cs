@@ -88,9 +88,6 @@ public class Program
 
     public static void LoadUi()
     {
-        if (UI_MAIN.IsLoaded == false)
-        {
-            UI_MAIN.Load();
-        }
+        UI_MAIN.Load();
     }
 }
