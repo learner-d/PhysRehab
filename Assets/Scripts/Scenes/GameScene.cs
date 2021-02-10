@@ -17,25 +17,31 @@ namespace PhysRehab.Scenes
 
         protected GameScene()
         {
-            SceneManager.activeSceneChanged += (prevScene, newScene) =>
+            SceneManager.activeSceneChanged += OnActiveSceneChanged;
+            SceneManager.sceneLoaded += OnSceneLoaded;
+            SceneManager.sceneUnloaded += OnSceneUnloaded;
+        }
+
+        protected virtual void OnActiveSceneChanged(Scene prevScene, Scene newScene)
+        {
+            return;
+            if (newScene.name == Name)
+                Program.LoadUi();
+        }
+
+        protected virtual void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        {
+            if (scene.name == Name)
+                IsLoaded = true;
+        }
+
+        protected virtual void OnSceneUnloaded(Scene scene) 
+        {
+            if (scene.name == Name)
             {
-                return;
-                if(newScene.name == Name)
-                    Program.LoadUi();
-            };
-            SceneManager.sceneLoaded += (scene, loadType) =>
-            {
-                if (scene.name == Name)
-                    IsLoaded = true;
-            };
-            SceneManager.sceneUnloaded += (scene) =>
-            {
-                if (scene.name == Name)
-                {
-                    UI_MAIN.Instance?.HideGameUi();
-                    IsLoaded = false;
-                }
-            };
+                UI_MAIN.Instance?.HideGameUi();
+                IsLoaded = false;
+            }
         }
 
         public void EnsureLoaded()
