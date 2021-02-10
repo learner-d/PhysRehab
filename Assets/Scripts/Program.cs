@@ -55,14 +55,12 @@ public class Program
         if (game == EGame.Collector)
         {
             CollectorGameScene.Instance.EnsureLoaded();
-            LoadUi();
             UI_MAIN.Instance.ActiveGame = game;
             UI_MAIN.Instance.ShowGameUi(game);
         }
         else if(game == EGame.Copycat)
         {
-            CollectorGameScene.Instance.EnsureLoaded();
-            LoadUi();
+            CopycatGameScene.Instance.EnsureLoaded();
             UI_MAIN.Instance.ActiveGame = game;
             UI_MAIN.Instance.ShowGameUi(game);
         }

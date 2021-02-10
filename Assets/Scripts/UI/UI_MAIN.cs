@@ -66,7 +66,7 @@ namespace PhysRehab.UI
 
                 Instance = this;
                 _isLoaded = true;
-                OnActiveGameChanged(_activeGame);
+                //OnActiveGameChanged(_activeGame);
             }
         }
 

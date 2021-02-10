@@ -42,6 +42,7 @@ namespace PhysRehab.Scenes
         {
             if (IsLoaded == false)
                 SceneManager.LoadScene(_name);
+            Program.LoadUi();
         }
     }
 }
