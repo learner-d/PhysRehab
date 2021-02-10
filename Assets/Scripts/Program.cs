@@ -51,16 +51,19 @@ public class Program
 
     public static void LaunchGame(EGame game)
     {
+        //TODO: remove LoadUi
         if (game == EGame.Collector)
         {
-            UI_MAIN.Instance.ActiveGame = game;
             CollectorGameScene.Instance.EnsureLoaded();
+            LoadUi();
+            UI_MAIN.Instance.ActiveGame = game;
             UI_MAIN.Instance.ShowGameUi(game);
         }
         else if(game == EGame.Copycat)
         {
-            UI_MAIN.Instance.ActiveGame = game;
             CollectorGameScene.Instance.EnsureLoaded();
+            LoadUi();
+            UI_MAIN.Instance.ActiveGame = game;
             UI_MAIN.Instance.ShowGameUi(game);
         }
         else if(game == EGame.FlappyBird)
