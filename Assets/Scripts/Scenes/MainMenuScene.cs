@@ -21,7 +21,7 @@ namespace PhysRehab.Scenes
             EnsureLoaded();
         }
 
-        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterAssembliesLoaded)]
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
         public static void Initialize()
         {
             Instance = new MainMenuScene();
