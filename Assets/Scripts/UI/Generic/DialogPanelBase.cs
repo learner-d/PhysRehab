@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 namespace PhysRehab.UI
 {
+    [RequireComponent(typeof(GraphicRaycaster))]
     public abstract class DialogPanelBase : VisibleBase
     {
         protected Fader _fader;

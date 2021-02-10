@@ -45,5 +45,10 @@ namespace PhysRehab.UI.CollectorGame
             _captionText.text = $"Рівень {_levelIndex}";
             _objectiveText.text = $"Зберіть {_coinsCount} монет.";
         }
+
+        public void Btn_StartGame_Click()
+        {
+            GoodsCollectorScene.Gameplay.StartGame();
+        }
     }
 }
