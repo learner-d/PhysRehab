@@ -46,8 +46,10 @@ namespace PhysRehab.UI
             switch (_loadGame)
             {
                 case EGame.Collector:
+                    CollectorGameScene.Instance.EnsureLoaded();
                     break;
                 case EGame.Copycat:
+                    CopycatGameScene.Instance.EnsureLoaded();
                     break;
                 case EGame.FlappyBird:
                     break;
