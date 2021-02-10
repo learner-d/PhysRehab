@@ -86,7 +86,7 @@ namespace PhysRehab.UI
                     CopycatGameScene.Instance.EnsureLoaded();
                     break;
                 case EGame.FlappyBird:
-                    SceneManager.LoadScene("BirdGame");
+                    //SceneManager.LoadScene("BirdGame");
                     break;
                 default:
                     break;
