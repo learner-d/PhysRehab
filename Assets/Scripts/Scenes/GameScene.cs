@@ -18,6 +18,7 @@ namespace PhysRehab.Scenes
         {
             SceneManager.activeSceneChanged += (prevScene, newScene) =>
             {
+                return;
                 if(newScene.name == Name)
                     Program.LoadUi();
             };

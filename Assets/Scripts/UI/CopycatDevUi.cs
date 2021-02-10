@@ -13,7 +13,7 @@ namespace PhysRehab.Copycat
 {
     public class CopycatDevUi : VisibleBase
     {
-        public static CopycatDevUi Instance => (CopycatDevUi) _instance;
+        public static CopycatDevUi Instance { get; private set; }
 
         [SerializeField]
         private ScrollRect _poseList_ScrollRect;
@@ -28,6 +28,7 @@ namespace PhysRehab.Copycat
         {
             InitializePoseSelector();
             base.Awake();
+            Instance = this;
         }
 
         private void Start()

@@ -36,24 +36,6 @@ namespace PhysRehab.UI
         [SerializeField]
         private Dialogs _dialogs;
 
-        private static void OnActiveGameChanged(EGame value)
-        {
-            switch (value)
-            {
-                case EGame.Collector:
-                    SceneManager.LoadScene("GoodsCollectorGame");
-                    break;
-                case EGame.Copycat:
-                    CopycatGameScene.Instance.EnsureLoaded();
-                    break;
-                case EGame.FlappyBird:
-                    SceneManager.LoadScene("BirdGame");
-                    break;
-                default:
-                    break;
-            }
-        }
-
         private void Awake()
         {
             Debug.Assert(_collectorUi != null);
@@ -81,6 +63,7 @@ namespace PhysRehab.UI
                 DontDestroyOnLoad(_genericUi.gameObject);
                 DontDestroyOnLoad(_dialogs.gameObject);
                 DontDestroyOnLoad(gameObject);
+
                 Instance = this;
                 _isLoaded = true;
                 OnActiveGameChanged(_activeGame);
@@ -89,8 +72,27 @@ namespace PhysRehab.UI
 
         private void Start()
         {
-            HideGameUi();
+            ShowGameUi(_activeGame);
         }
+
+        private void OnActiveGameChanged(EGame value)
+        {
+            switch (value)
+            {
+                case EGame.Collector:
+                    CollectorGameScene.Instance.EnsureLoaded();
+                    break;
+                case EGame.Copycat:
+                    CopycatGameScene.Instance.EnsureLoaded();
+                    break;
+                case EGame.FlappyBird:
+                    SceneManager.LoadScene("BirdGame");
+                    break;
+                default:
+                    break;
+            }
+        }
+
 
         public void HideGameUi()
         {

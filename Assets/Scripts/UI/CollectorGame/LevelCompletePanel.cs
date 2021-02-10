@@ -5,7 +5,7 @@ namespace PhysRehab.UI.CollectorGame
 {
     public class LevelCompletePanel : DialogPanelBase
     {
-        public static LevelCompletePanel Instance => (LevelCompletePanel)_instance;
+        public static LevelCompletePanel Instance { get; private set; }
         
         [SerializeField]
         private Text _captionText;
@@ -25,6 +25,7 @@ namespace PhysRehab.UI.CollectorGame
         {
             base.Awake();
             UpdateText();
+            Instance = this;
         }
 
         protected override void Update()
