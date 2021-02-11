@@ -64,7 +64,7 @@ namespace PhysRehab.UI
             }
         }
 
-        public void WireupGameEvents()
+        public void Initialize()
         {
             if (CollectorGameScene.Gameplay)
             {
@@ -75,7 +75,7 @@ namespace PhysRehab.UI
             }
         }
 
-        public void UnwireupGameEvents()
+        public void Shutdown()
         {
             if (CollectorGameScene.Gameplay)
             {
