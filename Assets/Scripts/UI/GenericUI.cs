@@ -43,7 +43,16 @@ namespace PhysRehab.UI
             InGameButtons.Hide();
             Time.timeScale = 0;
             _fader?.Show();
-            InfoPanel.Show();
+
+            if(UI_MAIN.Instance.ActiveGame == EGame.Collector)
+            {
+                InfoPanel.CollectorInfo();
+            }
+
+            else if (UI_MAIN.Instance.ActiveGame == EGame.Copycat)
+            {
+                InfoPanel.CopyCatInfo();
+            }
         }
 
         public void Btn_Pause_Click()
