@@ -56,7 +56,7 @@ namespace PhysRehab.Scenes
             }
         }
 
-        public void EnsureLoaded()
+        public virtual void EnsureLoaded()
         {
             if (IsLoaded == false)
                 SceneManager.LoadScene(_name);

@@ -39,7 +39,7 @@ namespace PhysRehab.Scenes
                 }
             }
         }
-
+        
         protected override void OnSceneUnloaded(Scene scene)
         {
             if (scene.name == Name)
