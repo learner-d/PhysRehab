@@ -7,9 +7,13 @@ using UnityEngine;
 
 public class Dialogs : VisibleBase
 {
+    public static Dialogs Instance { get; private set; }
+
     private Fader _fader;
 
     public PoseSavingPanel PoseSavingPanel { get; private set; }
+
+    public MultiCapturePanel MultiCapturePanel { get; private set; }
 
     public StartLevelPanel StartLevelPanel { get; private set; }
 
@@ -21,7 +25,10 @@ public class Dialogs : VisibleBase
         _fader = GetComponent<Fader>();
         StartLevelPanel = GetComponentInChildren<StartLevelPanel>();
         LevelCompletePanel = GetComponentInChildren<LevelCompletePanel>();
-        
+        MultiCapturePanel = GetComponentInChildren<MultiCapturePanel>();
         PoseSavingPanel = GetComponentInChildren<PoseSavingPanel>();
+
+        Instance = this;
+
     }
 }

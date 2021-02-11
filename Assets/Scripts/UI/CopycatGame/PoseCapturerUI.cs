@@ -129,6 +129,11 @@ namespace PhysRehab.UI.CopycatGame
             PoseSelector.Instance.CapturePoseBtn_OnClick();
         }
 
+        public void Btn_MultiCapturePose_Click()
+        {
+            Dialogs.Instance.MultiCapturePanel.Show();
+        }
+
         public void Btn_Save_Click()
         {
             PoseSelector.Instance.SavePoses();

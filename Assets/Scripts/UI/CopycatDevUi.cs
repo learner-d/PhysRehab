@@ -39,7 +39,8 @@ namespace PhysRehab.UI
             CapturerUI.Visible = _visible;
             if (_visible == false)
             {
-                UI_MAIN.Instance.Dialogs.PoseSavingPanel.Hide();
+                Dialogs.Instance.PoseSavingPanel.Hide();
+                Dialogs.Instance.MultiCapturePanel.Hide();
                 //CapturerUI.Hide();
                 //UI_MAIN.Instance.GenericUI.PausePanel.Hide();
             }
