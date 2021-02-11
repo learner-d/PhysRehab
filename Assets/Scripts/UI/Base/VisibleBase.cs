@@ -28,6 +28,18 @@ namespace PhysRehab.UI
             _graphicRaycaster = GetComponent<GraphicRaycaster>();
         }
 
+        protected virtual void OnEnable()
+        {
+            if (Application.isPlaying)
+            {
+                VisibleBase[] _children = GetComponentsInChildren<VisibleBase>();
+                foreach (VisibleBase child in _children)
+                {
+                    child.gameObject.SetActive(true);
+                }
+            }
+        }
+
         public virtual void Show()
         {
             _visible = true;
@@ -50,6 +62,8 @@ namespace PhysRehab.UI
         {
             _canvas.enabled = _visible;
             if (_graphicRaycaster) _graphicRaycaster.enabled = _visible;
+
+            return;
             if (_visible && _parent != null)
                 _parent.Show();
         }

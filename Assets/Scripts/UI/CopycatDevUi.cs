@@ -16,11 +16,13 @@ namespace PhysRehab.UI
     public class CopycatDevUi : VisibleBase
     {
         public PoseCapturerUI CapturerUI { get; private set; }
+        public MultiCapturingUI MultiCapturingUI { get; private set; }
         
         protected override void Awake()
         {
             base.Awake();
             CapturerUI = GetComponentInChildren<PoseCapturerUI>();
+            MultiCapturingUI = GetComponentInChildren<MultiCapturingUI>();
         }
 
         public void Initialize()
@@ -41,6 +43,8 @@ namespace PhysRehab.UI
             {
                 Dialogs.Instance.PoseSavingPanel.Hide();
                 Dialogs.Instance.MultiCapturePanel.Hide();
+
+                MultiCapturingUI.Hide();
             }
         }
     } 
