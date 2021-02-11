@@ -31,16 +31,6 @@ namespace PhysRehab.Scenes
         {
             if (scene.name == Name)
             {
-<<<<<<< HEAD
-                EnsureLoaded();
-                IsLoaded = true;
-            }
-        }
-        public override void EnsureLoaded()
-        {
-            UI_MAIN.Load();
-            base.EnsureLoaded();
-=======
                 IsLoaded = UI_MAIN.EnsureLoaded(this) == false;
                 if (IsLoaded)
                 {
@@ -49,7 +39,7 @@ namespace PhysRehab.Scenes
                 }
             }
         }
-
+        
         protected override void OnSceneUnloaded(Scene scene)
         {
             if (scene.name == Name)
@@ -58,7 +48,6 @@ namespace PhysRehab.Scenes
                 _UnLoaded?.Invoke(this);
                 Program.ClearStaticProperties<CollectorGameScene>();
             }
->>>>>>> b4276040862f7c1cdfb82d11cf00ef59127b8bbf
         }
     }
 }
