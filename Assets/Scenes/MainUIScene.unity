@@ -5273,8 +5273,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f835e314fce8acd4b962c17708b4b8ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _loadGame: 2
-  _goToMenu: 0
+  _loadGame: 0
+  _goToMenu: 1
 --- !u!1 &1069411074
 GameObject:
   m_ObjectHideFlags: 0
