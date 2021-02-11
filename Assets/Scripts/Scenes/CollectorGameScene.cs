@@ -22,9 +22,16 @@ namespace PhysRehab.Scenes
 
         protected override void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
-            base.OnSceneLoaded(scene, mode);
-            //if(UI_MAIN.Instance)
-            //    UI_MAIN.Instance.ActiveGame = 
+            if (scene.name == Name)
+            {
+                EnsureLoaded();
+                IsLoaded = true;
+            }
+        }
+        public override void EnsureLoaded()
+        {
+            UI_MAIN.Load();
+            base.EnsureLoaded();
         }
     }
 }
