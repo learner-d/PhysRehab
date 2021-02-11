@@ -72,22 +72,24 @@ namespace PhysRehab.UI
 
         private void CollectorGameScene_Loaded(GameScene gameScene)
         {
-            UI_MAIN.Instance.CollectorUI.WireupGameEvents();
+            UI_MAIN.Instance.CollectorUI.Initialize();
             UI_MAIN.Instance.ActiveGame = EGame.Collector;
-        }
-
-        private void CopycatGameScene_Loaded(GameScene gameScene)
-        {
-            UI_MAIN.Instance.ActiveGame = EGame.Copycat;
         }
 
         private void CollectorGameScene_Unloaded(GameScene gameScene)
         {
-            UI_MAIN.Instance.CollectorUI.UnwireupGameEvents();
+            UI_MAIN.Instance.CollectorUI.Shutdown();
         }
+
+        private void CopycatGameScene_Loaded(GameScene gameScene)
+        {
+            UI.UI_MAIN.Instance.CopycatDevUi.Initialize();
+            UI_MAIN.Instance.ActiveGame = EGame.Copycat;
+        }
+
         private void CopycatGameScene_Unloaded(GameScene gameScene)
         {
-            
+            UI_MAIN.Instance.CopycatDevUi.Shutdown();
         }
     } 
 }
