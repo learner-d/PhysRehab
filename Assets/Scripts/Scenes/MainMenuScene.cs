@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PhysRehab.Core;
+using PhysRehab.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -16,9 +18,18 @@ namespace PhysRehab.Scenes
             _name = "MainMenuScene";
         }
 
+        /// <summary>
+        /// Not supporting LoadSceneMode.Additive
+        /// </summary>
+        /// <param name="mode">Not supporting LoadSceneMode.Additive</param>
         protected override void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
-            EnsureLoaded();
+            if (scene.name == Name)
+            {
+                IsLoaded = UI_MAIN.EnsureLoaded(this) == false;
+                if(IsLoaded)
+                    _Loaded?.Invoke(this);
+            }
         }
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]

@@ -2,17 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using PhysRehab.Copycat.UI;
 using PhysRehab.UI;
+using PhysRehab.UI.CollectorGame;
 using UnityEngine;
 
 public class Dialogs : VisibleBase
 {
     private Fader _fader;
-    private PoseSavingPanel _poseSavingPanel;
+
+    public PoseSavingPanel PoseSavingPanel { get; private set; }
+
+    public StartLevelPanel StartLevelPanel { get; private set; }
+
+    public LevelCompletePanel LevelCompletePanel { get; private set; }
 
     protected override void Awake()
     {
         base.Awake();
         _fader = GetComponent<Fader>();
-        _poseSavingPanel = GetComponentInChildren<PoseSavingPanel>();
+        StartLevelPanel = GetComponentInChildren<StartLevelPanel>();
+        LevelCompletePanel = GetComponentInChildren<LevelCompletePanel>();
+        
+        PoseSavingPanel = GetComponentInChildren<PoseSavingPanel>();
     }
 }

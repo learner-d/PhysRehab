@@ -10,8 +10,6 @@ namespace PhysRehab.UI
 {
     public class CollectorUIHud : VisibleBase
     {
-        public static CollectorUIHud Instance { get; protected set; }
-
         [SerializeField]
         private ScoreCounter _scoreCounter;
         public ScoreCounter ScoreCounter => _scoreCounter;
@@ -19,7 +17,6 @@ namespace PhysRehab.UI
         protected override void Awake()
         {
             base.Awake();
-            Instance = this;
         }
 
         public void Btn_Menu_CLick()

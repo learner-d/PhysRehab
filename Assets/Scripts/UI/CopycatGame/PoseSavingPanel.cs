@@ -8,7 +8,6 @@ namespace PhysRehab.Copycat.UI
 {
     public class PoseSavingPanel : DialogPanelBase
     {
-        public static PoseSavingPanel Instance { get; private set; }
         [SerializeField]
         private InputField _poseName_infld;
         [SerializeField]
@@ -21,7 +20,6 @@ namespace PhysRehab.Copycat.UI
         protected override void Awake()
         {
             base.Awake();
-            Instance = this;
         }
 
         public void SaveBtn_OnClick()

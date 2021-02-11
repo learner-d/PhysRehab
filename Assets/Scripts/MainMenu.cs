@@ -15,48 +15,10 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject Game1;
     [SerializeField] private GameObject Game2;
     [SerializeField] private GameObject Game3;
-    [SerializeField] private GameObject levelsMenuContent;
-    [SerializeField] private int levelsCount;
-    [SerializeField] private GameObject levelsListHolder;
-    [SerializeField] private GameObject startLevelButton;
-
-
-
-    private void Awake()
-    {
-        LoadLevelsList();
-    }
-
-    private void ClearLevelsList()
-    {
-        while (levelsListHolder.transform.childCount > 0)
-        {
-            DestroyImmediate(levelsListHolder.transform.GetChild(0).gameObject);
-            
-            var b = false;
-            if(b) break;
-        }
-    }
-
-    private void LoadLevelsList()
-    {
-        ClearLevelsList();
-        for (int i = 0; i < levelsCount; i++)
-        {
-            AddLevelLauncher(i);
-        }
-    }
-
-    private void AddLevelLauncher(int levelIndex)
-    {
-        GameObject levelLauncher = Instantiate(startLevelButton, levelsListHolder.transform);
-        levelLauncher.transform.Find("LevelNumText").GetComponent<Text>().text = $"{levelIndex + 1}";
-    }
 
     public void ShowMainMenu()
     {
         gameChooseMenuContent.SetActive(false);
-        levelsMenuContent.SetActive(false);
         mainMenuContent.SetActive(true);
         InfoCanvas.SetActive(false);
         Info1st.SetActive(false);
@@ -71,7 +33,6 @@ public class MainMenu : MonoBehaviour
     {
         gameChooseMenuContent.SetActive(false);
         mainMenuContent.SetActive(false);
-        levelsMenuContent.SetActive(true);
         InfoCanvas.SetActive(false);
         Info1st.SetActive(false);
         Info2st.SetActive(false);
@@ -86,7 +47,6 @@ public class MainMenu : MonoBehaviour
     {
         gameChooseMenuContent.SetActive(false);
         mainMenuContent.SetActive(false);
-        levelsMenuContent.SetActive(false);
         InfoCanvas.SetActive(true);
         Info1st.SetActive(true);
         Info2st.SetActive(false);
@@ -101,7 +61,6 @@ public class MainMenu : MonoBehaviour
     {
         gameChooseMenuContent.SetActive(false);
         mainMenuContent.SetActive(false);
-        levelsMenuContent.SetActive(false);
         InfoCanvas.SetActive(true);
         Info1st.SetActive(false);
         Info2st.SetActive(true);
@@ -116,7 +75,6 @@ public class MainMenu : MonoBehaviour
     {
         gameChooseMenuContent.SetActive(false);
         mainMenuContent.SetActive(false);
-        levelsMenuContent.SetActive(false);
         InfoCanvas.SetActive(true);
         Info1st.SetActive(false);
         Info2st.SetActive(false);
@@ -133,7 +91,6 @@ public class MainMenu : MonoBehaviour
     {
         gameChooseMenuContent.SetActive(true);
         mainMenuContent.SetActive(false);
-        levelsMenuContent.SetActive(false);
         InfoCanvas.SetActive(false);
         Info1st.SetActive(false);
         Info2st.SetActive(false);
@@ -148,7 +105,6 @@ public class MainMenu : MonoBehaviour
     {
         gameChooseMenuContent.SetActive(true);
         mainMenuContent.SetActive(false);
-        levelsMenuContent.SetActive(false);
         InfoCanvas.SetActive(false);
         Info1st.SetActive(false);
         Info2st.SetActive(false);
@@ -163,7 +119,6 @@ public class MainMenu : MonoBehaviour
     {
         gameChooseMenuContent.SetActive(true);
         mainMenuContent.SetActive(false);
-        levelsMenuContent.SetActive(false);
         InfoCanvas.SetActive(false);
         Info1st.SetActive(false);
         Info2st.SetActive(false);
@@ -178,7 +133,6 @@ public class MainMenu : MonoBehaviour
     {
         gameChooseMenuContent.SetActive(true);
         mainMenuContent.SetActive(false);
-        levelsMenuContent.SetActive(false);
         InfoCanvas.SetActive(false);
         Info1st.SetActive(false);
         Info2st.SetActive(false);

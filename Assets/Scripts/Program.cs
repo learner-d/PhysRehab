@@ -30,7 +30,8 @@ public class Program
         PropertyInfo[] staticProperties = typeof(T).GetProperties(BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public);
         for (int i = 0; i < staticProperties.Length; i++)
         {
-            staticProperties[i].SetValue(null, null);
+            if (staticProperties[i].PropertyType.IsSubclassOf(typeof(Object)))
+                staticProperties[i].SetValue(null, null);
         }
     }
 
@@ -55,14 +56,10 @@ public class Program
         if (game == EGame.Collector)
         {
             CollectorGameScene.Instance.EnsureLoaded();
-            UI_MAIN.Instance.ActiveGame = game;
-            //UI_MAIN.Instance.ShowGameUi(game);
         }
         else if(game == EGame.Copycat)
         {
             CopycatGameScene.Instance.EnsureLoaded();
-            UI_MAIN.Instance.ActiveGame = game;
-            //UI_MAIN.Instance.ShowGameUi(game);
         }
         else if(game == EGame.FlappyBird)
         {
@@ -88,6 +85,6 @@ public class Program
 
     public static void LoadUi()
     {
-        UI_MAIN.Load();
+        UI_MAIN.EnsureLoaded();
     }
 }

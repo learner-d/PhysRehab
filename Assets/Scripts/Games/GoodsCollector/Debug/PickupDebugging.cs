@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using PhysRehab.Scenes;
 using UnityEngine;
 
 public class PickupDebugging : MonoBehaviour
@@ -21,7 +22,7 @@ public class PickupDebugging : MonoBehaviour
                 Vector3 clickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
                 //Створюємо пікап
-                GoodsCollectorScene.PickupSpawner.SpawnPickup(clickPos);
+                CollectorGameScene.PickupSpawner.SpawnPickup(clickPos);
             }
         }
     }
