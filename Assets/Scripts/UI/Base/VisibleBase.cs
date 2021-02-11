@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 namespace PhysRehab.UI
 {
@@ -7,6 +8,8 @@ namespace PhysRehab.UI
     public abstract class VisibleBase : MonoBehaviour
     {
         protected Canvas _canvas;
+        protected GraphicRaycaster _graphicRaycaster;
+        protected VisibleBase _parent;
 
         [SerializeField]
         protected bool _visible = true;
@@ -22,6 +25,7 @@ namespace PhysRehab.UI
         protected virtual void Awake()
         {
             _canvas = GetComponent<Canvas>();
+            _graphicRaycaster = GetComponent<GraphicRaycaster>();
         }
 
         public virtual void Show()
@@ -45,6 +49,9 @@ namespace PhysRehab.UI
         protected virtual void UpdateVisibility()
         {
             _canvas.enabled = _visible;
+            if (_graphicRaycaster) _graphicRaycaster.enabled = _visible;
+            if (_visible && _parent != null)
+                _parent.Show();
         }
     }
 }

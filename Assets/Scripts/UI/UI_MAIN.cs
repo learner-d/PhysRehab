@@ -114,6 +114,8 @@ namespace PhysRehab.UI
             _copycatUi.Hide();
             _genericUi.Hide();
             _dialogs.Hide();
+
+            Debug.Log("UI Hidden");
         }
 
         public void ShowGameUi(EGame game)
@@ -134,6 +136,7 @@ namespace PhysRehab.UI
             }
             _genericUi.Show();
             _dialogs.Show();
+            Debug.Log($"Shown UI for {game}");
         }
     } 
 }
