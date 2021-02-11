@@ -9,11 +9,14 @@ namespace PhysRehab.UI
     {
         private Fader _fader;
         public PausePanel PausePanel { get; private set; }
+        public InfoPanel InfoPanel { get; private set; }
+
         public GenericInGameButtons InGameButtons { get; private set; }
         protected override void Awake()
         {
             base.Awake();
             PausePanel = GetComponentInChildren<PausePanel>();
+            InfoPanel = GetComponentInChildren<InfoPanel>();
             InGameButtons = GetComponentInChildren<GenericInGameButtons>();
             _fader = GetComponent<Fader>();
         }
@@ -21,8 +24,10 @@ namespace PhysRehab.UI
         protected override void UpdateVisibility()
         {
             base.UpdateVisibility();
-            if(_visible == false)
+            if (_visible == false)
                 PausePanel.Hide();
+                
+      
         }
 
         public void Btn_Start_Click()
@@ -35,7 +40,10 @@ namespace PhysRehab.UI
 
         public void Btn_Info_Click()
         {
-
+            InGameButtons.Hide();
+            Time.timeScale = 0;
+            _fader?.Show();
+            InfoPanel.Show();
         }
 
         public void Btn_Pause_Click()
