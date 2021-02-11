@@ -19,6 +19,8 @@ public class Dialogs : VisibleBase
 
     public LevelCompletePanel LevelCompletePanel { get; private set; }
 
+    public MessageBoxDialog MessageBox { get; private set; }
+
     protected override void Awake()
     {
         base.Awake();
@@ -28,7 +30,24 @@ public class Dialogs : VisibleBase
         MultiCapturePanel = GetComponentInChildren<MultiCapturePanel>();
         PoseSavingPanel = GetComponentInChildren<PoseSavingPanel>();
 
+        MessageBox = GetComponentInChildren<MessageBoxDialog>();
+
         Instance = this;
 
+    }
+
+    protected override void UpdateVisibility()
+    {
+        base.UpdateVisibility();
+        if (_visible)
+        {
+            StartLevelPanel.Hide();
+            LevelCompletePanel.Hide();
+
+            PoseSavingPanel.Hide();
+            MultiCapturePanel.Hide();
+
+            MessageBox.Hide();
+        }
     }
 }
