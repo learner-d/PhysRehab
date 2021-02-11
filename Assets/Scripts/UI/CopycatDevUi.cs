@@ -41,8 +41,6 @@ namespace PhysRehab.UI
             {
                 Dialogs.Instance.PoseSavingPanel.Hide();
                 Dialogs.Instance.MultiCapturePanel.Hide();
-                //CapturerUI.Hide();
-                //UI_MAIN.Instance.GenericUI.PausePanel.Hide();
             }
         }
     } 

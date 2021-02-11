@@ -116,6 +116,7 @@ namespace PhysRehab.UI
             _dialogs.Hide();
 
             Debug.Log("UI Hidden");
+
         }
 
         public void ShowGameUi(EGame game)
