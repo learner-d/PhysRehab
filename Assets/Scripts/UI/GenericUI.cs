@@ -25,9 +25,11 @@ namespace PhysRehab.UI
         {
             base.UpdateVisibility();
             if (_visible == false)
+            {
                 PausePanel.Hide();
-                
-      
+                InfoPanel.Hide();
+            }
+
         }
 
         public void Btn_Start_Click()

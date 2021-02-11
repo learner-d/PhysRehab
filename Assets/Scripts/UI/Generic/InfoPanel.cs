@@ -34,6 +34,7 @@ namespace PhysRehab.UI.CollectorGame
         {
             _infoText.text = infoText;
             _infoImage.sprite = infoImage;
+            Show();
         }
 
         public void Btn_Resume_Click()
@@ -47,6 +48,7 @@ namespace PhysRehab.UI.CollectorGame
         public void CopyCatInfo()
         {
             Show(_CopyCatinfoText, _CopyCatinfoImage);
+
         }
 
 
