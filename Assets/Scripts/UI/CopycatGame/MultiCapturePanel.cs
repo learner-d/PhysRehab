@@ -17,37 +17,33 @@ public class MultiCapturePanel : DialogPanelBase
     public string CapturingName { get; private set; } = "";
     public float CapturingInterval { get; private set; } = float.NaN;
     public int CapturingCount { get; private set; } = 0;
-    public bool DataAcquired { get; private set; } = false;
 
-    public event UnityAction DataAquiredEvent;
+    public event UnityAction<string, int, float> DataAquiredEvent;
 
-    private bool AcquireData()
+    private void AcquireData()
     {
         if (string.IsNullOrEmpty(_capturingName_infld.text))
-            return false;
+            return;
         CapturingName = _capturingName_infld.text;
 
         if (string.IsNullOrEmpty(_capturingInterval_infld.text) || !float.TryParse(_capturingInterval_infld.text, out float parsedInterval)
             || float.IsNaN(parsedInterval)
             || parsedInterval <= 0 || parsedInterval >= 1000)
-            return false;
+            return;
         CapturingInterval = parsedInterval;
 
         if (string.IsNullOrEmpty(_capturingCount_infld.text) || !int.TryParse(_capturingCount_infld.text, out int parsedCount)
             || parsedCount <= 0)
-            return false;
+            return;
         CapturingCount = parsedCount;
 
-        if (_visible)
-            DataAquiredEvent?.Invoke();
-
-        return true;
+        DataAquiredEvent?.Invoke(CapturingName, CapturingCount, CapturingInterval);
     }
 
     public void _Btn_StartCaption_Click()
     {
         Hide();
-        DataAcquired = AcquireData();
+        AcquireData();
     }
 
     public void _Btn_CancelCaption_Click()
@@ -55,4 +51,8 @@ public class MultiCapturePanel : DialogPanelBase
         Hide();
     }
 
+    protected override void UpdateVisibility()
+    {
+        base.UpdateVisibility();
+    }
 }

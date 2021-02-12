@@ -27,7 +27,7 @@ public class PoseIndicator : MonoBehaviour
     {
         if (IsActive)
         {
-            if (PoseSelector.Instance.ActivePose.CheckRigMatch(poseRig))
+            if (PoseSelector.Instance.ActivePose.CheckRigMatch(poseRig, 0.2f, 10f))
             {
                 OnPoseMatch();
                 return true; 

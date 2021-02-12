@@ -21,6 +21,8 @@ namespace PhysRehab.UI.CopycatGame
         [SerializeField]
         private Button _btnPrefab_poseActivator;
 
+        private int _currentPoseIndex = 0;
+
         public void Initialize()
         {
             if (PoseSelector.Instance == null)
@@ -73,10 +75,8 @@ namespace PhysRehab.UI.CopycatGame
         {
             try
             {
-                //TODO: remove poseIndex
-                int poseIndex = PoseSelector.Instance.PosesCount;
                 Button poseActivator = Instantiate(_btnPrefab_poseActivator, _poseList_ScrollRect.content);
-                poseActivator.transform.name = $"Pose{poseIndex}Btn";
+                poseActivator.transform.name = "Btn_PoseActivator";
                 poseActivator.transform.SetSiblingIndex(poseActivator.transform.parent.childCount - 3);
 
                 poseActivator.gameObject
@@ -90,7 +90,7 @@ namespace PhysRehab.UI.CopycatGame
                 var poseNameTxt = poseActivator.GetComponentInChildren<Text>();
                 if (string.IsNullOrEmpty(pose.Name))
                 {
-                    poseNameTxt.text = $"Поза {poseIndex + 1}";
+                    poseNameTxt.text = $"Поза {++_currentPoseIndex}";
                 }
                 else
                 {
@@ -111,7 +111,7 @@ namespace PhysRehab.UI.CopycatGame
             foreach (Transform child in _poseList_ScrollRect.content)
             {
                 DataBinder childDataBind = child.GetComponent<DataBinder>();
-                if ((childDataBind?.DataSource as PoseInfo) == poseInfo)
+                if (childDataBind?.DataSource as PoseInfo == poseInfo)
                 {
                     Destroy(childDataBind.gameObject);
                     return;
@@ -126,7 +126,7 @@ namespace PhysRehab.UI.CopycatGame
 
         public void Btn_CapturePose_Click()
         {
-            PoseSelector.Instance.CapturePoseBtn_OnClick();
+            PoseCapturer.Instance.SingleCapturePose();
         }
 
         public void Btn_MultiCapturePose_Click()

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using PhysRehab.Copycat;
 using PhysRehab.Copycat.UI;
 using PhysRehab.Core;
 using PhysRehab.UI;
@@ -28,12 +29,15 @@ namespace PhysRehab.UI
         public void Initialize()
         {
             CapturerUI.Initialize();
+            MultiCapturingUI.Initialize();
         }
 
         public void Shutdown()
         {
             CapturerUI.Shutdown();
+            MultiCapturingUI.Shutdown();
         }
+
 
         protected override void UpdateVisibility()
         {

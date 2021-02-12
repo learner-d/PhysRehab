@@ -24,6 +24,7 @@ namespace PhysRehab.Copycat
 
         [SerializeField]
         private PoseIndicator _poseIndicator;
+
         [SerializeField]
         private GameObject _character;
 
@@ -68,30 +69,11 @@ namespace PhysRehab.Copycat
             ActivePose = poseInfo;
         }
 
-        //TODO: rewrite immediately!
-        public void CapturePoseBtn_OnClick()
-        {
-            UI_MAIN.Instance.Dialogs.PoseSavingPanel.Show();
-            StartCoroutine(retrievePoseData(_character.CaptureRig()));
-        }
-
-        private IEnumerator retrievePoseData(HumanRig poseRig)
-        {
-            if (UI_MAIN.Instance.Dialogs.PoseSavingPanel.Visible)
-            {
-                yield return new WaitUntil(() => UI_MAIN.Instance.Dialogs.PoseSavingPanel.Visible == false);
-                if (UI_MAIN.Instance.Dialogs.PoseSavingPanel.DataAcquired)
-                {
-                    AddPose(poseRig, UI_MAIN.Instance.Dialogs.PoseSavingPanel.PoseName, UI_MAIN.Instance.Dialogs.PoseSavingPanel.PoseDuration);
-                }
-            }
-            yield break;
-        }
-
-        public void AddPose(PoseInfo poseInfo)
+        public void AddPose(PoseInfo poseInfo, bool makeActive)
         {
             ActivePosesPack.AddPose(poseInfo);
-            PoseAdded?.Invoke(poseInfo);
+            if (makeActive)
+                ActivePose = poseInfo;
         }
 
         public PoseInfo AddPose(HumanRig rig, string poseName, float duration_s)
@@ -158,7 +140,6 @@ namespace PhysRehab.Copycat
             PoseRemoved?.Invoke(poseInfo);
         }
 
-        
 
         private void Start()
         {
