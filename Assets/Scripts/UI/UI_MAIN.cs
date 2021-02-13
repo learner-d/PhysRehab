@@ -33,7 +33,11 @@ namespace PhysRehab.UI
         [SerializeField]
         private CopycatDevUi _copycatUi;
         public CopycatDevUi CopycatDevUi => _copycatUi;
-        
+
+        [SerializeField]
+        private BirdUI _birdUi;
+        public BirdUI BirdUI => _birdUi;
+
         [SerializeField]
         private GenericUI _genericUi;
         public GenericUI GenericUI => _genericUi;
@@ -70,6 +74,7 @@ namespace PhysRehab.UI
         {
             Debug.Assert(_collectorUi != null);
             Debug.Assert(_copycatUi != null);
+            Debug.Assert(_birdUi != null);
             Debug.Assert(_genericUi != null);
             Debug.Assert(_dialogs != null);
             Debug.Assert(_gameLoader != null);
@@ -79,6 +84,8 @@ namespace PhysRehab.UI
             _collectorUi.gameObject.SetActive(true);
             _dialogs.gameObject.SetActive(true);
             _copycatUi.gameObject.SetActive(true);
+            _birdUi.gameObject.SetActive(true);
+
             _genericUi.gameObject.SetActive(true);
             if (_isLoaded == false)
             {
@@ -90,6 +97,7 @@ namespace PhysRehab.UI
 
                 DontDestroyOnLoad(_collectorUi.gameObject);
                 DontDestroyOnLoad(_copycatUi.gameObject);
+                DontDestroyOnLoad(_birdUi.gameObject);
                 DontDestroyOnLoad(_genericUi.gameObject);
                 DontDestroyOnLoad(_dialogs.gameObject);
                 DontDestroyOnLoad(_gameLoader);
@@ -112,6 +120,7 @@ namespace PhysRehab.UI
         {
             _collectorUi.Hide();
             _copycatUi.Hide();
+            _birdUi.Hide();
             _genericUi.Hide();
             _dialogs.Hide();
 
@@ -130,7 +139,8 @@ namespace PhysRehab.UI
                 case EGame.Copycat:
                     _copycatUi.Show();
                     break;
-                case EGame.FlappyBird:
+                case EGame.Bird:
+                    _birdUi.Show();
                     break;
                 default:
                     return;
