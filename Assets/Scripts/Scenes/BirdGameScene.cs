@@ -7,12 +7,12 @@ using UnityEngine.SceneManagement;
 
 namespace PhysRehab.Scenes
 {
-    public class FlappyBirdGameScene : GameScene
+    public class BirdGameScene : GameScene
     {
-        public static FlappyBirdGameScene Instance { get; protected set; }
-        public FlappyBirdGameScene()
+        public static BirdGameScene Instance { get; protected set; }
+        public BirdGameScene()
         {
-            _name = "FlappyBirdGame";
+            _name = "BirdGame";
         }
 
         protected override void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -30,7 +30,7 @@ namespace PhysRehab.Scenes
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterAssembliesLoaded)]
         public static void Initialize()
         {
-            Instance = new FlappyBirdGameScene();
+            Instance = new BirdGameScene();
         }
     }
 }
