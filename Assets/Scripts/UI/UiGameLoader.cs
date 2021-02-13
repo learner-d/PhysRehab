@@ -28,6 +28,8 @@ namespace PhysRehab.UI
                 CollectorGameScene.Instance.Unloaded += CollectorGameScene_Unloaded;
                 CopycatGameScene.Instance.Loaded += CopycatGameScene_Loaded;
                 CopycatGameScene.Instance.Unloaded += CopycatGameScene_Unloaded;
+                FlappyBirdGameScene.Instance.Loaded += FlappyBirdGameScene_Loaded;
+                FlappyBirdGameScene.Instance.Unloaded += FlappyBirdGameScene_UnLoaded;
                 _isLoaded = true;
 
                 LoadSceneIfNeeded();
@@ -90,6 +92,17 @@ namespace PhysRehab.UI
         private void CopycatGameScene_Unloaded(GameScene gameScene)
         {
             UI_MAIN.Instance.CopycatDevUi.Shutdown();
+        }
+
+        private void FlappyBirdGameScene_Loaded(GameScene gameScene)
+        {
+            UI_MAIN.Instance.FlappyBirdUI.Initialize();
+            UI_MAIN.Instance.ActiveGame = EGame.FlappyBird;
+        }
+
+        private void FlappyBirdGameScene_UnLoaded(GameScene gameScene)
+        {
+            UI_MAIN.Instance.FlappyBirdUI.Shutdown();
         }
     } 
 }
