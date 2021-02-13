@@ -37,7 +37,9 @@ namespace PhysRehab.UI
             base.UpdateVisibility();
             if (_visible == false)
             {
-             
+                UI_MAIN.Instance.Dialogs.StartLevelPanel.Hide();
+                UI_MAIN.Instance.GenericUI.PausePanel.Hide();
+                UI_MAIN.Instance.Dialogs.LevelCompletePanel.Hide();
             }
         }
     }

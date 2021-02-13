@@ -41,7 +41,7 @@ namespace PhysRehab.UI
             if (_goToMenu)
             {
                 MainMenuScene.Instance.EnsureLoaded();
-                _goToMenu = false;
+                _goToMenu = true;
                 return;
             }
 
@@ -54,6 +54,7 @@ namespace PhysRehab.UI
                     CopycatGameScene.Instance.EnsureLoaded();
                     break;
                 case EGame.Bird:
+                    BirdGameScene.Instance.EnsureLoaded();
                     break;
                 default:
                     break;
