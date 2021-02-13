@@ -47,7 +47,7 @@ public class Program
 
     public static void LaunchFlappyBirdGame()
     {
-
+        LaunchGame(EGame.Bird);
     }
 
     public static void LaunchGame(EGame game)
@@ -61,9 +61,9 @@ public class Program
         {
             CopycatGameScene.Instance.EnsureLoaded();
         }
-        else if(game == EGame.FlappyBird)
+        else if(game == EGame.Bird)
         {
-
+            BirdGameScene.Instance.EnsureLoaded();
         }
     }
     public static void GoToMainMenu()
