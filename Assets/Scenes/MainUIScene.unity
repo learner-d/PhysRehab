@@ -3242,7 +3242,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _collectorUi: {fileID: 578371657}
   _copycatUi: {fileID: 1167688476}
-  _birdUi: {fileID: 0}
+  _birdUi: {fileID: 1362427570}
   _genericUi: {fileID: 562351317}
   _dialogs: {fileID: 1406000014}
   _gameLoader: {fileID: 1049161583}
