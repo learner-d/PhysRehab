@@ -95,6 +95,7 @@ namespace PhysRehab.UI
                 //Delete mockup image
                 Destroy(_copycatUi.GetComponent<Image>());
 
+
                 //Delete mockup image
                 Destroy(_birdUi.GetComponent<Image>());
 
