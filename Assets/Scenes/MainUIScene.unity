@@ -3242,7 +3242,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _collectorUi: {fileID: 578371657}
   _copycatUi: {fileID: 1167688476}
-  _birdUi: {fileID: 0}
+  _birdUi: {fileID: 1362427570}
   _genericUi: {fileID: 562351317}
   _dialogs: {fileID: 1406000014}
   _gameLoader: {fileID: 1049161583}
@@ -4540,12 +4540,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _visible: 1
-  _infoText: {fileID: 0}
-  _infoImage: {fileID: 0}
+  _infoText: {fileID: 1779708934}
+  _infoImage: {fileID: 1597638707}
   _CollectorinfoText: 
-  _CollectorinfoImage: {fileID: 0}
+  _CollectorinfoImage: {fileID: 21300000, guid: 3b2c3e52af1088e4f8ae24b09ce18297, type: 3}
   _CopyCatinfoText: 
-  _CopyCatinfoImage: {fileID: 0}
+  _CopyCatinfoImage: {fileID: 21300000, guid: f8dab034f2d7c13408c97a546aed99d4, type: 3}
 --- !u!114 &883742302
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5274,8 +5274,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f835e314fce8acd4b962c17708b4b8ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _loadGame: 0
-  _goToMenu: 1
+  _loadGame: 1
+  _goToMenu: 0
 --- !u!1 &1069411074
 GameObject:
   m_ObjectHideFlags: 0
