@@ -8,7 +8,7 @@ namespace PhysRehab.Copycat
     public class PoseComparer : MonoBehaviour
     {
         public static PoseComparer  Instance { get; private set; }
-        public UnityAction PoseMatch;
+        public event UnityAction PoseMatch;
 
         [SerializeField]
         private GameObject _character;
