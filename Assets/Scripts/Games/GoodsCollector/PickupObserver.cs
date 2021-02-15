@@ -27,7 +27,7 @@ namespace PhysRehab.Collector
         public bool AllPickupsCollected => SpawningIsFinished && SpawnedPickupsCount == DestroyedPickupsCount;
 
 
-        private void Awake()
+        private void Start()
         {
             Initialize();
         }
@@ -58,13 +58,15 @@ namespace PhysRehab.Collector
 
         private void OnDisable()
         {
-            
+            _pickupSpawner.PickupSpawned -= OnPickupSpawned;
+            _pickupSpawner.PickupDestroyed -= OnPickupDestroyed;
         }
 
         public void OnPickupSpawned(Pickup pickup)
         {
             pickup.Collected += OnPickupCollected;
             SpawnedPickupsCount++;
+            PickupSpawned?.Invoke(pickup);
         }
         private void OnPickupDestroyed(Pickup pickup)
         {
@@ -74,8 +76,6 @@ namespace PhysRehab.Collector
 
         private void OnPickupCollected(Pickup pickup)
         {
-            AudioClip collectSound;
-
             int score = pickup.PickupType == PickupType.Normal? _normalScore : _biggerScore;
             
             CollectorGameScene.ScoreCounter.AddScore(score);

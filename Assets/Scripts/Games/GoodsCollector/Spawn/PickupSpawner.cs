@@ -37,11 +37,6 @@ namespace PhysRehab.Collector
         private bool _spawnIsRunning = false;
 
         public int TotalPickupsCount { get; private set; }
-        
-        private void Awake()
-        {
-            Initialize();
-        }
 
         private void OnEnable()
         {
@@ -62,6 +57,11 @@ namespace PhysRehab.Collector
         private void OnDisable()
         {
             _pickupObserver.PickupCollected -= OnPickupCollected;
+        }
+
+        private void Start()
+        {
+            Initialize();
         }
 
         private void Initialize()
