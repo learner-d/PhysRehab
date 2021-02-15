@@ -15,7 +15,7 @@ namespace PhysRehab.Scenes
     {
         protected string _name;
         public string Name => _name;
-        public bool IsLoaded { get; protected set; }
+        public bool IsActive { get; protected set; }
 
         protected UnityAction<GameScene> _Loaded;
         public event UnityAction<GameScene> Loaded
@@ -40,9 +40,7 @@ namespace PhysRehab.Scenes
 
         protected virtual void OnActiveSceneChanged(Scene prevScene, Scene newScene)
         {
-            return;
-            if (newScene.name == Name)
-                Program.LoadUi();
+            
         }
 
         protected abstract void OnSceneLoaded(Scene scene, LoadSceneMode mode);
@@ -51,14 +49,14 @@ namespace PhysRehab.Scenes
         {
             if (scene.name == Name)
             {
-                IsLoaded = false;
+                IsActive = false;
                 _UnLoaded?.Invoke(this);
             }
         }
 
         public virtual void EnsureLoaded()
         {
-            if (IsLoaded == false)
+            if (IsActive == false)
                 SceneManager.LoadScene(_name);
         }
     }

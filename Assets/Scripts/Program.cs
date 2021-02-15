@@ -77,14 +77,23 @@ public class Program
         Application.Quit();
     }
 
+    //TODO: move to another location
+    public static void Pause()
+    {
+        Time.timeScale = 0;
+        Debug.Log("Game paused.");
+    }
+
+    //TODO: move to another location
+    public static void Resume()
+    {
+        Time.timeScale = 1;
+        Debug.Log("Game resumed.");
+    }
+
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterAssembliesLoaded)]
     public static void OnAppStartup()
     {
         
-    }
-
-    public static void LoadUi()
-    {
-        UI_MAIN.EnsureLoaded();
     }
 }

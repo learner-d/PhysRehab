@@ -57,9 +57,9 @@ namespace PhysRehab.UI.CopycatGame
 
         private void ClearPoseSelector()
         {
-            while (_poseList_ScrollRect.content.childCount > 2)
+            for (int i = 0; i < _poseList_ScrollRect.content.childCount - 2; i++)
             {
-                DestroyImmediate(_poseList_ScrollRect.content.GetChild(0).gameObject);
+                Destroy(_poseList_ScrollRect.content.GetChild(i).gameObject);
             }
         }
 

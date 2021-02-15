@@ -17,6 +17,8 @@ namespace PhysRehab.UI
         private static bool _isLoaded = false;
         public static bool IsLoaded => _isLoaded;
 
+        private bool _isRunning = false;
+
         private EGame _activeGame = EGame.None;
         public EGame ActiveGame {
             get => _activeGame;
@@ -26,28 +28,14 @@ namespace PhysRehab.UI
             }
         }
 
-        [SerializeField]
-        private CollectorUI _collectorUi;
-        public CollectorUI CollectorUI => _collectorUi;
+        public CollectorUI CollectorUI { get; private set; }
 
-        [SerializeField]
-        private CopycatDevUi _copycatUi;
-        public CopycatDevUi CopycatDevUi => _copycatUi;
+        public BirdUI BirdUI { get; private set; }
 
-        [SerializeField]
-        private BirdUI _birdUi;
-        public BirdUI BirdUI => _birdUi;
+        public GenericUI GenericUI { get; private set; }
+        public Dialogs Dialogs { get; private set; }
 
-        [SerializeField]
-        private GenericUI _genericUi;
-        public GenericUI GenericUI => _genericUi;
-
-        [SerializeField]
-        private Dialogs _dialogs;
-        public Dialogs Dialogs => _dialogs;
-
-        [SerializeField]
-        private UiGameLoader _gameLoader;
+        public UiGameLoader GameLoader { get; private set; }
 
         private static GameScene _sceneToLoad = null;
 
@@ -57,12 +45,16 @@ namespace PhysRehab.UI
         /// <returns>whether is scene wasn't previously loaded</returns>
         public static bool EnsureLoaded(GameScene loadNext = null)
         {
+            CopycatUIScene.EnsureLoaded();
             if (_isLoaded == false)
             {
-                SceneManager.LoadScene("MainUIScene");
-                Debug.Log("UI Loaded");
+                SceneManager.LoadScene("MainUIScene", LoadSceneMode.Additive);
+                Debug.Log("Loading UI");
 
-                _sceneToLoad = loadNext;
+                if (loadNext != null)
+                {
+                    _sceneToLoad = loadNext; 
+                }
 
                 return true;
             }
@@ -72,44 +64,45 @@ namespace PhysRehab.UI
 
         private void Awake()
         {
-            Debug.Assert(_collectorUi != null);
-            Debug.Assert(_copycatUi != null);
-            Debug.Assert(_birdUi != null);
-            Debug.Assert(_genericUi != null);
-            Debug.Assert(_dialogs != null);
-            Debug.Assert(_gameLoader != null);
-            
-            //Ensure canvases activation
-            
-            _collectorUi.gameObject.SetActive(true);
-            _dialogs.gameObject.SetActive(true);
-            _copycatUi.gameObject.SetActive(true);
-            _birdUi.gameObject.SetActive(true);
-
-            _genericUi.gameObject.SetActive(true);
+            CopycatUIScene.EnsureLoaded();
+            _isRunning = false;
             if (_isLoaded == false)
             {
+                CollectorUI = FindObjectOfType<CollectorUI>(true);
+                Debug.Assert(CollectorUI != null);
                 //Delete mockup image
-                Destroy(_collectorUi.GetComponent<Image>());
+                Destroy(CollectorUI.GetComponent<Image>());
+                DontDestroyOnLoad(CollectorUI.gameObject);
 
+                BirdUI = FindObjectOfType<BirdUI>(true);
+                Debug.Assert(BirdUI != null);
                 //Delete mockup image
-                Destroy(_copycatUi.GetComponent<Image>());
+                Destroy(BirdUI.GetComponent<Image>());
+                DontDestroyOnLoad(BirdUI.gameObject);
 
-                //Delete mockup image
-                Destroy(_birdUi.GetComponent<Image>());
+                GenericUI = FindObjectOfType<GenericUI>(true);
+                Debug.Assert(GenericUI != null);
+                DontDestroyOnLoad(GenericUI.gameObject);
 
-                DontDestroyOnLoad(_collectorUi.gameObject);
-                DontDestroyOnLoad(_copycatUi.gameObject);
-                DontDestroyOnLoad(_birdUi.gameObject);
-                DontDestroyOnLoad(_genericUi.gameObject);
-                DontDestroyOnLoad(_dialogs.gameObject);
-                DontDestroyOnLoad(_gameLoader);
+                Dialogs = FindObjectOfType<Dialogs>(true);
+                Debug.Assert(Dialogs != null);
+                DontDestroyOnLoad(Dialogs.gameObject);
+
+                GameLoader = FindObjectOfType<UiGameLoader>(true);
+                Debug.Assert(GameLoader != null);
+                DontDestroyOnLoad(GameLoader);
+
                 DontDestroyOnLoad(gameObject);
 
                 Instance = this;
                 _isLoaded = true;
 
-                //OnActiveGameChanged(_activeGame);
+                //Ensure canvases activation
+                CollectorUI.gameObject.SetActive(true);
+                BirdUI.gameObject.SetActive(true);
+
+                GenericUI.gameObject.SetActive(true);
+                Dialogs.gameObject.SetActive(true);
 
                 if (_sceneToLoad != null)
                 {
@@ -119,38 +112,49 @@ namespace PhysRehab.UI
             }
         }
 
-        public void HideGameUi()
+        private void Start()
         {
-            _collectorUi.Hide();
-            _copycatUi.Hide();
-            _birdUi.Hide();
-            _genericUi.Hide();
-            _dialogs.Hide();
-
-            Debug.Log("UI Hidden");
-
+            _isRunning = true;
+            ShowGameUi(_activeGame);
         }
 
         public void ShowGameUi(EGame game)
         {
+            if(_isRunning == false)
+                return;
+
             HideGameUi();
             switch (game)
             {
                 case EGame.Collector:
-                    _collectorUi.Show();
+                    CollectorUI.Show();
                     break;
                 case EGame.Copycat:
-                    _copycatUi.Show();
+                    CopycatDevUi.Instance.Show();
                     break;
                 case EGame.Bird:
-                    _birdUi.Show();
+                    BirdUI.Show();
                     break;
                 default:
                     return;
             }
-            _genericUi.Show();
-            _dialogs.Show();
+            GenericUI.Show();
+            Dialogs.Show();
             Debug.Log($"Shown UI for {game}");
+        }
+
+        public void HideGameUi()
+        {
+            if (_isRunning == false)
+                return;
+
+            CollectorUI.Hide();
+            CopycatDevUi.Instance.Hide();
+            BirdUI.Hide();
+            GenericUI.Hide();
+            Dialogs.Hide();
+
+            Debug.Log("UI Hidden");
         }
     } 
 }

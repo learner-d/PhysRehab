@@ -9,15 +9,18 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenuScene.unity
     guid: 9a24d589479f5d340afac7ccd7ebc391
   - enabled: 1
-    path: Assets/Scenes/GoodsCollectorGame.unity
+    path: Assets/Scenes/Games/GoodsCollectorGame.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
-    path: Assets/Scenes/CopycatGame.unity
+    path: Assets/Scenes/Games/CopycatGame.unity
     guid: 0d60ec56ee48d884ab2386cdca284556
   - enabled: 1
-    path: Assets/Scenes/MainUIScene.unity
+    path: Assets/Scenes/UI/MainUIScene.unity
     guid: bb157e66eb541b245995c84d3c54fabf
   - enabled: 1
-    path: Assets/Scenes/BirdGame.unity
+    path: Assets/Scenes/Games/BirdGame.unity
     guid: 88a15222ca76c534687b454fd11fb0da
+  - enabled: 1
+    path: Assets/Scenes/UI/CopycatUIScene.unity
+    guid: 1ab49a4ceb3577b4fb7a133abdd3773b
   m_configObjects: {}

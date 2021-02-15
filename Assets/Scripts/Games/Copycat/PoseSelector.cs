@@ -22,12 +22,6 @@ namespace PhysRehab.Copycat
         public event UnityAction<PosePack, PosePack> ActivePosePackChanged;
         #endregion
 
-        [SerializeField]
-        private PoseIndicator _poseIndicator;
-
-        [SerializeField]
-        private GameObject _character;
-
         private PosePack _currentPosesPack;
 
         public PosePack ActivePosesPack
@@ -40,6 +34,11 @@ namespace PhysRehab.Copycat
             }
         }
 
+        public IReadOnlyList<PoseInfo> GetActivePoses()
+        {
+            return _currentPosesPack.Poses;
+        }
+
         public int PosesCount => ActivePosesPack?.Poses.Count ?? 0;
 
         [SerializeField]
@@ -49,10 +48,10 @@ namespace PhysRehab.Copycat
         public PoseInfo ActivePose
         {
             get => _activePose;
-            private set
+            set
             {
-                ActivePoseChanged?.Invoke(_activePose, value);
                 _activePose = value;
+                ActivePoseChanged?.Invoke(_activePose, value);
             }
         }
 
@@ -144,11 +143,6 @@ namespace PhysRehab.Copycat
         private void Start()
         {
             LoadPosePacks();
-        }
-
-        private void FixedUpdate()
-        {
-            _poseIndicator.CheckPoseMatch(_character.CaptureRig());
         }
     }
 

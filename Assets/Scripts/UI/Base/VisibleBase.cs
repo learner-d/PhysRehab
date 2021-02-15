@@ -7,6 +7,8 @@ namespace PhysRehab.UI
     [ExecuteInEditMode]
     public abstract class VisibleBase : MonoBehaviour
     {
+        protected bool _isAlive = false;
+
         protected Canvas _canvas;
         protected GraphicRaycaster _graphicRaycaster;
         protected VisibleBase _parent;
@@ -26,28 +28,30 @@ namespace PhysRehab.UI
         {
             _canvas = GetComponent<Canvas>();
             _graphicRaycaster = GetComponent<GraphicRaycaster>();
+
+            _isAlive = true;
         }
 
-        protected virtual void OnEnable()
+
+        protected virtual void OnDestroy()
         {
-            if (Application.isPlaying)
-            {
-                VisibleBase[] _children = GetComponentsInChildren<VisibleBase>();
-                foreach (VisibleBase child in _children)
-                {
-                    child.gameObject.SetActive(true);
-                }
-            }
+            _isAlive = false;
         }
 
         public virtual void Show()
         {
+            if(_isAlive == false)
+                Debug.LogError("object is destroyed!");
+
             _visible = true;
             UpdateVisibility();
         }
 
         public virtual void Hide()
         {
+            if (_isAlive == false)
+                Debug.LogError("object is destroyed!");
+
             _visible = false;
             UpdateVisibility();
         }
@@ -60,6 +64,9 @@ namespace PhysRehab.UI
 
         protected virtual void UpdateVisibility()
         {
+            if(_isAlive == false)
+                return;
+
             _canvas.enabled = _visible;
             if (_graphicRaycaster) _graphicRaycaster.enabled = _visible;
 
