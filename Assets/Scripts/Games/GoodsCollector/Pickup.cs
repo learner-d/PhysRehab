@@ -3,17 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Pickup : MonoBehaviour
+namespace PhysRehab.Collector
 {
-    [SerializeField]
-    private PickupType pickupType;
-
-    public event UnityAction<Pickup> Collected;
-    public PickupType PickupType => pickupType;
-
-    public void Collect()
+    public class Pickup : MonoBehaviour
     {
-        Collected?.Invoke(this);
+        /// <summary>
+        /// Тип пікапу
+        /// </summary>
+        public PickupType PickupType => pickupType;
+        [SerializeField]
+        private PickupType pickupType;
+
+        //Подія "Зібрано"
+        public event UnityAction<Pickup> Collected;
+
+        /// <summary>
+        /// Ініціює подію "Збирання"
+        /// </summary>
+        private void Collect()
+        {
+            Collected?.Invoke(this);
+        }
     }
 
 }

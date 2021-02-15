@@ -2,45 +2,85 @@
 using System.Collections.Generic;
 using PhysRehab.Scenes;
 using UnityEngine;
+using UnityEngine.Events;
 
-public class PickupObserver : MonoBehaviour
+namespace PhysRehab.Collector
 {
-    [SerializeField] private AudioSource _audioSource;
-    [SerializeField] private AudioClip _normalPickupCollectSound;
-    [SerializeField] private AudioClip _bigScorePickupCollectSound;
-
-    public void Subscribe(Pickup pickup)
+    public class PickupObserver : MonoBehaviour
     {
-        pickup.Collected += OnPickupCollected;
-    }
+        public event UnityAction<Pickup> PickupSpawned;
+        public event UnityAction<Pickup> PickupCollected;
 
-    private void OnPickupCollected(Pickup pickup)
-    {
-        int score;
-        AudioClip collectSound;
-        
-        if (pickup.PickupType == PickupType.Normal)
-        {
-            score = 10;
-            collectSound = _normalPickupCollectSound;
-        }
-        else
-        {
-            score = 25;
-            collectSound = _bigScorePickupCollectSound;
-        }
-        
-        _audioSource.PlayOneShot(collectSound);
-        CollectorGameScene.ScoreCounter.AddScore(score);
+        private PickupSpawner _pickupSpawner;
 
-        CollectorGameScene.PickupSpawner.RemovePickup(pickup, true);
-    }
+        [SerializeField]
+        private int _normalScore = 10;
+        [SerializeField]
+        private int _biggerScore = 25;
 
-    private void Awake()
-    {
-        if(_audioSource == null)
+        public int SpawnedPickupsCount { get; private set; }
+        public int CollectedPickupsCount { get; private set; }
+        public int DestroyedPickupsCount { get; private set; }
+        public int TotalPickupsCount => _pickupSpawner.TotalPickupsCount;
+
+        public bool SpawningIsFinished => SpawnedPickupsCount >= TotalPickupsCount;
+        public bool AllPickupsCollected => SpawningIsFinished && SpawnedPickupsCount == DestroyedPickupsCount;
+
+
+        private void Awake()
         {
-            _audioSource = FindObjectOfType<AudioSource>();
+            Initialize();
         }
-    }
+
+        public void Initialize()
+        {
+            Clear();
+        }
+
+        public void Clear()
+        {
+            SpawnedPickupsCount = 0;
+            CollectedPickupsCount = 0;
+            DestroyedPickupsCount = 0;
+        }
+
+        private void OnEnable()
+        {
+            if(_pickupSpawner == null)
+            {
+                _pickupSpawner = FindObjectOfType<PickupSpawner>();
+                Debug.Assert(_pickupSpawner != null);
+            }
+            _pickupSpawner.PickupSpawned += OnPickupSpawned;
+            _pickupSpawner.PickupDestroyed += OnPickupDestroyed;
+        }
+
+
+        private void OnDisable()
+        {
+            
+        }
+
+        public void OnPickupSpawned(Pickup pickup)
+        {
+            pickup.Collected += OnPickupCollected;
+            SpawnedPickupsCount++;
+        }
+        private void OnPickupDestroyed(Pickup pickup)
+        {
+            pickup.Collected -= OnPickupCollected;
+            DestroyedPickupsCount++;
+        }
+
+        private void OnPickupCollected(Pickup pickup)
+        {
+            AudioClip collectSound;
+
+            int score = pickup.PickupType == PickupType.Normal? _normalScore : _biggerScore;
+            
+            CollectorGameScene.ScoreCounter.AddScore(score);
+            CollectedPickupsCount++;
+            PickupCollected?.Invoke(pickup);
+        }
+    } 
 }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using PhysRehab.Core;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using PhysRehab.Collector;
 
 namespace PhysRehab.Scenes
 {

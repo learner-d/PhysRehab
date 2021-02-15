@@ -3,27 +3,31 @@ using System.Collections.Generic;
 using PhysRehab.Scenes;
 using UnityEngine;
 
-public class PickupDebugging : MonoBehaviour
+namespace PhysRehab.Collector
 {
-    private void Update()
+    public class PickupDebugging : MonoBehaviour
     {
-        if (GlobalSettings.DebugMode)
+        private void Update()
         {
-            if (Input.GetMouseButtonDown(0))  //коли відбувся клік ЛКМ
+            if (GlobalSettings.DebugMode)
             {
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                Collider2D hitObject = Physics2D.Raycast(ray.origin, ray.direction).collider;
-                Pickup pickup = hitObject?.GetComponentInParent<Pickup>();
-                pickup?.Collect();
-            }
-            else if (Input.GetMouseButtonDown(1)) //коли відбувся клік ПКМ
-            {
-                //Координати миші
-                Vector3 clickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                if (Input.GetMouseButtonDown(0))  //коли відбувся клік ЛКМ
+                {
+                    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                    Collider2D hitObject = Physics2D.Raycast(ray.origin, ray.direction).collider;
+                    Pickup pickup = hitObject?.GetComponentInParent<Pickup>();
+                    pickup.SendMessage("Collect");
+                }
+                else if (Input.GetMouseButtonDown(1)) //коли відбувся клік ПКМ
+                {
+                    //Координати миші
+                    Vector3 clickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-                //Створюємо пікап
-                CollectorGameScene.PickupSpawner.SpawnPickup(clickPos);
+                    //Створюємо пікап
+                    CollectorGameScene.PickupSpawner.SpawnPickup(clickPos);
+                }
             }
         }
     }
+
 }
