@@ -39,7 +39,7 @@ public class Dialogs : VisibleBase
     protected override void UpdateVisibility()
     {
         base.UpdateVisibility();
-        if (_visible)
+        if (_visible == false)
         {
             StartLevelPanel.Hide();
             LevelCompletePanel.Hide();

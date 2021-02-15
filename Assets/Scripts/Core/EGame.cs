@@ -8,7 +8,7 @@ namespace PhysRehab.Core
 {
     public enum EGame
     {
-        None, Collector, Copycat, FlappyBird
+        None, Collector, Copycat, Bird
     }
 
 }

@@ -26,10 +26,10 @@ public class PoseInfo
         _lifetimeS = lifetimeS;
     }
 
-    public bool CheckRigMatch(HumanRig rig, float tolerance = 0.1F)
+    public bool CheckRigMatch(HumanRig rig, float posTolerance, float rotDegTolerance)
     {
         if (_poseRig == null || rig == null)
             return false;
-        return _poseRig.CheckRigMatch(rig, tolerance);
+        return _poseRig.CheckRigMatch(rig, posTolerance, rotDegTolerance);
     }
 }

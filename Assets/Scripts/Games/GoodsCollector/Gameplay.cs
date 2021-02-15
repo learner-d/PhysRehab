@@ -14,11 +14,13 @@ public class Gameplay : MonoBehaviour
     private void Start()
     {
         LevelLoaded?.Invoke();
+        SpawnZoneCollection.Instance.enabled = true;
     }
 
     public void StartLevel()
     {
         LevelStarted?.Invoke();
+        SpawnZoneCollection.Instance.enabled = false;
     }
 
     public void StartGame()

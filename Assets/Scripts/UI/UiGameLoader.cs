@@ -28,18 +28,32 @@ namespace PhysRehab.UI
                 CollectorGameScene.Instance.Unloaded += CollectorGameScene_Unloaded;
                 CopycatGameScene.Instance.Loaded += CopycatGameScene_Loaded;
                 CopycatGameScene.Instance.Unloaded += CopycatGameScene_Unloaded;
+                BirdGameScene.Instance.Loaded += BirdGameScene_Loaded;
+                BirdGameScene.Instance.Unloaded += BirdGameScene_UnLoaded;
                 _isLoaded = true;
-
-                LoadSceneIfNeeded();
             }
+        }
+
+        private void Start()
+        {
+            LoadSceneIfNeeded();
+        }
+
+        public void Clear()
+        {
+            _loadGame = EGame.None;
+            _goToMenu = false;
         }
 
         private void LoadSceneIfNeeded()
         {
+            if(MainMenuScene.Instance.IsActive)
+                return;
+
             if (_goToMenu)
             {
                 MainMenuScene.Instance.EnsureLoaded();
-                _goToMenu = false;
+                _goToMenu = true;
                 return;
             }
 
@@ -51,7 +65,8 @@ namespace PhysRehab.UI
                 case EGame.Copycat:
                     CopycatGameScene.Instance.EnsureLoaded();
                     break;
-                case EGame.FlappyBird:
+                case EGame.Bird:
+                    BirdGameScene.Instance.EnsureLoaded();
                     break;
                 default:
                     break;
@@ -83,13 +98,24 @@ namespace PhysRehab.UI
 
         private void CopycatGameScene_Loaded(GameScene gameScene)
         {
-            UI.UI_MAIN.Instance.CopycatDevUi.Initialize();
+            CopycatDevUi.Instance.Initialize();
             UI_MAIN.Instance.ActiveGame = EGame.Copycat;
         }
 
         private void CopycatGameScene_Unloaded(GameScene gameScene)
         {
-            UI_MAIN.Instance.CopycatDevUi.Shutdown();
+            CopycatDevUi.Instance.Shutdown();
+        }
+
+        private void BirdGameScene_Loaded(GameScene gameScene)
+        {
+            UI_MAIN.Instance.BirdUI.Initialize();
+            UI_MAIN.Instance.ActiveGame = EGame.Bird;
+        }
+
+        private void BirdGameScene_UnLoaded(GameScene gameScene)
+        {
+            UI_MAIN.Instance.BirdUI.Shutdown();
         }
     } 
 }

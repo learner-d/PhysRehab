@@ -47,7 +47,7 @@ public class Program
 
     public static void LaunchFlappyBirdGame()
     {
-
+        LaunchGame(EGame.Bird);
     }
 
     public static void LaunchGame(EGame game)
@@ -61,9 +61,9 @@ public class Program
         {
             CopycatGameScene.Instance.EnsureLoaded();
         }
-        else if(game == EGame.FlappyBird)
+        else if(game == EGame.Bird)
         {
-
+            BirdGameScene.Instance.EnsureLoaded();
         }
     }
     public static void GoToMainMenu()
@@ -77,14 +77,23 @@ public class Program
         Application.Quit();
     }
 
+    //TODO: move to another location
+    public static void Pause()
+    {
+        Time.timeScale = 0;
+        Debug.Log("Game paused.");
+    }
+
+    //TODO: move to another location
+    public static void Resume()
+    {
+        Time.timeScale = 1;
+        Debug.Log("Game resumed.");
+    }
+
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterAssembliesLoaded)]
     public static void OnAppStartup()
     {
         
-    }
-
-    public static void LoadUi()
-    {
-        UI_MAIN.EnsureLoaded();
     }
 }

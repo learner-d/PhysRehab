@@ -36,15 +36,15 @@ public class HumanRig
         }
     }
 
-    public bool CheckRigMatch(HumanRig rig, float tolerance = 0.1f)
+    public bool CheckRigMatch(HumanRig rig, float posTolerance, float rotDegTolerance)
     {
         for (int i = 0; i < _bodyBoneTransforms.Count; i++)
         {
             if (_bodyBoneTransforms[i] != null && rig._bodyBoneTransforms[i] != null)
             {
                 float bonePositionDiff = Vector3.Distance(_bodyBoneTransforms[i].localPosition, rig._bodyBoneTransforms[i].localPosition);
-                float boneRotationDiff = Quaternion.Angle(_bodyBoneTransforms[i].localRotation, rig._bodyBoneTransforms[i].localRotation) / 360f;
-                if (bonePositionDiff > tolerance || boneRotationDiff > tolerance)
+                float boneRotationDegDiff = Quaternion.Angle(_bodyBoneTransforms[i].localRotation, rig._bodyBoneTransforms[i].localRotation) % 360f;
+                if (bonePositionDiff > posTolerance || boneRotationDegDiff > posTolerance)
                 {
                     return false;
                 } 

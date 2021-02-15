@@ -41,7 +41,7 @@ namespace PhysRehab.UI.CollectorGame
         {
             Hide();
             _fader?.Hide();
-            Time.timeScale = 1.0f;
+            Program.Resume();
             _genericUi.InGameButtons.Show();
         }
 

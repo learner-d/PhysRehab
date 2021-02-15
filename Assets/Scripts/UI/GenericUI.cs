@@ -1,4 +1,5 @@
-﻿using PhysRehab.Core;
+﻿using PhysRehab.Copycat;
+using PhysRehab.Core;
 using PhysRehab.Scenes;
 using PhysRehab.UI.CollectorGame;
 using UnityEngine;
@@ -35,15 +36,21 @@ namespace PhysRehab.UI
         public void Btn_Start_Click()
         {
             if (UI_MAIN.Instance.ActiveGame == EGame.Collector)
-            {
                 CollectorGameScene.Gameplay.StartLevel();
+
+            else if (UI_MAIN.Instance.ActiveGame == EGame.Copycat)
+            {
+                if(PosePlayback.Instance.IsPlaying == false)
+                    PosePlayback.Instance.StartPlayback();
+                else
+                    PosePlayback.Instance.Stop();
             }
         }
 
         public void Btn_Info_Click()
         {
             InGameButtons.Hide();
-            Time.timeScale = 0;
+            Program.Pause();
             _fader?.Show();
 
             if(UI_MAIN.Instance.ActiveGame == EGame.Collector)
@@ -60,7 +67,7 @@ namespace PhysRehab.UI
         public void Btn_Pause_Click()
         {
             InGameButtons.Hide();
-            Time.timeScale = 0;
+            Program.Pause();
             _fader?.Show();
             PausePanel.Show();
         }

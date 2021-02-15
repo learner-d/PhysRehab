@@ -5,6 +5,8 @@ using System.Linq;
 
 public class SpawnZoneCollection : MonoBehaviour
 {
+    public static SpawnZoneCollection Instance { get; private set; }
+
     [SerializeField]
     private PickupSpawnZone[] _spawnZones;
 
@@ -61,6 +63,24 @@ public class SpawnZoneCollection : MonoBehaviour
     {
         foreach (var spawZone in _spawnZones)
             spawZone.Clear();
+    }
+
+    private SpriteRenderer[] _spawnZoneSpriteRenderers;
+
+    private void Awake()
+    {
+        _spawnZoneSpriteRenderers = GetComponentsInChildren<SpriteRenderer>();
+        Instance = this;
+    }
+    private void OnEnable()
+    {
+        foreach (var spawnZoneRenderer in _spawnZoneSpriteRenderers)
+            spawnZoneRenderer.enabled = true;
+    }
+    private void OnDisable()
+    {
+        foreach (var spawnZoneRenderer in _spawnZoneSpriteRenderers)
+            spawnZoneRenderer.enabled = false;
     }
 
     private void Update()
