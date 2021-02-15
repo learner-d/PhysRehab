@@ -48,8 +48,8 @@ namespace PhysRehab.UI
         {
             _collectorUiHud.Hide();
             UI_MAIN.Instance.Dialogs.LevelCompletePanel.Show(1,
-                CollectorGameScene.PickupSpawner.TotalPickupsCount,
-                CollectorGameScene.PickupSpawner.CollectedPickupsCount,
+                CollectorGameScene.PickupObserver.TotalPickupsCount,
+                CollectorGameScene.PickupObserver.CollectedPickupsCount,
                 CollectorGameScene.ScoreCounter.Score);
         }
 
