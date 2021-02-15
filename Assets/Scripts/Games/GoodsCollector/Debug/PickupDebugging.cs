@@ -16,7 +16,7 @@ namespace PhysRehab.Collector
                     Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                     Collider2D hitObject = Physics2D.Raycast(ray.origin, ray.direction).collider;
                     Pickup pickup = hitObject?.GetComponentInParent<Pickup>();
-                    pickup.SendMessage("Collect");
+                    pickup?.SendMessage("Collect");
                 }
                 else if (Input.GetMouseButtonDown(1)) //коли відбувся клік ПКМ
                 {
