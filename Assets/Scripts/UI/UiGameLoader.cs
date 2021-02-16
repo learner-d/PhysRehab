@@ -87,13 +87,13 @@ namespace PhysRehab.UI
 
         private void CollectorGameScene_Loaded(GameScene gameScene)
         {
-            UI_MAIN.Instance.CollectorUI.Initialize();
+            CollectorUI.Instance.Initialize();
             UI_MAIN.Instance.ActiveGame = EGame.Collector;
         }
 
         private void CollectorGameScene_Unloaded(GameScene gameScene)
         {
-            UI_MAIN.Instance.CollectorUI.Shutdown();
+            CollectorUI.Instance.Shutdown();
         }
 
         private void CopycatGameScene_Loaded(GameScene gameScene)
@@ -109,13 +109,14 @@ namespace PhysRehab.UI
 
         private void BirdGameScene_Loaded(GameScene gameScene)
         {
-            UI_MAIN.Instance.BirdUI.Initialize();
+            
+            BirdUI.Instance.Initialize();
             UI_MAIN.Instance.ActiveGame = EGame.Bird;
         }
 
         private void BirdGameScene_UnLoaded(GameScene gameScene)
         {
-            UI_MAIN.Instance.BirdUI.Shutdown();
+            BirdUI.Instance.Shutdown();
         }
     } 
 }

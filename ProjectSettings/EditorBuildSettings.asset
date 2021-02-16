@@ -23,4 +23,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/UI/CopycatUIScene.unity
     guid: 1ab49a4ceb3577b4fb7a133abdd3773b
+  - enabled: 1
+    path: Assets/Scenes/UI/CollectorUIScene.unity
+    guid: 77a95c56fe8e0a94ab13ef159a64463c
+  - enabled: 1
+    path: Assets/Scenes/UI/BirdUIScene.unity
+    guid: d677b0d0f2deaf94390ef970f326cc88
   m_configObjects: {}

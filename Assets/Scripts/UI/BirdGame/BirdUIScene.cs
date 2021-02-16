@@ -1,26 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
+using PhysRehab.UI;
 using PhysRehab.Core;
 using PhysRehab.Scenes;
-using PhysRehab.UI;
+using PhysRehab.UI.CollectorGame;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace PhysRehab.UI
 {
-    public class CopycatUIScene : MonoBehaviour
+    public class BirdUIScene : MonoBehaviour
     {
-        public static CopycatUIScene Instance { get; private set; }
+        public static BirdUIScene Instance { get; private set; }
         private static bool _isLoaded = false;
         public static bool IsLoaded => _isLoaded;
-        public CopycatDevUi CopycatDevUi { get; private set; }
+        public BirdUI BirdUI { get; private set; }
 
         public static bool EnsureLoaded()
         {
             if (_isLoaded == false)
             {
-                SceneManager.LoadScene("CopycatUIScene", LoadSceneMode.Additive);
+                SceneManager.LoadScene("BirdUIScene", LoadSceneMode.Additive);
 
                 return true;
             }
@@ -32,18 +31,18 @@ namespace PhysRehab.UI
         {
             if (_isLoaded == false)
             {
-                CopycatDevUi = FindObjectOfType<CopycatDevUi>(true);
-                Debug.Assert(CopycatDevUi != null);
+                BirdUI = FindObjectOfType<BirdUI>(true);
+                Debug.Assert(BirdUI != null);
                 //Delete mockup image
-                Destroy(CopycatDevUi.GetComponent<Image>());
-                DontDestroyOnLoad(CopycatDevUi.gameObject);
+                Destroy(BirdUI.GetComponent<Image>());
+                DontDestroyOnLoad(BirdUI.gameObject);
 
                 DontDestroyOnLoad(gameObject);
                 Instance = this;
                 _isLoaded = true;
 
                 //Ensure canvases activation
-                CopycatDevUi.gameObject.SetActive(true);
+                BirdUI.gameObject.SetActive(true);
 
                 //UI_MAIN.EnsureLoaded();
             }
@@ -53,5 +52,6 @@ namespace PhysRehab.UI
         {
             _isLoaded = false;
         }
-    } 
+    }
+
 }

@@ -64,6 +64,20 @@ namespace PhysRehab.UI
             }
         }
 
+        public void Btn_Restart_Click()
+        {
+            if (UI_MAIN.Instance.ActiveGame == EGame.Collector)
+                CollectorGameScene.Gameplay.StartLevel();
+
+            else if (UI_MAIN.Instance.ActiveGame == EGame.Copycat)
+            {
+                if (PosePlayback.Instance.IsPlaying == false)
+                    PosePlayback.Instance.StartPlayback();
+                else
+                    PosePlayback.Instance.Stop();
+            }
+        }
+
         public void Btn_Pause_Click()
         {
             InGameButtons.Hide();

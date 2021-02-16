@@ -13,7 +13,7 @@ public class ScoreCounter_old : MonoBehaviour
         private set
         {
             Score_fld = value;
-            UI_MAIN.Instance.CollectorUI.HUD.ScoreCounter.Score = value;
+           CollectorUI.Instance.HUD.ScoreCounter.Score = value;
         }
     }
 

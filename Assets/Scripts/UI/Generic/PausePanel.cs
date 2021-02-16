@@ -26,6 +26,7 @@ namespace PhysRehab.UI.CollectorGame
         {
             Program.GoToMainMenu();
             _genericUi.InGameButtons.Show();
+            Program.Resume();
         }
     }
 }
