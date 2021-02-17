@@ -67,14 +67,16 @@ namespace PhysRehab.UI
         public void Btn_Restart_Click()
         {
             if (UI_MAIN.Instance.ActiveGame == EGame.Collector)
-                CollectorGameScene.Gameplay.StartLevel();
+                Program.LaunchCollectorGame();
 
             else if (UI_MAIN.Instance.ActiveGame == EGame.Copycat)
             {
-                if (PosePlayback.Instance.IsPlaying == false)
-                    PosePlayback.Instance.StartPlayback();
-                else
-                    PosePlayback.Instance.Stop();
+                Program.LaunchCopycatGame();
+            }
+
+            else if (UI_MAIN.Instance.ActiveGame == EGame.Bird)
+            {
+                Program.LaunchFlappyBirdGame();
             }
         }
 

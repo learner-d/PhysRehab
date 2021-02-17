@@ -1,3 +1,6 @@
+using PhysRehab.UI.BirdGame;
+using PhysRehab.UI;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +13,7 @@ namespace PhysRehab.BirdGame
     {
         public static event UnityAction<Pipe> PipeCreated;
         public static event UnityAction<Pipe> PipeDestroyed;
+        public static event UnityAction<Pipe, GameObject> PipeCollision;
 
         [SerializeField]
         private SpriteRenderer _headSprite;
@@ -79,6 +83,15 @@ namespace PhysRehab.BirdGame
         private void UpdateScale()
         {
             _bodySprite.transform.localScale = new Vector2(_bodyWidth, _bodyHeight);
+        }
+
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            if (collision.gameObject.name == "Bird")
+            {
+                PipeCollision?.Invoke(this, collision.gameObject);
+               
+            }
         }
     } 
 }

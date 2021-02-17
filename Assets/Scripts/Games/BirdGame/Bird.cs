@@ -18,12 +18,34 @@ namespace PhysRehab.BirdGame
         [SerializeField]
         private float _camera_deltaY = 1;
 
+        [SerializeField]
+        private GameObject Pipe;
+        [SerializeField]
+        private GameObject End;
+
+        private bool Win = false;
+
+        private bool IsDead = false;
+
         private void FixedUpdate()
         {
             transform.position = new Vector3(transform.position.x + _deltaX, transform.position.y + _deltaY, transform.position.z);
-            Camera.main.transform.position = new Vector3(transform.position.x + _camera_deltaX, transform.position.y + _camera_deltaY, Camera.main.transform.position.z);
+            Camera.main.transform.position = new Vector3(transform.position.x + _camera_deltaX, transform.position.y, Camera.main.transform.position.z);
 
         }
+
+        private void CheckWin(Collision2D collision)
+        {
+            Win = true;
+            Program.Pause();
+        
+        }
+
+        private void OnCollisionEnter(Collision2D collision)
+        {
+            IsDead = true;
+        }
+
     }
 
 }
