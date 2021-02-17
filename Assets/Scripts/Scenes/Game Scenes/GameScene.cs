@@ -59,5 +59,11 @@ namespace PhysRehab.Scenes
             if (IsActive == false)
                 SceneManager.LoadScene(_name);
         }
+
+        public virtual void Unload()
+        {
+            if(IsActive == true)
+                SceneManager.UnloadScene(_name);
+        }
     }
 }

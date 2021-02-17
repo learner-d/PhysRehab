@@ -3,6 +3,7 @@ using PhysRehab.Core;
 using PhysRehab.Scenes;
 using PhysRehab.UI.CollectorGame;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace PhysRehab.UI
 {
@@ -66,17 +67,20 @@ namespace PhysRehab.UI
 
         public void Btn_Restart_Click()
         {
-            if (UI_MAIN.Instance.ActiveGame == EGame.Collector)
-                Program.LaunchCollectorGame();
+            if (UI_MAIN.Instance.ActiveGame == EGame.Collector) { 
 
+                
+            }
+        
             else if (UI_MAIN.Instance.ActiveGame == EGame.Copycat)
             {
-                Program.LaunchCopycatGame();
+                
             }
 
             else if (UI_MAIN.Instance.ActiveGame == EGame.Bird)
             {
-                Program.LaunchFlappyBirdGame();
+                BirdGameScene.Instance.Unload();
+                BirdGameScene.Instance.EnsureLoaded();
             }
         }
 
