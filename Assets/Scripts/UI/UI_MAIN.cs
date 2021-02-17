@@ -28,9 +28,6 @@ namespace PhysRehab.UI
             }
         }
 
-        public CollectorUI CollectorUI { get; private set; }
-
-        public BirdUI BirdUI { get; private set; }
 
         public GenericUI GenericUI { get; private set; }
         public Dialogs Dialogs { get; private set; }
@@ -46,6 +43,8 @@ namespace PhysRehab.UI
         public static bool EnsureLoaded(GameScene loadNext = null)
         {
             CopycatUIScene.EnsureLoaded();
+            CollectorUIScene.EnsureLoaded();
+            BirdUIScene.EnsureLoaded();
             if (_isLoaded == false)
             {
                 SceneManager.LoadScene("MainUIScene", LoadSceneMode.Additive);
@@ -64,21 +63,12 @@ namespace PhysRehab.UI
 
         private void Awake()
         {
+            CollectorUIScene.EnsureLoaded();
+            BirdUIScene.EnsureLoaded();
             CopycatUIScene.EnsureLoaded();
             _isRunning = false;
             if (_isLoaded == false)
             {
-                CollectorUI = FindObjectOfType<CollectorUI>(true);
-                Debug.Assert(CollectorUI != null);
-                //Delete mockup image
-                Destroy(CollectorUI.GetComponent<Image>());
-                DontDestroyOnLoad(CollectorUI.gameObject);
-
-                BirdUI = FindObjectOfType<BirdUI>(true);
-                Debug.Assert(BirdUI != null);
-                //Delete mockup image
-                Destroy(BirdUI.GetComponent<Image>());
-                DontDestroyOnLoad(BirdUI.gameObject);
 
                 GenericUI = FindObjectOfType<GenericUI>(true);
                 Debug.Assert(GenericUI != null);
@@ -96,10 +86,6 @@ namespace PhysRehab.UI
 
                 Instance = this;
                 _isLoaded = true;
-
-                //Ensure canvases activation
-                CollectorUI.gameObject.SetActive(true);
-                BirdUI.gameObject.SetActive(true);
 
                 GenericUI.gameObject.SetActive(true);
                 Dialogs.gameObject.SetActive(true);
@@ -127,13 +113,13 @@ namespace PhysRehab.UI
             switch (game)
             {
                 case EGame.Collector:
-                    CollectorUI.Show();
+                    CollectorUI.Instance.Show();
                     break;
                 case EGame.Copycat:
                     CopycatDevUi.Instance.Show();
                     break;
                 case EGame.Bird:
-                    BirdUI.Show();
+                    BirdUI.Instance.Show();
                     break;
                 default:
                     return;
@@ -148,9 +134,9 @@ namespace PhysRehab.UI
             if (_isRunning == false)
                 return;
 
-            CollectorUI.Hide();
+            CollectorUI.Instance.Hide();
             CopycatDevUi.Instance.Hide();
-            BirdUI.Hide();
+            BirdUI.Instance.Hide();
             GenericUI.Hide();
             Dialogs.Hide();
 

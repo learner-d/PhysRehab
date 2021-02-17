@@ -13,11 +13,13 @@ namespace PhysRehab.UI
 {
     public class BirdUI : VisibleBase
     {
-   
+
+        public static BirdUI Instance { get; private set; }
 
         protected override void Awake()
         {
             base.Awake();
+            Instance = this;
            
         }
 

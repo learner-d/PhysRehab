@@ -15,11 +15,14 @@ namespace PhysRehab.UI
         private CollectorUIHud _collectorUiHud;
         public CollectorUIHud HUD => _collectorUiHud;
 
+        public static CollectorUI Instance { get; private set; }
+
         protected override void Awake()
         {
             base.Awake();
             _preConfingUi = GetComponentInChildren<CollectorPreConfingUI>();
             _collectorUiHud = GetComponentInChildren<CollectorUIHud>();
+            Instance = this;
         }
 
         private void OnLevelLoaded()
