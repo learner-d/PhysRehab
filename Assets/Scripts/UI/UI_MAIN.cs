@@ -121,6 +121,8 @@ namespace PhysRehab.UI
                 case EGame.Bird:
                     BirdUI.Instance.Show();
                     break;
+                case EGame.KinectTester:
+                    break;
                 default:
                     return;
             }

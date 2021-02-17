@@ -30,9 +30,13 @@ namespace PhysRehab.UI
                 CopycatGameScene.Instance.Unloaded += CopycatGameScene_Unloaded;
                 BirdGameScene.Instance.Loaded += BirdGameScene_Loaded;
                 BirdGameScene.Instance.Unloaded += BirdGameScene_UnLoaded;
+
+                KinectTesterScene.Instance.Loaded += KinectTesterScene_Loaded;
+                KinectTesterScene.Instance.Unloaded += KinectTesterScene_Unloaded;
                 _isLoaded = true;
             }
         }
+
 
         private void Start()
         {
@@ -84,6 +88,17 @@ namespace PhysRehab.UI
         {
             
         }
+
+        private void KinectTesterScene_Loaded(GameScene arg0)
+        {
+            UI_MAIN.Instance.ActiveGame = EGame.KinectTester;
+        }
+
+        private void KinectTesterScene_Unloaded(GameScene arg0)
+        {
+            UI_MAIN.Instance.ActiveGame = EGame.None;
+        }
+
 
         private void CollectorGameScene_Loaded(GameScene gameScene)
         {
