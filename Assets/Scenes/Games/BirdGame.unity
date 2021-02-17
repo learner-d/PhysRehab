@@ -1400,7 +1400,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _deltaX: 0.03
-  _deltaY: -0.03
+  _deltaY: 0
+  _camera_deltaX: 1
+  _camera_deltaY: 1
 --- !u!58 &1098488828
 CircleCollider2D:
   m_ObjectHideFlags: 0
