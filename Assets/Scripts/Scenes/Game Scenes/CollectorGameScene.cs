@@ -32,12 +32,9 @@ namespace PhysRehab.Scenes
         {
             if (scene.name == Name)
             {
-                IsActive = UI_MAIN.EnsureLoaded(this) == false;
-                if (IsActive)
-                {
-                    Program.ResolveStaticProperties<CollectorGameScene>();
-                    _Loaded?.Invoke(this);
-                }
+                IsActive = true;
+                Program.ResolveStaticProperties<CollectorGameScene>();
+                _Loaded?.Invoke(this);
             }
         }
         

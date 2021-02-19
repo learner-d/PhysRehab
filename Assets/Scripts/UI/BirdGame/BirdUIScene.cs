@@ -2,6 +2,7 @@ using PhysRehab.UI;
 using PhysRehab.Core;
 using PhysRehab.Scenes;
 using PhysRehab.UI.CollectorGame;
+using PhysRehab.Util;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -11,21 +12,11 @@ namespace PhysRehab.UI
     public class BirdUIScene : MonoBehaviour
     {
         public static BirdUIScene Instance { get; private set; }
+        public const string SceneName = "BirdUIScene"; 
+
         private static bool _isLoaded = false;
-        public static bool IsLoaded => _isLoaded;
+        public static bool IsSceneLoaded => SceneManagerExt.IsSceneLoaded(SceneName);
         public BirdUI BirdUI { get; private set; }
-
-        public static bool EnsureLoaded()
-        {
-            if (_isLoaded == false)
-            {
-                SceneManager.LoadScene("BirdUIScene", LoadSceneMode.Additive);
-
-                return true;
-            }
-
-            return false;
-        }
 
         private void Awake()
         {

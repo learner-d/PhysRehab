@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using PhysRehab.Copycat;
 using PhysRehab.Core;
 using PhysRehab.Scenes;
+using PhysRehab.Util;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -12,6 +13,7 @@ namespace PhysRehab.UI
 {
     public class UI_MAIN : MonoBehaviour
     {
+        public const string SceneName = "MainUIScene";
         public static UI_MAIN Instance { get; private set; }
 
         private static bool _isLoaded = false;
@@ -34,42 +36,29 @@ namespace PhysRehab.UI
 
         public UiGameLoader GameLoader { get; private set; }
 
-        private static GameScene _sceneToLoad = null;
-
         /// <summary>
         /// Not supporting LoadSceneMode.Additive
         /// </summary>
         /// <returns>whether is scene wasn't previously loaded</returns>
-        public static bool EnsureLoaded(GameScene loadNext = null)
+        public static void EnsureLoaded()
         {
-            CopycatUIScene.EnsureLoaded();
-            CollectorUIScene.EnsureLoaded();
-            BirdUIScene.EnsureLoaded();
-            if (_isLoaded == false)
-            {
-                SceneManager.LoadScene("MainUIScene", LoadSceneMode.Additive);
-                Debug.Log("Loading UI");
-
-                if (loadNext != null)
-                {
-                    _sceneToLoad = loadNext; 
-                }
-
-                return true;
-            }
-
-            return false;
+            Debug.Log("Loading UI");
+            if (CollectorUIScene.IsSceneLoaded == false)
+                SceneManager.LoadScene(CollectorUIScene.SceneName, LoadSceneMode.Additive);
+            if (CopycatUIScene.IsSceneLoaded == false)
+                SceneManager.LoadScene(CopycatUIScene.SceneName, LoadSceneMode.Additive);
+            if (BirdUIScene.IsSceneLoaded == false)
+                SceneManager.LoadScene(BirdUIScene.SceneName, LoadSceneMode.Additive);
+            
+            if (SceneManagerExt.IsSceneLoaded(SceneName) == false)
+                SceneManager.LoadScene(SceneName, LoadSceneMode.Additive);
         }
 
         private void Awake()
         {
-            CollectorUIScene.EnsureLoaded();
-            BirdUIScene.EnsureLoaded();
-            CopycatUIScene.EnsureLoaded();
             _isRunning = false;
             if (_isLoaded == false)
             {
-
                 GenericUI = FindObjectOfType<GenericUI>(true);
                 Debug.Assert(GenericUI != null);
                 DontDestroyOnLoad(GenericUI.gameObject);
@@ -89,12 +78,6 @@ namespace PhysRehab.UI
 
                 GenericUI.gameObject.SetActive(true);
                 Dialogs.gameObject.SetActive(true);
-
-                if (_sceneToLoad != null)
-                {
-                    _sceneToLoad.EnsureLoaded();
-                    _sceneToLoad = null;
-                }
             }
         }
 

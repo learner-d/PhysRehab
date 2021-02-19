@@ -33,19 +33,6 @@ namespace PhysRehab.BirdGame
             Camera.main.transform.position = new Vector3(transform.position.x + _camera_deltaX, transform.position.y, Camera.main.transform.position.z);
 
         }
-
-        private void CheckWin(Collision2D collision)
-        {
-            Win = true;
-            Program.Pause();
-        
-        }
-
-        private void OnCollisionEnter(Collision2D collision)
-        {
-            IsDead = true;
-        }
-
     }
 
 }

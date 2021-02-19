@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using PhysRehab.Util;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -8,22 +9,12 @@ namespace PhysRehab.UI
 {
     public class CollectorUIScene : MonoBehaviour
     {
+        public const string SceneName = "CollectorUIScene";
         public static CollectorUIScene Instance { get; private set; }
+
         private static bool _isLoaded = false;
-        public static bool IsLoaded => _isLoaded;
+        public static bool IsSceneLoaded => SceneManagerExt.IsSceneLoaded(SceneName);
         public CollectorUI CollectorUI { get; private set; }
-
-        public static bool EnsureLoaded()
-        {
-            if (_isLoaded == false)
-            {
-                SceneManager.LoadScene("CollectorUIScene", LoadSceneMode.Additive);
-
-                return true;
-            }
-
-            return false;
-        }
 
         private void Awake()
         {

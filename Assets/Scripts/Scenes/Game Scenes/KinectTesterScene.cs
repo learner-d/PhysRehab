@@ -21,11 +21,8 @@ namespace PhysRehab.Scenes
         {
             if (scene.name == Name)
             {
-                IsActive = UI_MAIN.EnsureLoaded(this) == false;
-                if (IsActive)
-                {
-                    _Loaded?.Invoke(this);
-                }
+                IsActive = true;
+                _Loaded?.Invoke(this);
             }
         }
 
