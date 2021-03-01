@@ -20,6 +20,11 @@ namespace PhysRehab.BirdGame
         private float _camera_deltaY = 1;
 
         [SerializeField]
+        private float _camera_deltaXTolerance = 0;
+        [SerializeField]
+        private float _camera_deltaYTolerance = 0;
+
+        [SerializeField]
         private KeyCode _flapKeyCode = KeyCode.Space;
 
         [SerializeField]
@@ -29,9 +34,16 @@ namespace PhysRehab.BirdGame
 
         private Rigidbody2D _rigidbody;
 
+        private Vector3 _startPosition;
+
         private void Awake()
         {
             _rigidbody = GetComponent<Rigidbody2D>();
+        }
+
+        private void Start()
+        {
+            _startPosition = transform.position;
         }
 
         private void OnCollisionEnter2D(Collision2D collider)
@@ -45,12 +57,21 @@ namespace PhysRehab.BirdGame
                 MakeFlap();
 
             transform.position = new Vector3(transform.position.x + _deltaX, transform.position.y + _deltaY, transform.position.z);
-            Camera.main.transform.position = new Vector3(transform.position.x + _camera_deltaX, transform.position.y, Camera.main.transform.position.z);
+            if (((Vector2)Camera.main.transform.position - (Vector2)transform.position).x > _camera_deltaX)
+                Camera.main.transform.position = new Vector3(transform.position.x, Camera.main.transform.position.y, Camera.main.transform.position.z); 
+            if (((Vector2)Camera.main.transform.position - (Vector2)transform.position).y > _camera_deltaY)
+                Camera.main.transform.position = new Vector3(Camera.main.transform.transform.position.x, transform.position.y, Camera.main.transform.position.z);
         }
 
         private void MakeFlap()
         {
+            //_rigidbody.inertia = 0;
             _rigidbody.velocity = new Vector2(_flapVelocityX, _flapVelocityY);
+        }
+
+        public void Reset()
+        {
+            transform.position = _startPosition;
         }
     }
 
