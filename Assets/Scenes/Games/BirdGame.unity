@@ -2634,7 +2634,7 @@ MonoBehaviour:
   _deltaX: 0.36
   _deltaY: 0
   _camera_deltaX: 1
-  _camera_deltaY: 1
+  _camera_deltaY: 0
   _flapKeyCode: 32
   _flapVelocityX: 1
   _flapVelocityY: 40
