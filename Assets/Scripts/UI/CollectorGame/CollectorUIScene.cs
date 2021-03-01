@@ -13,7 +13,7 @@ namespace PhysRehab.UI
         public static CollectorUIScene Instance { get; private set; }
 
         private static bool _isLoaded = false;
-        public static bool IsSceneLoaded => SceneManagerExt.IsSceneLoaded(SceneName);
+        public static bool IsSceneLoaded => SceneManagerExt.IsSceneLoaded(SceneName) || _isLoaded;
         public CollectorUI CollectorUI { get; private set; }
 
         private void Awake()

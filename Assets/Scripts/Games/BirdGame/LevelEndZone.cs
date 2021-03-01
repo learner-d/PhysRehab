@@ -6,15 +6,15 @@ using UnityEngine.Events;
 namespace PhysRehab.BirdGame
 {
 
-    public class EndZone : MonoBehaviour
+    public class LevelEndZone : MonoBehaviour
     {
-        public static event UnityAction<EndZone, GameObject> LevelPassed;
+        public static event UnityAction<LevelEndZone, GameObject> Reached;
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
             if (collision.gameObject.name == "Bird")
             {
-                LevelPassed?.Invoke(this, collision.gameObject);
+                Reached?.Invoke(this, collision.gameObject);
 
             }
         }

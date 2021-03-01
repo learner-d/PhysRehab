@@ -15,7 +15,7 @@ namespace PhysRehab.Scenes
     {
         protected string _name;
         public string Name => _name;
-        public bool IsActive { get; protected set; }
+        public bool IsLoaded { get; protected set; }
 
         protected UnityAction<GameScene> _Loaded;
         public event UnityAction<GameScene> Loaded
@@ -49,20 +49,20 @@ namespace PhysRehab.Scenes
         {
             if (scene.name == Name)
             {
-                IsActive = false;
+                IsLoaded = false;
                 _UnLoaded?.Invoke(this);
             }
         }
 
         public virtual void EnsureLoaded()
         {
-            if (IsActive == false)
+            if (IsLoaded == false)
                 SceneManager.LoadScene(_name);
         }
 
         public virtual void Unload()
         {
-            if(IsActive == true)
+            if(IsLoaded == true)
                 SceneManager.UnloadScene(_name);
         }
     }

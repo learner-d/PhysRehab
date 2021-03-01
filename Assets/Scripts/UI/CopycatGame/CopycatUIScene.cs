@@ -16,7 +16,7 @@ namespace PhysRehab.UI
         public const string SceneName = "CopycatUIScene";
         
         private static bool _isLoaded = false;
-        public static bool IsSceneLoaded => SceneManagerExt.IsSceneLoaded(SceneName);
+        public static bool IsSceneLoaded => SceneManagerExt.IsSceneLoaded(SceneName) || _isLoaded;
         public CopycatDevUi CopycatDevUi { get; private set; }
 
         private void Awake()

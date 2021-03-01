@@ -59,7 +59,6 @@ namespace PhysRehab.BirdGame
         {
             if (Application.isEditor)
             {
-                UpdatePosition();
                 UpdateFlip();
                 UpdateScale();
             }

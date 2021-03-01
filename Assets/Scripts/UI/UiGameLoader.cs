@@ -10,14 +10,26 @@ namespace PhysRehab.UI
     public class UiGameLoader : MonoBehaviour
     {
         private static bool _isLoaded = false;
-        
-        [SerializeField]
-        private EGame _loadGame = EGame.None;
+
+        [SerializeField] private EGame _loadGame = EGame.None;
+
+        private static EGame _st_loadGame = EGame.None;
+        public static EGame LoadGame
+        {
+            get => _st_loadGame;
+            set
+            {
+                if(_isLoaded)
+                    throw new InvalidOperationException();
+                _st_loadGame = value;
+            }
+        }
+
 
         [SerializeField]
         private bool _goToMenu = false;
 
-        private void Awake()
+        private void Start()
         {
             if (_isLoaded == false)
             {
@@ -26,21 +38,18 @@ namespace PhysRehab.UI
 
                 CollectorGameScene.Instance.Loaded += CollectorGameScene_Loaded;
                 CollectorGameScene.Instance.Unloaded += CollectorGameScene_Unloaded;
+
                 CopycatGameScene.Instance.Loaded += CopycatGameScene_Loaded;
                 CopycatGameScene.Instance.Unloaded += CopycatGameScene_Unloaded;
+
                 BirdGameScene.Instance.Loaded += BirdGameScene_Loaded;
                 BirdGameScene.Instance.Unloaded += BirdGameScene_UnLoaded;
 
                 KinectTesterScene.Instance.Loaded += KinectTesterScene_Loaded;
                 KinectTesterScene.Instance.Unloaded += KinectTesterScene_Unloaded;
+                LoadSceneIfNeeded();
                 _isLoaded = true;
             }
-        }
-
-
-        private void Start()
-        {
-            LoadSceneIfNeeded();
         }
 
         public void Clear()
@@ -51,29 +60,33 @@ namespace PhysRehab.UI
 
         private void LoadSceneIfNeeded()
         {
-            if(MainMenuScene.Instance.IsActive)
+            if(MainMenuScene.Instance.IsLoaded)
                 return;
 
             if (_goToMenu)
             {
                 MainMenuScene.Instance.EnsureLoaded();
-                _goToMenu = true;
-                return;
+                _goToMenu = false;
             }
-
-            switch (_loadGame)
+            else
             {
-                case EGame.Collector:
-                    CollectorGameScene.Instance.EnsureLoaded();
-                    break;
-                case EGame.Copycat:
-                    CopycatGameScene.Instance.EnsureLoaded();
-                    break;
-                case EGame.Bird:
-                    BirdGameScene.Instance.EnsureLoaded();
-                    break;
-                default:
-                    break;
+                if (_st_loadGame != EGame.None)
+                    _loadGame = _st_loadGame;
+
+                switch (_loadGame)
+                {
+                    case EGame.Collector:
+                        CollectorGameScene.Instance.EnsureLoaded();
+                        break;
+                    case EGame.Copycat:
+                        CopycatGameScene.Instance.EnsureLoaded();
+                        break;
+                    case EGame.Bird:
+                        BirdGameScene.Instance.EnsureLoaded();
+                        break;
+                    default:
+                        break;
+                }
             }
 
             _loadGame = EGame.None;

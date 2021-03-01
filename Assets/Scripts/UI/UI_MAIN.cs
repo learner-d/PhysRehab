@@ -34,7 +34,8 @@ namespace PhysRehab.UI
         public GenericUI GenericUI { get; private set; }
         public Dialogs Dialogs { get; private set; }
 
-        public UiGameLoader GameLoader { get; private set; }
+        private UiGameLoader GameLoader { get; set; }
+        private MainAudioSource MainAudio { get; set; }
 
         /// <summary>
         /// Not supporting LoadSceneMode.Additive
@@ -43,20 +44,21 @@ namespace PhysRehab.UI
         public static void EnsureLoaded()
         {
             Debug.Log("Loading UI");
+            if (SceneManagerExt.IsSceneLoaded(SceneName) == false)
+                SceneManager.LoadScene(SceneName, LoadSceneMode.Single);
+
             if (CollectorUIScene.IsSceneLoaded == false)
                 SceneManager.LoadScene(CollectorUIScene.SceneName, LoadSceneMode.Additive);
             if (CopycatUIScene.IsSceneLoaded == false)
                 SceneManager.LoadScene(CopycatUIScene.SceneName, LoadSceneMode.Additive);
             if (BirdUIScene.IsSceneLoaded == false)
                 SceneManager.LoadScene(BirdUIScene.SceneName, LoadSceneMode.Additive);
-            
-            if (SceneManagerExt.IsSceneLoaded(SceneName) == false)
-                SceneManager.LoadScene(SceneName, LoadSceneMode.Additive);
         }
 
         private void Awake()
         {
             _isRunning = false;
+            UI_MAIN[] uiMains = FindObjectsOfType<UI_MAIN>();
             if (_isLoaded == false)
             {
                 GenericUI = FindObjectOfType<GenericUI>(true);
@@ -69,7 +71,11 @@ namespace PhysRehab.UI
 
                 GameLoader = FindObjectOfType<UiGameLoader>(true);
                 Debug.Assert(GameLoader != null);
-                DontDestroyOnLoad(GameLoader);
+                DontDestroyOnLoad(GameLoader.gameObject);
+
+                MainAudio = FindObjectOfType<MainAudioSource>(true);
+                Debug.Assert(MainAudio != null);
+                DontDestroyOnLoad(MainAudio.gameObject);
 
                 DontDestroyOnLoad(gameObject);
 

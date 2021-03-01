@@ -15,7 +15,7 @@ namespace PhysRehab.UI
         public const string SceneName = "BirdUIScene"; 
 
         private static bool _isLoaded = false;
-        public static bool IsSceneLoaded => SceneManagerExt.IsSceneLoaded(SceneName);
+        public static bool IsSceneLoaded => SceneManagerExt.IsSceneLoaded(SceneName) || _isLoaded;
         public BirdUI BirdUI { get; private set; }
 
         private void Awake()

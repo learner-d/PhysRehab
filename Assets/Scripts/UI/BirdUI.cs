@@ -15,7 +15,6 @@ namespace PhysRehab.UI
 {
     public class BirdUI : VisibleBase
     {
-
         public static BirdUI Instance { get; private set; }
         public BirdLosePanel BirdLosePanel { get; private set; }
         public BirdWinPanel BirdWinPanel { get; private set; }
@@ -26,32 +25,28 @@ namespace PhysRehab.UI
             Instance = this;
             BirdLosePanel = GetComponentInChildren<BirdLosePanel>();
             BirdWinPanel = GetComponentInChildren<BirdWinPanel>();
-
-
         }
 
         public void Initialize()
         {
-
-            Pipe.PipeCollision += OnPipeCollision;
-            EndZone.LevelPassed += OnLevelPassed;
-
+            Bird.Crashed += OnBirdCrashed;
+            LevelEndZone.Reached += OnLevelPassed;
         }
 
-        private void OnPipeCollision(Pipe arg0, GameObject arg1)
+        private void OnBirdCrashed()
         {
             BirdLosePanel.ShowLosePanel();
         }
 
-        private void OnLevelPassed(EndZone arg0, GameObject arg1)
+        private void OnLevelPassed(LevelEndZone arg0, GameObject arg1)
         {
             BirdWinPanel.ShowWinPanel();
         }
 
         public void Shutdown()
         {
-            Pipe.PipeCollision -= OnPipeCollision;
-            EndZone.LevelPassed -= OnLevelPassed;
+            Bird.Crashed -= OnBirdCrashed;
+            LevelEndZone.Reached -= OnLevelPassed;
         }
 
 

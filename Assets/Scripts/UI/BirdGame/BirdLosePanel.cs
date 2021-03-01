@@ -9,15 +9,13 @@ namespace PhysRehab.UI.BirdGame
 
     public class BirdLosePanel : DialogPanelBase
     {
-    
-        protected override void Awake()
-        {
-            base.Awake();
-        }
 
+        [SerializeField]
+        private AudioClip _loseSound;
         public void ShowLosePanel()
         {
             Program.Pause();
+            MainAudioSource.Instance.PlaySound(_loseSound);
             Show();
         }
     }
