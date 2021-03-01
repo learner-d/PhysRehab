@@ -9,7 +9,7 @@ namespace PhysRehab.Collector
     {
         private void Update()
         {
-            if (GlobalSettings.DebugMode)
+            if (GlobalProps.DebugMode)
             {
                 if (Input.GetMouseButtonDown(0))  //коли відбувся клік ЛКМ
                 {
