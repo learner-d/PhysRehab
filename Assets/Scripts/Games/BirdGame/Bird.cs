@@ -23,9 +23,9 @@ namespace PhysRehab.BirdGame
         private KeyCode _flapKeyCode = KeyCode.Space;
 
         [SerializeField]
-        private float _flapForceX = 1;
+        private float _flapVelocityX = 1;
         [SerializeField]
-        private float _flapForceY = 1;
+        private float _flapVelocityY = 1;
 
         private Rigidbody2D _rigidbody;
 
@@ -50,7 +50,7 @@ namespace PhysRehab.BirdGame
 
         private void MakeFlap()
         {
-            _rigidbody.AddForce(new Vector2(_flapForceX, _flapForceY), ForceMode2D.Impulse);
+            _rigidbody.velocity = new Vector2(_flapVelocityX, _flapVelocityY);
         }
     }
 
