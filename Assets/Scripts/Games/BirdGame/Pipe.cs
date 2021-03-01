@@ -29,11 +29,6 @@ namespace PhysRehab.BirdGame
         [SerializeField]
         private float _bodyWidth = 0;
 
-        [SerializeField]
-        private float _positionX = 0;
-        [SerializeField]
-        private float _positionY = 0;
-
         private bool _initialized = false;
         private void Awake()
         {
@@ -43,12 +38,6 @@ namespace PhysRehab.BirdGame
                     _bodyHeight = _bodySprite.transform.localScale.y;
                 if (_bodyWidth <= float.Epsilon)
                     _bodyWidth = _bodySprite.transform.localScale.y;
-
-                if (_positionX <= float.Epsilon)
-                    _positionX = transform.localPosition.x;
-
-                if (_positionX <= float.Epsilon)
-                    _positionY = transform.localPosition.y;
 
                 PipeCreated?.Invoke(this);
                 _initialized = true;
@@ -76,7 +65,6 @@ namespace PhysRehab.BirdGame
         }
         private void UpdatePosition()
         {
-            transform.localPosition = new Vector3(_positionX, _positionY);
         }
 
         private void UpdateScale()
