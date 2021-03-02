@@ -3127,7 +3127,7 @@ MonoBehaviour:
   _camera_deltaY: 0
   _flapKeyCode: 32
   _flapVelocityX: 1
-  _flapVelocityY: 60
+  _flapVelocityY: 20
 --- !u!58 &1098488828
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -3159,7 +3159,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 20
+  m_GravityScale: 5
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
