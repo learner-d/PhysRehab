@@ -18,19 +18,6 @@ namespace PhysRehab.Scenes
             _name = "MainMenuScene";
         }
 
-        /// <summary>
-        /// Not supporting LoadSceneMode.Additive
-        /// </summary>
-        /// <param name="mode">Not supporting LoadSceneMode.Additive</param>
-        protected override void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-        {
-            if (scene.name == Name)
-            {
-                IsLoaded = true;
-                _Loaded?.Invoke(this);
-            }
-        }
-
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
         public static void Initialize()
         {

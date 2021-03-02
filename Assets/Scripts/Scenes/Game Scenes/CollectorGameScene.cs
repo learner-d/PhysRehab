@@ -27,25 +27,5 @@ namespace PhysRehab.Scenes
         {
             Instance = new CollectorGameScene();
         }
-
-        protected override void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-        {
-            if (scene.name == Name)
-            {
-                IsLoaded = true;
-                Program.ResolveStaticProperties<CollectorGameScene>();
-                _Loaded?.Invoke(this);
-            }
-        }
-        
-        protected override void OnSceneUnloaded(Scene scene)
-        {
-            if (scene.name == Name)
-            {
-                IsLoaded = false;
-                _UnLoaded?.Invoke(this);
-                Program.ClearStaticProperties<CollectorGameScene>();
-            }
-        }
     }
 }

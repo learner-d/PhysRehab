@@ -17,15 +17,6 @@ namespace PhysRehab.Scenes
             _name = "KinectTester";
         }
 
-        protected override void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-        {
-            if (scene.name == Name)
-            {
-                IsLoaded = true;
-                _Loaded?.Invoke(this);
-            }
-        }
-
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterAssembliesLoaded)]
         public static void Initialize()
         {

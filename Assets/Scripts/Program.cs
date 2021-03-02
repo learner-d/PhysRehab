@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 using PhysRehab.Core;
@@ -6,12 +7,18 @@ using PhysRehab.Scenes;
 using PhysRehab.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Object = UnityEngine.Object;
 
 public class Program
 {
     public static void ResolveStaticProperties<T>()
     {
-        PropertyInfo[] staticProperties = typeof(T).GetProperties(BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public);
+        ResolveStaticProperties(typeof(T));
+    }
+
+    public static void ResolveStaticProperties(Type type)
+    {
+        PropertyInfo[] staticProperties = type.GetProperties(BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public);
         for (int i = 0; i < staticProperties.Length; i++)
         {
             if (staticProperties[i].PropertyType.IsSubclassOf(typeof(Object)))
@@ -27,7 +34,11 @@ public class Program
 
     public static void ClearStaticProperties<T>()
     {
-        PropertyInfo[] staticProperties = typeof(T).GetProperties(BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public);
+        ResolveStaticProperties(typeof(T));
+    }
+    public static void ClearStaticProperties(Type type)
+    {
+        PropertyInfo[] staticProperties = type.GetProperties(BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public);
         for (int i = 0; i < staticProperties.Length; i++)
         {
             if (staticProperties[i].PropertyType.IsSubclassOf(typeof(Object)))

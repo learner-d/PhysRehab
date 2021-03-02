@@ -34,8 +34,8 @@ namespace PhysRehab.Scenes
         protected GameScene()
         {
             SceneManager.activeSceneChanged += OnActiveSceneChanged;
-            SceneManager.sceneLoaded += OnSceneLoaded;
-            SceneManager.sceneUnloaded += OnSceneUnloaded;
+            SceneManager.sceneLoaded += SceneManager_SceneLoaded;
+            SceneManager.sceneUnloaded += SceneManager_SceneUnloaded;
         }
 
         protected virtual void OnActiveSceneChanged(Scene prevScene, Scene newScene)
@@ -43,15 +43,30 @@ namespace PhysRehab.Scenes
             
         }
 
-        protected abstract void OnSceneLoaded(Scene scene, LoadSceneMode mode);
+        private void SceneManager_SceneLoaded(Scene scene, LoadSceneMode mode)
+        {
+            if (scene.name == Name)
+                OnSceneLoaded(scene, mode);
+        }
+
+        private void SceneManager_SceneUnloaded(Scene scene)
+        {
+            if (scene.name == Name)
+                OnSceneUnloaded(scene);
+        }
+
+        protected virtual void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        {
+            IsLoaded = true;
+            Program.ResolveStaticProperties(GetType());
+            _Loaded?.Invoke(this);
+        }
 
         protected virtual void OnSceneUnloaded(Scene scene) 
         {
-            if (scene.name == Name)
-            {
-                IsLoaded = false;
-                _UnLoaded?.Invoke(this);
-            }
+            IsLoaded = false;
+            _UnLoaded?.Invoke(this);
+            Program.ClearStaticProperties(GetType());
         }
 
         public virtual void EnsureLoaded()

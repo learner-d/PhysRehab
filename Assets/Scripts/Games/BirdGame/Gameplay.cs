@@ -6,11 +6,16 @@ namespace PhysRehab.BirdGame
 {
     public class Gameplay : MonoBehaviour
     {
-        public static Gameplay Instance { get; private set; }
+        public Bird Player { get; private set; }
 
         private void Awake()
         {
-            Instance = this;
+            Player = FindObjectOfType<Bird>();
+        }
+
+        public void Reset()
+        {
+            Player.Reset();
         }
     }
 }

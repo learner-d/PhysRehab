@@ -79,8 +79,7 @@ namespace PhysRehab.UI
 
             else if (UI_MAIN.Instance.ActiveGame == EGame.Bird)
             {
-                BirdGameScene.Instance.Unload();
-                BirdGameScene.Instance.EnsureLoaded();
+                BirdGameScene.Gameplay.Reset();
             }
         }
 

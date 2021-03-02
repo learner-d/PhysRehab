@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using PhysRehab.Scenes;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +13,7 @@ namespace PhysRehab.UI.BirdGame
 
         [SerializeField]
         private AudioClip _loseSound;
+        [SerializeField]
         private AudioClip _devLoseSound;
         public void ShowLosePanel()
         {
@@ -19,6 +21,13 @@ namespace PhysRehab.UI.BirdGame
             //TODO: restore sound
             //MainAudioSource.Instance.PlaySound(_loseSound);
             Show();
+        }
+
+        public void BtnReplay_Click()
+        {
+            BirdGameScene.Gameplay.Reset();
+            Hide();
+            Program.Resume();
         }
     }
 }
