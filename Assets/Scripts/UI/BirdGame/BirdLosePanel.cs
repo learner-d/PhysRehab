@@ -12,10 +12,12 @@ namespace PhysRehab.UI.BirdGame
 
         [SerializeField]
         private AudioClip _loseSound;
+        private AudioClip _devLoseSound;
         public void ShowLosePanel()
         {
             Program.Pause();
-            MainAudioSource.Instance.PlaySound(_loseSound);
+            //TODO: restore sound
+            //MainAudioSource.Instance.PlaySound(_loseSound);
             Show();
         }
     }
