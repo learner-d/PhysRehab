@@ -57,10 +57,10 @@ namespace PhysRehab.BirdGame
             if (Input.GetKeyDown(_flapKeyCode) || _flapGesture.IsRecognised())
             {
                 _rigidBody.velocity = Vector2.up * velocity_Y;
-                AudioSource.PlayClipAtPoint(flap, Vector3.zero);
+                if (flap != null)
+                    AudioSource.PlayClipAtPoint(flap, Vector3.zero);
             }
             _rigidBody.transform.position += Vector3.right * velocity_X;
-
         }
 
 
