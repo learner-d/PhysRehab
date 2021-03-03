@@ -1337,7 +1337,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7407332718847882915, guid: c7061c877553fc945903736236151680, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 24.29
+      value: 28
       objectReference: {fileID: 0}
     - target: {fileID: 7407332718847882915, guid: c7061c877553fc945903736236151680, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2756,9 +2756,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22dd23e9be75ff144b820dcfc192f341, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flap: {fileID: 0}
-  velocity_Y: 1
-  velocity_X: 1
+  flap: {fileID: 8300000, guid: e7a61376a310ff1488d709c2b67501de, type: 3}
+  velocity_Y: 25
+  velocity_X: 0.05
   _deltaX: 1
   _deltaY: 1
   _flapKeyCode: 32
