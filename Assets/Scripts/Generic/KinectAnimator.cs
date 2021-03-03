@@ -15,11 +15,15 @@ public class KinectAnimator : MonoBehaviour
 
     private void Awake()
     {
+        _characterScriptedModel = _characterModel.AvatarRoot.GetComponent<CharacterScriptedModel>();
+        _characterScriptedModel.OnDestroying += ResetCharacterRig;
+    }
+
+    private void Start()
+    {
         if (_characterModel.AvatarRoot != null)
         {
             _defaultRig = new HumanRig(_characterModel.AvatarRoot);
-            _characterScriptedModel = _characterModel.AvatarRoot.GetComponent<CharacterScriptedModel>();
-            _characterScriptedModel.OnDestroying += ResetCharacterRig; 
         }
     }
 
