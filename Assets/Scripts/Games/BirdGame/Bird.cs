@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using PhysRehab.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -27,19 +28,21 @@ namespace PhysRehab.BirdGame
         private KeyCode _flapKeyCode = KeyCode.Space;
 
 
-        private Rigidbody2D rb;
+        private Rigidbody2D _rigidBody;
+        private FlapGesture _flapGesture;
 
         private Vector3 _startPosition;
         private Quaternion _startRotatiton;
 
         private void Awake()
         {
-            rb = GetComponent<Rigidbody2D>();
+            _rigidBody = GetComponent<Rigidbody2D>();
+            _flapGesture = FindObjectOfType<FlapGesture>();
         }
 
         private void Start()
         {
-            rb = GetComponent<Rigidbody2D>();
+            _rigidBody = GetComponent<Rigidbody2D>();
             _startPosition = transform.position;
             _startRotatiton = transform.rotation;
         }
@@ -51,13 +54,13 @@ namespace PhysRehab.BirdGame
 
         private void Update()
         {
-            if (Input.GetKeyDown(_flapKeyCode))
+            if (Input.GetKeyDown(_flapKeyCode) || _flapGesture.IsRecognised())
             {
-                rb.velocity = Vector2.up * velocity_Y;
-                AudioSource.PlayClipAtPoint(flap, Vector3.zero);
+                _rigidBody.velocity = Vector2.up * velocity_Y;
+                if (flap != null)
+                    AudioSource.PlayClipAtPoint(flap, Vector3.zero);
             }
-            rb.transform.position += Vector3.right * velocity_X;
-
+            _rigidBody.transform.position += Vector3.right * velocity_X;
         }
 
 
