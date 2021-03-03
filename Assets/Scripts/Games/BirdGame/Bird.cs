@@ -27,7 +27,6 @@ namespace PhysRehab.BirdGame
         [SerializeField]
         private KeyCode _flapKeyCode = KeyCode.Space;
 
-
         private Rigidbody2D _rigidBody;
         private FlapGesture _flapGesture;
 
