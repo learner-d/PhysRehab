@@ -10,6 +10,15 @@ namespace PhysRehab.BirdGame
         public static event UnityAction Crashed;
 
         [SerializeField]
+        private AudioClip flap;
+
+        [SerializeField]
+        private float velocity_Y = 1;
+
+        [SerializeField]
+        private float velocity_X = 1;
+
+        [SerializeField]
         private float _deltaX = 1;
         [SerializeField]
         private float _deltaY = 1;
@@ -17,23 +26,20 @@ namespace PhysRehab.BirdGame
         [SerializeField]
         private KeyCode _flapKeyCode = KeyCode.Space;
 
-        [SerializeField]
-        private float _flapVelocityX = 1;
-        [SerializeField]
-        private float _flapVelocityY = 1;
 
-        private Rigidbody2D _rigidbody;
+        private Rigidbody2D rb;
 
         private Vector3 _startPosition;
         private Quaternion _startRotatiton;
 
         private void Awake()
         {
-            _rigidbody = GetComponent<Rigidbody2D>();
+            rb = GetComponent<Rigidbody2D>();
         }
 
         private void Start()
         {
+            rb = GetComponent<Rigidbody2D>();
             _startPosition = transform.position;
             _startRotatiton = transform.rotation;
         }
@@ -43,18 +49,17 @@ namespace PhysRehab.BirdGame
             Crashed?.Invoke();
         }
 
-        private void FixedUpdate()
+        private void Update()
         {
-            if(Input.GetKeyDown(_flapKeyCode))
-                MakeFlap();
+            if (Input.GetKeyDown(_flapKeyCode))
+            {
+                rb.velocity = Vector2.up * velocity_Y;
+                AudioSource.PlayClipAtPoint(flap, Vector3.zero);
+            }
+            rb.transform.position += Vector3.right * velocity_X;
 
-            transform.position = new Vector3(transform.position.x + _deltaX, transform.position.y + _deltaY, transform.position.z);
         }
 
-        private void MakeFlap()
-        {
-            _rigidbody.velocity = new Vector2(_flapVelocityX, _flapVelocityY);
-        }
 
         public void Reset()
         {
