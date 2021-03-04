@@ -15,7 +15,7 @@ namespace PhysRehab.BirdGame
 
         public void Reset()
         {
-            Player.Reset();
+            Player.ResetIt();
         }
     }
 }

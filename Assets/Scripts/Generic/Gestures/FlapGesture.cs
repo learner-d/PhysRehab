@@ -60,13 +60,19 @@ namespace PhysRehab.Generic
             }
         }
 
-        private void Update()
-        {
-            _flapTimer += Time.deltaTime;
-        }
+        //private void Update()
+        //{
+        //    _flapTimer += Time.deltaTime;
+        //}
 
+        private DateTime _prevTime = default;
         public bool IsRecognised()
         {
+            if (_prevTime.Ticks == 0)
+                _prevTime = DateTime.Now;
+            _flapTimer += (float)(DateTime.Now - _prevTime).TotalSeconds;
+            _prevTime = DateTime.Now;
+
             Frame frame = _adapter?.UpdateFrame();
             Body body = frame?.GetClosestBody();
             
@@ -76,21 +82,21 @@ namespace PhysRehab.Generic
                     _flapTimer = 0;
                 else if (_predicateIndex == _predicates.Length)
                 {
-                    Reset();
+                    ResetIt();
                     return true;
                 }
             }
             else
             {
                 if (_flapTimer > _flapTimeout)
-                    Reset();
+                    ResetIt();
             }
 
             return false;
         }
 
 
-        public void Reset()
+        public void ResetIt()
         {
             _predicateIndex = 0;
             _flapTimer = 0;

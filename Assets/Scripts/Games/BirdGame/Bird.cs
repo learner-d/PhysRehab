@@ -33,6 +33,8 @@ namespace PhysRehab.BirdGame
         private Vector3 _startPosition;
         private Quaternion _startRotatiton;
 
+        public bool IsAlive { get; private set; } = true;
+
         private void Awake()
         {
             _rigidBody = GetComponent<Rigidbody2D>();
@@ -44,29 +46,35 @@ namespace PhysRehab.BirdGame
             _rigidBody = GetComponent<Rigidbody2D>();
             _startPosition = transform.position;
             _startRotatiton = transform.rotation;
+            //Time.fixedDeltaTime = 1 / 30;
         }
 
         private void OnCollisionEnter2D(Collision2D collider)
         {
+            IsAlive = false; 
             Crashed?.Invoke();
         }
 
         private void Update()
         {
-            if (Input.GetKeyDown(_flapKeyCode) || _flapGesture.IsRecognised())
+            if (IsAlive)
             {
-                _rigidBody.velocity = Vector2.up * velocity_Y;
-                if (flap != null)
-                    AudioSource.PlayClipAtPoint(flap, Vector3.zero);
+                if (Input.GetKeyDown(_flapKeyCode) || _flapGesture.IsRecognised())
+                {
+                    _rigidBody.velocity = Vector2.up * velocity_Y;
+                    if (flap != null)
+                        AudioSource.PlayClipAtPoint(flap, Vector3.zero);
+                }
+                _rigidBody.transform.position += Vector3.right * velocity_X; 
             }
-            _rigidBody.transform.position += Vector3.right * velocity_X;
         }
 
 
-        public void Reset()
+        public void ResetIt()
         {
             transform.position = _startPosition;
             transform.rotation = _startRotatiton;
+            IsAlive = true;
         }
     }
 
