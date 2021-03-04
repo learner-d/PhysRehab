@@ -60,20 +60,23 @@ namespace PhysRehab.BirdGame
             if (IsAlive)
             {
                 if (Input.GetKeyDown(_flapKeyCode) || _flapGesture.IsRecognised())
-                {
-                    Debug.Log($"Flap {++_flapCount}");
-
-                    _rigidBody.velocity = Vector2.zero;
-                    _rigidBody.AddForce(_flapForce, _flapForceMode);
-                    if (flap != null)
-                        MainAudioSource.Instance.PlaySound(flap);
-                }
+                    MakeFlap();
                 _rigidBody.position += _velocity;
             }
         }
 
+        private void MakeFlap()
+        {
+            Debug.Log($"Flap {++_flapCount}");
 
-        public void ResetIt()
+            _rigidBody.velocity = Vector2.zero;
+            _rigidBody.AddForce(_flapForce, _flapForceMode);
+            if (flap != null)
+                MainAudioSource.Instance.PlaySound(flap);
+        }
+
+
+        public void Clear()
         {
             transform.position = _startPosition;
             transform.rotation = _startRotatiton;
