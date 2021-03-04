@@ -39,6 +39,7 @@ namespace PhysRehab.BirdGame
         {
             _rigidBody = GetComponent<Rigidbody2D>();
             _flapGesture = FindObjectOfType<FlapGesture>();
+            System.Console.WriteLine();
         }
 
         private void Start()

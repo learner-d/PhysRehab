@@ -60,6 +60,7 @@ namespace PhysRehab.Scenes
             IsLoaded = true;
             Program.ResolveStaticProperties(GetType());
             _Loaded?.Invoke(this);
+            Console.WriteLine();
         }
 
         protected virtual void OnSceneUnloaded(Scene scene) 

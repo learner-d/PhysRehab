@@ -100,6 +100,7 @@ namespace PhysRehab.Generic
         {
             _predicateIndex = 0;
             _flapTimer = 0;
+            Console.WriteLine();
         }
     } 
 }
