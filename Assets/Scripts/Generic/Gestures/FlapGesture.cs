@@ -68,39 +68,45 @@ namespace PhysRehab.Generic
         private DateTime _prevTime = default;
         public bool IsRecognised()
         {
-            if (_prevTime.Ticks == 0)
-                _prevTime = DateTime.Now;
-            _flapTimer += (float)(DateTime.Now - _prevTime).TotalSeconds;
-            _prevTime = DateTime.Now;
+            UpdateTimer();
 
             Frame frame = _adapter?.UpdateFrame();
             Body body = frame?.GetClosestBody();
-            
-            if (body != null && _predicates[_predicateIndex++].Invoke(body) == true)
+            if (body == null)
+                return false;
+
+            if (_predicates[_predicateIndex].Invoke(body) == true)
             {
+                _predicateIndex++;
                 if (_predicateIndex == 1)
                     _flapTimer = 0;
                 else if (_predicateIndex == _predicates.Length)
                 {
-                    ResetIt();
+                    Clear();
                     return true;
                 }
             }
             else
             {
-                if (_flapTimer > _flapTimeout)
-                    ResetIt();
+                if (_predicateIndex == 0 && _flapTimer > _flapTimeout)
+                    Clear();
             }
 
             return false;
         }
 
+        private void UpdateTimer()
+        {
+            if (_prevTime.Ticks == 0)
+                _prevTime = DateTime.Now;
+            _flapTimer += (float)(DateTime.Now - _prevTime).TotalSeconds;
+            _prevTime = DateTime.Now;
+        }
 
-        public void ResetIt()
+        public void Clear()
         {
             _predicateIndex = 0;
             _flapTimer = 0;
-            Console.WriteLine();
         }
     } 
 }

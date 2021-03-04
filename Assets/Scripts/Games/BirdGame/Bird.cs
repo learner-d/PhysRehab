@@ -14,15 +14,12 @@ namespace PhysRehab.BirdGame
         private AudioClip flap;
 
         [SerializeField]
-        private float velocity_Y = 1;
+        private Vector2 _velocity = Vector2.right;
 
         [SerializeField]
-        private float velocity_X = 1;
-
+        private Vector2 _flapForce = new Vector2(1, 1);
         [SerializeField]
-        private float _deltaX = 1;
-        [SerializeField]
-        private float _deltaY = 1;
+        private ForceMode2D _flapForceMode = ForceMode2D.Impulse;
 
         [SerializeField]
         private KeyCode _flapKeyCode = KeyCode.Space;
@@ -32,6 +29,8 @@ namespace PhysRehab.BirdGame
 
         private Vector3 _startPosition;
         private Quaternion _startRotatiton;
+
+        private int _flapCount = 0;
 
         public bool IsAlive { get; private set; } = true;
 
@@ -62,11 +61,14 @@ namespace PhysRehab.BirdGame
             {
                 if (Input.GetKeyDown(_flapKeyCode) || _flapGesture.IsRecognised())
                 {
-                    _rigidBody.velocity = Vector2.up * velocity_Y;
+                    Debug.Log($"Flap {++_flapCount}");
+
+                    _rigidBody.velocity = Vector2.zero;
+                    _rigidBody.AddForce(_flapForce, _flapForceMode);
                     if (flap != null)
-                        AudioSource.PlayClipAtPoint(flap, Vector3.zero);
+                        MainAudioSource.Instance.PlaySound(flap);
                 }
-                _rigidBody.transform.position += Vector3.right * velocity_X; 
+                _rigidBody.position += _velocity;
             }
         }
 
@@ -75,6 +77,7 @@ namespace PhysRehab.BirdGame
         {
             transform.position = _startPosition;
             transform.rotation = _startRotatiton;
+            _flapCount = 0;
             IsAlive = true;
         }
     }
