@@ -69,9 +69,8 @@ namespace PhysRehab.Generic
         {
             Frame frame = _adapter?.UpdateFrame();
             Body body = frame?.GetClosestBody();
-            if (body == null) return false;
-
-            if (_predicates[_predicateIndex++].Invoke(body) == true)
+            
+            if (body != null && _predicates[_predicateIndex++].Invoke(body) == true)
             {
                 if (_predicateIndex == 1)
                     _flapTimer = 0;
